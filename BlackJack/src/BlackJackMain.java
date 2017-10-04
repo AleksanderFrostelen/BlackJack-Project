@@ -1,10 +1,16 @@
+import java.util.LinkedList;
 
 public class BlackJackMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("hej");
-		System.out.println("jeh");
+		
+		//Testar shuffle
+		Deck deckTest = new Deck();		
+		deckTest.shuffle();
+		
+		//Testar att slumpmässigt ta ut ett kort från shoe,
+		int rndCard = deckTest.randomCard (deckTest.getShoe().size());
+		System.out.println(rndCard);
 	}
 
 }

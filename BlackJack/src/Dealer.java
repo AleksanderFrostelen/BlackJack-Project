@@ -1,19 +1,13 @@
 import java.util.ArrayList;
 public class Dealer {
-<<<<<<< HEAD
 
-=======
-	
-	private final int stopValue = 17; //dealern stannar på 17 eller över.
+	private final int STOPVALUE = 17; //dealern stannar på 17 eller över.
 	
 	int totalValue; //Totala värdet för korten.
 	
 	ArrayList <Integer> hand = new ArrayList<Integer>();
-	
-	
-	
-	
 
+	
 	public int getTotalValue() {
 		return totalValue;
 	}
@@ -22,12 +16,11 @@ public class Dealer {
 		this.totalValue = totalValue;
 	}
 
-	public int getStopValue() {
-		return stopValue;
+	public int getSTOPVALUE() {
+		return STOPVALUE;
 	}
 	
 	
 
 
->>>>>>> branch 'HEAD' of https://github.com/steffodimfelt/bestfriends
 }
