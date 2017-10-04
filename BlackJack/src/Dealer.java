@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Dealer {
 
-	private final int STOPVALUE = 17; //dealern stannar på 17 eller över.
+	private final int STOPVALUE = 17;//dealern stannar på 17 eller över.
 	
 	int totalValue; //Totala värdet för korten.
 	
