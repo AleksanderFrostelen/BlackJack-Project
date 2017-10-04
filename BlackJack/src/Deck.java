@@ -19,25 +19,36 @@ public class Deck {
 		this.shoe = shoe;
 	}
 	
-	//Lägger upp alla kort 
-	void shuffle()
+	//Lägger upp alla kort i grundleken deckSetup
+	void deckSetup()
 	{
 		for (int VALUESPANElem=0;VALUESPANElem<deckSetup.length;VALUESPANElem=VALUESPANElem+VALUESPAN.length)//Loopar igenom hela array deckSpan med repeat VALUESPAN.length
 		{
 			System.arraycopy(VALUESPAN, 0, deckSetup, VALUESPANElem, VALUESPAN.length);//Kopierar hela array VALUESPAN till array deckSpan
 		}
-		
+	}
+	
+	//Blandar en ny lek att spela med.
+	void shuffle()
+	{	
 		for (int LinkedElem=0;LinkedElem<deckSetup.length;LinkedElem++)
 		{
 			shoe.add(deckSetup[LinkedElem]);//Lägger in varje element från array deckSetup till LinkedList shoe
 		}
+		
 	}
 	
-	//Returnerar ett slumpmässigt kort från array shoe
+	//Returnerar ett slumpmässigt nummer
 	int randomCard (int randomIn)
 	{
 		int randomOut = (int)(Math.random()*randomIn);
 		return randomOut;
+	}
+	
+	//Skriver ut värdet i LinkedList shoe från inkommande attribut
+	void printOutShoeCard(int cardNmbIn)
+	{
+		System.out.println(shoe.get(cardNmbIn).toString());
 	}
 	
 }
