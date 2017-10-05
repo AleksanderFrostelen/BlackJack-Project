@@ -1,8 +1,5 @@
 import java.util.LinkedList;
 
-import uppgifter3.Dealer;
-import uppgifter3.Player;
-
 import java.util.Arrays;
 
 public class Deck {
@@ -50,10 +47,10 @@ public class Deck {
 	}
 	
 	//Skriver ut värdet i LinkedList shoe från inkommande attribut
-	void shoeValue(int cardNmbIn)
+	int shoeValue(int cardNmbIn)
 	{
 		//System.out.println(shoe.get(cardNmbIn).toString());
-		shoe.get(cardNmbIn);
+		return shoe.get(cardNmbIn);
 	}
 	
 	public void resetAll() //shoe ska laddas om till deckSetup och båda händerna ska nollas.
