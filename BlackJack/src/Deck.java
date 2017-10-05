@@ -22,6 +22,7 @@ public class Deck {
 	public void setShoe(LinkedList<Integer> shoe) {
 		this.shoe = shoe;
 	}
+
 	
 	//Lägger upp alla kort i grundleken deckSetup
 	void deckSetup()
