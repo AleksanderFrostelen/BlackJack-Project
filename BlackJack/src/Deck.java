@@ -51,4 +51,9 @@ public class Deck {
 		System.out.println(shoe.get(cardNmbIn).toString());
 	}
 	
+	public void resetAll() //shoe ska laddas om till deckSetup och båda händerna ska nollas.
+	{
+		
+	}
+	
 }
