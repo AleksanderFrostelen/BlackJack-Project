@@ -50,9 +50,10 @@ public class Deck {
 	}
 	
 	//Skriver ut värdet i LinkedList shoe från inkommande attribut
-	void printOutShoeCard(int cardNmbIn)
+	void shoeValue(int cardNmbIn)
 	{
-		System.out.println(shoe.get(cardNmbIn).toString());
+		//System.out.println(shoe.get(cardNmbIn).toString());
+		shoe.get(cardNmbIn);
 	}
 	
 	public void resetAll() //shoe ska laddas om till deckSetup och båda händerna ska nollas.
