@@ -3,6 +3,9 @@ import java.util.LinkedList;
 import java.util.Arrays;
 
 public class Deck {
+	Dealer dealer = new Dealer ();
+	Player player = new Player();
+	
 	final int[] VALUESPAN = {2,3,4,5,6,7,8,9,10,10,10,10,11};
 	int[] deckSetup = new int [52];
 	LinkedList<Integer> shoe = new LinkedList<>();
@@ -60,11 +63,12 @@ public class Deck {
 	
 	public void dealRandomCards() //den ska använda randomCard och ger kort till player och dealer
 	{
-		Player player = new Player();
-		player.setTotalValue(randomCard());
-		
-		Dealer dealer = new Dealer ();
-		dealer.setTotalValue(randomCard());
+
+	}
+	
+	public void removeCard(Object object) //den ska använda randomCard och ger kort till player och dealer
+	{
+
 	}
 	
 }
