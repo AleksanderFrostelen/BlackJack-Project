@@ -1,4 +1,8 @@
 import java.util.LinkedList;
+
+import uppgifter3.Dealer;
+import uppgifter3.Player;
+
 import java.util.Arrays;
 
 public class Deck {
@@ -54,6 +58,15 @@ public class Deck {
 	public void resetAll() //shoe ska laddas om till deckSetup och båda händerna ska nollas.
 	{
 		
+	}
+	
+	public void dealRandomCards() //den ska använda randomCard och ger kort till player och dealer
+	{
+		Player player = new Player();
+		player.setTotalValue(randomCard());
+		
+		Dealer dealer = new Dealer ();
+		dealer.setTotalValue(randomCard());
 	}
 	
 }
