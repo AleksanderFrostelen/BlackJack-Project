@@ -3,12 +3,10 @@ import java.util.LinkedList;
 import java.util.Arrays;
 
 public class Deck {
-	Dealer dealer = new Dealer ();
-	Player player = new Player();
 	
-	final int[] VALUESPAN = {2,3,4,5,6,7,8,9,10,10,10,10,11};
-	int[] deckSetup = new int [52];
-	LinkedList<Integer> shoe = new LinkedList<>();
+	private final int[] VALUESPAN = {2,3,4,5,6,7,8,9,10,10,10,10,11};
+	private int[] deckSetup = new int [52];
+	private LinkedList<Integer> shoe = new LinkedList<>();
 	
 	public int[] getDeckSetup() {
 		return deckSetup;
@@ -71,5 +69,14 @@ public class Deck {
 	{
 
 	}
+	
+	String showAllCards(Player playerObj)//Returnerar en sträng med valörerna på alla korten på hand. 
+	{
+		String tempString="";
+		for(int handElem=0;handElem<playerObj.hand.size();handElem++){tempString += playerObj.hand.get(handElem).toString()+" ";}
+		return tempString;
+	}
+	
+	int showFirstCard(Player playerObj){return playerObj.hand.get(0);}//Returnerar valören på det första kortet på hand.
 	
 }
