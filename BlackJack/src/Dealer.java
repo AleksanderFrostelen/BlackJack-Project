@@ -6,7 +6,7 @@ public class Dealer {
 	int totalValue; //Totala värdet för korten.
 	
 	ArrayList <Integer> hand = new ArrayList<Integer>();
-
+	
 	
 	public int getTotalValue() {
 		return totalValue;

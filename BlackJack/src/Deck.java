@@ -64,6 +64,8 @@ public class Deck {
 		shoe2.add(1);
 		shoe2.add(1);
 		System.out.println("Bacon "+shoe2.size());
+//		player.hand.clear();
+//		dealer.hand.clear();
 		shoe2.clear();
 		System.out.println("Bacon "+shoe2.size());
 		shuffle();
