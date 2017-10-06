@@ -10,11 +10,11 @@ public class BlackJackMain {
 	 * Jamien
 	 * Steffo Dimfelt
 	 * */
-		
+
 		//Hit Run and play
 		BlackJackMain blackJack = new BlackJackMain();
 		blackJack.table();
-		
+
 	}
 
 	private Deck deck = new Deck();
@@ -29,7 +29,7 @@ public class BlackJackMain {
 		player.hand.add(234);	//ENDAST FÖR TEST
 		player.setTotalValue(20);//ENDAST FÖR TEST
 		dealer.setTotalValue(20);//ENDAST FÖR TEST
-		
+
 		boolean mainPlay = true;
 		
 		//Huvudloop för hela spelet.

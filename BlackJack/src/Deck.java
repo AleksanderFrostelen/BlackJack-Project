@@ -1,5 +1,5 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
-
 import java.util.Arrays;
 
 public class Deck {
@@ -57,6 +57,14 @@ public class Deck {
 	
 	public void resetAll() //shoe ska laddas om till deckSetup och båda händerna ska nollas.
 	{
+//		shoe2.add(1);
+//		shoe2.add(1);
+//		System.out.println("Bacon "+shoe2.size());
+////		player.hand.clear();
+////		dealer.hand.clear();
+//		shoe2.clear();
+//		System.out.println("Bacon "+shoe2.size());
+		shuffle();
 		
 	}
 	

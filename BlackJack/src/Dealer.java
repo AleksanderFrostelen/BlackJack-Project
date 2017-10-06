@@ -3,7 +3,7 @@ public class Dealer {
 
 	private final int STOPVALUE = 17; //dealern stannar på 17 eller över.
 	
-	int totalValue = 30; //Totala värdet för korten.
+	int totalValue; //Totala värdet för korten.
 	
 	ArrayList <Integer> hand = new ArrayList<Integer>();
 	
