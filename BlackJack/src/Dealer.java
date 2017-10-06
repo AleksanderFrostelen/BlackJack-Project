@@ -20,4 +20,5 @@ public class Dealer {
 		return STOPVALUE;
 	}
 	
+	
 }

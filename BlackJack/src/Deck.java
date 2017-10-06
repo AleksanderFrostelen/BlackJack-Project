@@ -1,18 +1,20 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
-import uppgifter3.Dealer;
-import uppgifter3.Player;
-
-import java.util.Arrays;
+//import java.util.Arrays;
 
 public class Deck {
+	
 	final int[] VALUESPAN = {2,3,4,5,6,7,8,9,10,10,10,10,11};
 	int[] deckSetup = new int [52];
 	LinkedList<Integer> shoe = new LinkedList<>();
+	ArrayList<Integer> shoe2 = new ArrayList<>();
+	
 	
 	public int[] getDeckSetup() {
 		return deckSetup;
 	}
+
 	public void setDeckSetup(int[] deckSetup) {
 		this.deckSetup = deckSetup;
 	}
@@ -54,20 +56,27 @@ public class Deck {
 	{
 		//System.out.println(shoe.get(cardNmbIn).toString());
 		shoe.get(cardNmbIn);
+//		System.out.println("test");
 	}
 	
 	public void resetAll() //shoe ska laddas om till deckSetup och båda händerna ska nollas.
 	{
+		shoe2.add(1);
+		shoe2.add(1);
+		System.out.println("Bacon "+shoe2.size());
+		shoe2.clear();
+		System.out.println("Bacon "+shoe2.size());
+		shuffle();
 		
 	}
+
 	
-	public void dealRandomCards() //den ska använda randomCard och ger kort till player och dealer
+/*	public void dealRandomCards() //den ska använda randomCard och ger kort till player och dealer
 	{
 		Player player = new Player();
-		player.setTotalValue(randomCard());
+		Player.setTotalValue(randomCard(shoe));
 		
 		Dealer dealer = new Dealer ();
-		dealer.setTotalValue(randomCard());
+		dealer.setTotalValue(randomCard(shoe));*/
 	}
-	
-}
+
