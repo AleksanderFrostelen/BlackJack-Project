@@ -36,7 +36,7 @@ public class BlackJackMain {
 		//Setup table
 		boolean mainPlay = true;
 
-		System.out.println(player.hand.get(0));
+
 		deck.resetAll(player,dealer,betting);
 	
 		
