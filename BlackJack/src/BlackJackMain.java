@@ -28,8 +28,12 @@ public class BlackJackMain {
 		dealer.hand.add(1);//ENDAST FÖR TEST
 		player.hand.add(44);	//ENDAST FÖR TEST
 		player.hand.add(234);	//ENDAST FÖR TEST
-		player.setTotalValue(20);//ENDAST FÖR TEST
+		player.setTotalValue(30);//ENDAST FÖR TEST
 		dealer.setTotalValue(20);//ENDAST FÖR TEST
+		
+		
+		String message = "* * * * * * * * * * * * * * \n* * B L A C K   J A C K * * \n* * * * * * * * * * * * * *";
+		vegasNeonSign(message, 25);
 
 		boolean mainPlay = true;
 		
@@ -38,8 +42,7 @@ public class BlackJackMain {
 			
 			//Playerns tur.
 			boolean playerHitNewCard=true;
-			
-			betting.bettingLoop();
+
 			
 			do {
 				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
@@ -83,6 +86,9 @@ public class BlackJackMain {
 		if (evaluateHands(player,dealer)==true)
 		{
 			System.out.println("Du vann spelet.");
+			String message = "* * * * * * * * * * * \n* * D U   V A N N * * \n* * * * * * * * * * *";
+			vegasNeonSign(message, 15);
+			
 		}else {
 			System.out.println("Du förlorade.");
 		}
@@ -122,4 +128,24 @@ public class BlackJackMain {
 		return returnAnswer;
 	}
 
+
+	public static void vegasNeonSign(String message, long millisPerChar)
+    {
+        for (int i = 0; i < message.length(); i++)
+        {
+            System.out.print(message.charAt(i));
+
+            try
+            {
+                Thread.sleep(millisPerChar);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("");
+    }
+	
+	
 }

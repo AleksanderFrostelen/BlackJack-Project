@@ -7,31 +7,25 @@ public class Betting {
 	private int playerChips = 50;
 	private Scanner scan = new Scanner(System.in);
 
+	int[] tempHand = {5,2};
+	
 	public ArrayList<Integer> getPlayerBet() {
 		return playerBet;
 	}
-
-
 
 	public void setPlayerBet(ArrayList<Integer> playerBet) {
 		this.playerBet = playerBet;
 	}
 
-
-
 	public int getPlayerChips() {
 		return playerChips;
 	}
-
-
 
 	public void setPlayerChips(int playerChips) {
 		this.playerChips = playerChips;
 	}
 
 
-
-	int[] tempHand = {5,2};
 
 
 
@@ -62,16 +56,15 @@ public class Betting {
 	//är pengarna slut ska spelet sluta auto. ett felmeddelande att pengarna är slut. 
 	
 	  public void bettingLoop() 
-
 	  {
-		  
 		  System.out.println("Du har $"+getPlayerChips()+". Hur mycket vill du satsa?");
-		/*  
+		  String scannerAnswer = scan.next().toLowerCase();
+
 	   boolean bettingAgain=false;
 	   do{
-	     if (chipsIn>0)
+	     if (getPlayerChips()>0)
 	      {
-	      System.out.println("Du har $"+chipsIn+" Hur mycket vill du satsa?");
+	      System.out.println("Du har $"+getPlayerChips()+" Hur mycket vill du satsa?");
 	      
 	      int tempSatsa = 10;//temp
 
