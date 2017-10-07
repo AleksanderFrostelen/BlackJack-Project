@@ -7,7 +7,7 @@ public class BlackJackMain {
 	 * Moa Gardsäter
 	 * Sara Svensson
 	 * Aleksander Frostelen
-	 * Jamien
+	 * Jaimen Lavalle
 	 * Steffo Dimfelt
 	 * */
 
@@ -16,11 +16,11 @@ public class BlackJackMain {
 		blackJack.table();
 
 	}
-
-	private Deck deck = new Deck();
 	private Scanner scan = new Scanner(System.in);
+	private Deck deck = new Deck();
 	private Player dealer = new Player ();
 	private Player player = new Player();
+	private Betting betting = new Betting();
 	
 	void table()
 	{
@@ -29,8 +29,16 @@ public class BlackJackMain {
 		player.hand.add(234);	//ENDAST FÖR TEST
 		player.setTotalValue(20);//ENDAST FÖR TEST
 		dealer.setTotalValue(20);//ENDAST FÖR TEST
-
+		
+		String message = "* * * * * * * * * * * * * * \n* * B L A C K   J A C K * * \n* * * * * * * * * * * * * *";
+		vegasNeonSign(message, 25);
+		
+		//Setup table
 		boolean mainPlay = true;
+
+		System.out.println(player.hand.get(0));
+		deck.resetAll(player,dealer,betting);
+	
 		
 		//Huvudloop för hela spelet.
 		do {
@@ -38,14 +46,19 @@ public class BlackJackMain {
 			//Playerns tur.
 			boolean playerHitNewCard=true;
 			do {
-				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
-				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
+				player.hand.add(44);	//ENDAST FÖR TEST
+				dealer.hand.add(1);//ENDAST FÖR TEST
+				System.out.println("Dealerns total: "+dealer.getTotalValue());
+				System.out.println("Player total: "+player.getTotalValue());
+//				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
+//				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
 				playerHitNewCard=false;//ENDAST FÖR TEST
 			} while (playerHitNewCard==true);
 			
 			//Dealerns tur
 			boolean dealerHitNewCard=true;
 			do {
+				
 				dealerHitNewCard=false;//ENDAST FÖR TEST
 			} while (dealerHitNewCard==true);
 			
@@ -88,8 +101,7 @@ public class BlackJackMain {
 	{
 		boolean returnAnswer=true;
 		boolean fetchReturnAnswer=false;
-		
-		
+
 		do {
 			switch (answerIn)
 			{
@@ -117,5 +129,22 @@ public class BlackJackMain {
 		} while (fetchReturnAnswer==false);
 		return returnAnswer;
 	}
+	
+	public static void vegasNeonSign(String message, long millisPerChar)
+    {
+        for (int i = 0; i < message.length(); i++)
+        {
+            System.out.print(message.charAt(i));
 
+            try
+            {
+                Thread.sleep(millisPerChar);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("");
+    }
 }

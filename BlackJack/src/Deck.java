@@ -55,17 +55,13 @@ public class Deck {
 		return shoe.get(cardNmbIn);
 	}
 	
-	public void resetAll() //shoe ska laddas om till deckSetup och båda händerna ska nollas.
+	public void resetAll(Player playerObj1,Player playerObj2, Betting bettingObj) //shoe ska laddas om till deckSetup och båda händerna ska nollas.
 	{
-//		shoe2.add(1);
-//		shoe2.add(1);
-//		System.out.println("Bacon "+shoe2.size());
-////		player.hand.clear();
-////		dealer.hand.clear();
-//		shoe2.clear();
-//		System.out.println("Bacon "+shoe2.size());
+		playerObj1.hand.clear();
+		playerObj2.hand.clear();
+		bettingObj.playerBet.clear();
+		shoe.clear();
 		shuffle();
-		
 	}
 	
 	public void dealRandomCards() //den ska använda randomCard och ger kort till player och dealer
