@@ -1,68 +1,81 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Betting {
 
-	protected ArrayList <Integer> playerBet = new ArrayList<>();
-	int playerChips = 00;
+	private ArrayList <Integer> playerBet = new ArrayList<>();
+	private int playerChips = 50;
+	private Scanner scan = new Scanner(System.in);
+
+	public ArrayList<Integer> getPlayerBet() {
+		return playerBet;
+	}
+
+
+
+	public void setPlayerBet(ArrayList<Integer> playerBet) {
+		this.playerBet = playerBet;
+	}
+
+
+
+	public int getPlayerChips() {
+		return playerChips;
+	}
+
+
+
+	public void setPlayerChips(int playerChips) {
+		this.playerChips = playerChips;
+	}
+
+
 
 	int[] tempHand = {5,2};
 
 
 
-	/**Har man inga pengar kan man inte betta
-	 * har man pengar räknar man första handen hand[0]
-	 * finns det fler händer
+	/**Har man inga pengar kan man inte betta - skriv ut att man inte kan betta mer. 
+	 * har man pengar räknar man första handen playerBet[0]
+	 * finns det fler händer fortsätter man 
+	 * 
+	 * Om man har 7-11 kan man dubbla
+	 * Om man inte har pengar får man istället upp att man kan satsa sina sista slantar
+	 * Om man inte har några pengar kvar får man upp att man inte kan dubbla 
+	 * Har man fler än en hand så ska handens nummer redovisar, typ Din hand 1 har 11 - vill du dubbla?
+	 * 
+	 * 
+	 * Om man satsat sin sista slant och förlorat så åker man ut. 
+	 * 
 	 * @param betIn
 	 * @param chipsIn
 	 */
 	
 	
 	
-	//betting(playerBet,playerChips);
-
-
-
+	
 	//vinst ger 1x pengar. Alltså 10 man satsade + 10
-
 	//Har man 21 och vinner får man 1.5x peng. Alltså 10 man satsade + 15
-
 	//Har dealer och playern lika mellan 17-21 får man tillbka instatsen.  
-
 	//Har spelaren 7-11 på grundgiven kan spelaren dubbla insatsen. 
-
-
-
-
-
 	//felmeddelande om man bettar med för mycket pengar. 
-
-
-
 	//är pengarna slut ska spelet sluta auto. ett felmeddelande att pengarna är slut. 
 	
-	  public static void betting(int betIn,int chipsIn) 
+	  public void bettingLoop() 
 
 	  {
-
+		  
+		  System.out.println("Du har $"+getPlayerChips()+". Hur mycket vill du satsa?");
+		/*  
 	   boolean bettingAgain=false;
-
 	   do{
-
 	     if (chipsIn>0)
-
 	      {
-
-	      System.out.println("Hur mycket vill du satsa?");
-
+	      System.out.println("Du har $"+chipsIn+" Hur mycket vill du satsa?");
+	      
 	      int tempSatsa = 10;//temp
 
-	       
-
 	       // en satsa loop
-
-	      
-
-	     
 
 	      }else{
 
@@ -75,7 +88,7 @@ public class Betting {
 	     }while(bettingAgain==true);
 
 	     System.out.println("Tack å hej");
-
+*/
 	  }
 
 	  
@@ -89,4 +102,5 @@ public class Betting {
 	    //fråga om spelaren vill dubbla. 
 
 	  }
+	  
 }

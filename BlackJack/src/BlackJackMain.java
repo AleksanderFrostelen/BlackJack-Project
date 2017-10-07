@@ -21,6 +21,7 @@ public class BlackJackMain {
 	private Scanner scan = new Scanner(System.in);
 	private Player dealer = new Player ();
 	private Player player = new Player();
+	private Betting betting = new Betting();
 	
 	void table()
 	{
@@ -37,6 +38,9 @@ public class BlackJackMain {
 			
 			//Playerns tur.
 			boolean playerHitNewCard=true;
+			
+			betting.bettingLoop();
+			
 			do {
 				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
 				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
