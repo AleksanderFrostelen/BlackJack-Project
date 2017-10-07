@@ -42,6 +42,9 @@ public class BlackJackMain {
 			
 			//Playerns tur.
 			boolean playerHitNewCard=true;
+			
+			welcome();
+			betting.bettingLoop();
 
 			
 			do {
@@ -62,7 +65,8 @@ public class BlackJackMain {
 			System.out.println("Vill du fortsätta spela? Ja eller Nej");
 			String scannerAnswer = scan.next().toLowerCase();
 			//Vill spelaren fortsätta. 
-			mainPlay = scanNewGame(scannerAnswer);
+		//	mainPlay = scanNewGame(scannerAnswer);
+			mainPlay = yesOrNo(scannerAnswer, "Vill du fortsätta spela? Ja eller Nej");
 
 		} while (mainPlay == true);
 		
@@ -93,43 +97,26 @@ public class BlackJackMain {
 			System.out.println("Du förlorade.");
 		}
 	}
-	
-	boolean scanNewGame(String answerIn)
+
+	boolean yesOrNo(String answerIn, String printOut)
 	{
 		boolean returnAnswer=true;
 		boolean fetchReturnAnswer=false;
 		
-		
+		System.out.println(printOut);
 		do {
 			switch (answerIn)
 			{
 				case "j": case "ja": returnAnswer=true;fetchReturnAnswer=true;break;
 				case "n": case "nej": returnAnswer=false;fetchReturnAnswer=true;break;
-				default: System.out.println("2 Vill du fortsätta spela? Ja eller Nej");fetchReturnAnswer=false;break;
+				default: System.out.println(printOut);fetchReturnAnswer=false;break;
 			}
 		} while (fetchReturnAnswer==false);
 		return returnAnswer;
 	}
 	
-	boolean hitOrStay(String answerIn)
-	{
-		boolean returnAnswer=true;
-		boolean fetchReturnAnswer=false;
-		
-		System.out.println("Vill du fortsätta spela? Ja eller Nej");
-		do {
-			switch (answerIn)
-			{
-				case "j": case "ja": returnAnswer=true;fetchReturnAnswer=true;break;
-				case "n": case "nej": returnAnswer=false;fetchReturnAnswer=true;break;
-				default: System.out.println("Vill du fortsätta spela? Ja eller Nej");fetchReturnAnswer=false;break;
-			}
-		} while (fetchReturnAnswer==false);
-		return returnAnswer;
-	}
-
-
-	public static void vegasNeonSign(String message, long millisPerChar)
+	
+	public void vegasNeonSign(String message, long millisPerChar)
     {
         for (int i = 0; i < message.length(); i++)
         {
@@ -147,5 +134,12 @@ public class BlackJackMain {
         System.out.println("");
     }
 	
+	public void welcome()
+	{
+		System.out.println("Välkommen till Black Jack.");
+		System.out.println("För att vinna behöver summan av dina kort vara högre än Dealerns.");
+		System.out.println("Den som får högst kort, upp till och med 21, vinner handen.");
+		System.out.println("Lycka till!");
+	}
 	
 }

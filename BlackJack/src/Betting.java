@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
 
 public class Betting {
 
@@ -45,9 +47,6 @@ public class Betting {
 	 * @param chipsIn
 	 */
 	
-	
-	
-	
 	//vinst ger 1x pengar. Alltså 10 man satsade + 10
 	//Har man 21 och vinner får man 1.5x peng. Alltså 10 man satsade + 15
 	//Har dealer och playern lika mellan 17-21 får man tillbka instatsen.  
@@ -57,31 +56,35 @@ public class Betting {
 	
 	  public void bettingLoop() 
 	  {
-		  System.out.println("Du har $"+getPlayerChips()+". Hur mycket vill du satsa?");
-		  String scannerAnswer = scan.next().toLowerCase();
-
-	   boolean bettingAgain=false;
+		   boolean bettingAgain=false;
 	   do{
 	     if (getPlayerChips()>0)
 	      {
-	      System.out.println("Du har $"+getPlayerChips()+" Hur mycket vill du satsa?");
-	      
-	      int tempSatsa = 10;//temp
 
-	       // en satsa loop
+
+			  Scanner scannerAnswer = new Scanner(System.in);
+			  int number;
+			  do {
+				  System.out.println("Du har $"+getPlayerChips()+". Hur mycket vill du satsa?");
+			      while (!scannerAnswer.hasNextInt()) {
+			    	  	System.out.println("Felaktig inmatning. Försök igen.");
+			          scannerAnswer.next(); // this is important!
+			      }
+			      number = scannerAnswer.nextInt();
+			  } while (number <= 0);
+			  System.out.println("Du satsar " + number);
+			 
+
 
 	      }else{
-
-	      bettingAgain=false;
-
-	      System.out.println("Pengarna är slut");
-
+		      bettingAgain=false;
+		      System.out.println("Du har inga pengar kvar att satsa med.");
 	      }
 
 	     }while(bettingAgain==true);
+	   	System.out.println("");
+	     //System.out.println("Tack å hej");
 
-	     System.out.println("Tack å hej");
-*/
 	  }
 
 	  
