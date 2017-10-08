@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Betting {
 
 	private ArrayList <Integer> playerBet = new ArrayList<>();
-	private int playerChips = 50;
+	private int playerChips = 0;
 	private Scanner scan = new Scanner(System.in);
 
 	int[] tempHand = {5,2};
@@ -54,42 +54,41 @@ public class Betting {
 	//felmeddelande om man bettar med för mycket pengar. 
 	//är pengarna slut ska spelet sluta auto. ett felmeddelande att pengarna är slut. 
 	
-	  public void bettingLoop() 
+	  public int bettingLoop() 
 	  {
 		   boolean bettingAgain=false;
+		   int bettingIn=0;
 	   do{
 	     if (getPlayerChips()>0)
 	      {
+			  System.out.println("Du har $"+getPlayerChips()+". Hur mycket vill du satsa?");
+			  
+			  bettingIn = bettingScanEvaluator();
 
-
-			  Scanner scannerAnswer = new Scanner(System.in);
-			  int number;
-			  do {
-				  System.out.println("Du har $"+getPlayerChips()+". Hur mycket vill du satsa?");
-			      while (!scannerAnswer.hasNextInt()) {
-			    	  	System.out.println("Felaktig inmatning. Försök igen.");
-			          scannerAnswer.next(); // this is important!
-			      }
-			      number = scannerAnswer.nextInt();
-			  } while (number <= 0);
-			  System.out.println("Du satsar " + number);
-			 
-
-
+			  if (bettingIn<=getPlayerChips())
+			  {
+				  setPlayerChips(getPlayerChips()-bettingIn); 
+				  System.out.println("Du satsar $" + bettingIn);
+				  System.out.println("Du har $"+getPlayerChips()+" kvar.");
+				  bettingAgain=false;
+			  }else {
+				  System.out.println("Du kan inte satsa så mycket.");
+				  bettingAgain=true;
+			  }
+			  
 	      }else{
 		      bettingAgain=false;
 		      System.out.println("Du har inga pengar kvar att satsa med.");
 	      }
-
 	     }while(bettingAgain==true);
-	   	System.out.println("");
-	     //System.out.println("Tack å hej");
+	   
+	   return bettingIn;
 
 	  }
 
 	  
 
-	  public static void doubleUp(int[] handIn)
+	  public void doubleUp(int[] handIn)
 
 	  {
 
@@ -97,6 +96,21 @@ public class Betting {
 
 	    //fråga om spelaren vill dubbla. 
 
+	  }
+	  
+	  int bettingScanEvaluator ()
+	  {
+		  Scanner scannerAnswer = new Scanner(System.in);
+		  int bettingIn;
+		  do {
+		      while (!scannerAnswer.hasNextInt()) {
+		    	  	System.out.println("Felaktig inmatning. Försök igen.");
+		          scannerAnswer.next(); 
+		      }
+		      bettingIn = scannerAnswer.nextInt();
+		  } while (bettingIn <= 0);
+
+		  return bettingIn;
 	  }
 	  
 }

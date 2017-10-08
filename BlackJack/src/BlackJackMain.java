@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class BlackJackMain {
 
@@ -25,15 +27,22 @@ public class BlackJackMain {
 	
 	void table()
 	{
-		dealer.hand.add(1);//ENDAST FÖR TEST
-		player.hand.add(44);	//ENDAST FÖR TEST
-		player.hand.add(234);	//ENDAST FÖR TEST
-		player.setTotalValue(30);//ENDAST FÖR TEST
-		dealer.setTotalValue(20);//ENDAST FÖR TEST
+		System.out.println(dealer.hand.size());
+		dealer.hand.add(new ArrayList<Integer>());
+		System.out.println(dealer.hand.size());
+		
+	//	dealer.hand.get(0).add(2);//ENDAST FÖR TEST
+//		player.hand.add(44);	//ENDAST FÖR TEST
+//		player.hand.add(234);	//ENDAST FÖR TEST
+	//	player.hand.add(new ArrayList<Integer>());
+//		player.setTotalValue(30);//ENDAST FÖR TEST
+//		dealer.setTotalValue(20);//ENDAST FÖR TEST
+		
+
 		
 		
-		String message = "* * * * * * * * * * * * * * \n* * B L A C K   J A C K * * \n* * * * * * * * * * * * * *";
-		vegasNeonSign(message, 25);
+//		String message = "* * * * * * * * * * * * * * \n* * B L A C K   J A C K * * \n* * * * * * * * * * * * * *";
+//		vegasNeonSign(message, 25);
 
 		boolean mainPlay = true;
 		
@@ -49,7 +58,7 @@ public class BlackJackMain {
 			
 			do {
 				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
-				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
+				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer,0,0));
 				playerHitNewCard=false;//ENDAST FÖR TEST
 			} while (playerHitNewCard==true);
 			
@@ -61,7 +70,7 @@ public class BlackJackMain {
 			
 			//Utvärdera vem som vunnit. 
 			printWinner();
-			System.out.println(deck.showFirstCard(player));
+			System.out.println(deck.showFirstCard(player,0,0));
 			System.out.println("Vill du fortsätta spela? Ja eller Nej");
 			String scannerAnswer = scan.next().toLowerCase();
 			//Vill spelaren fortsätta. 
