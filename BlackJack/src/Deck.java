@@ -55,17 +55,14 @@ public class Deck {
 		return shoe.get(cardNmbIn);
 	}
 	
-	public void resetAll() //shoe ska laddas om till deckSetup och båda händerna ska nollas.
+	public void resetAll(Player playerObj,Player dealerObj) //shoe ska laddas om till deckSetup och båda händerna ska nollas.
 	{
-//		shoe2.add(1);
-//		shoe2.add(1);
-//		System.out.println("Bacon "+shoe2.size());
-////		player.hand.clear();
-////		dealer.hand.clear();
-//		shoe2.clear();
-//		System.out.println("Bacon "+shoe2.size());
+		playerObj.hand.clear();
+		playerObj.hand.clear();
+		shoe.clear();
+		playerObj.hand.add(new ArrayList<Integer>());//Adderar ett element till player
+		dealerObj.hand.add(new ArrayList<Integer>());//Adderar ett element till dealer
 		shuffle();
-		
 	}
 	
 	public void dealRandomCards() //den ska använda randomCard och ger kort till player och dealer
@@ -78,13 +75,20 @@ public class Deck {
 
 	}
 	
-	String showAllCards(Player playerObj)//Returnerar en sträng med valörerna på alla korten på hand. 
+	String showAllCards(Player playerObj,int handIndex)//Returnerar en sträng med valörerna på alla korten på vald hand. 
 	{
 		String tempString="";
-		for(int handElem=0;handElem<playerObj.hand.size();handElem++){tempString += playerObj.hand.get(handElem).toString()+" ";}
+		for(int handElem=0;handElem<playerObj.hand.get(handIndex).size();handElem++)
+		{tempString += playerObj.hand.get(handIndex).get(handElem).toString()+" ";}
 		return tempString;
 	}
 	
-	int showFirstCard(Player playerObj){return playerObj.hand.get(0);}//Returnerar valören på det första kortet på hand.
+	int showFirstCard(Player playerObj,int handIndex, int cardIndex)//Returnerar valören på det första kortet på hand.
+	{return playerObj.hand.get(handIndex).get(cardIndex);}
 	
+	int totalHandValue(Player playerObj,int handIndex)//Returnerar totalen för en hand.
+	{
+		int handTotal = playerObj.hand.get(handIndex).stream().mapToInt(Integer::intValue).sum();
+		return handTotal;
+	}
 }
