@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Deck {
 	
-	private final int[] VALUESPAN = {2,3,4,5,6,7,8,9,10,10,10,10,11};
+	private final int[] VALUESPAN = {2,3,4,5,6,7,8,9,10,20,30,40,11};
 	private int[] deckSetup = new int [52];
 	private LinkedList<Integer> shoe = new LinkedList<>();
 	
