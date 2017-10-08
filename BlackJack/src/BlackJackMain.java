@@ -27,12 +27,19 @@ public class BlackJackMain {
 	
 	void table()
 	{
-		System.out.println(dealer.hand.size());
-		dealer.hand.add(new ArrayList<Integer>());
-		System.out.println(dealer.hand.size());
+//		System.out.println(dealer.hand.size());
+	//dealer.hand.add(new ArrayList<Integer>());
+//		System.out.println(dealer.hand.size());
 		
-	//	dealer.hand.get(0).add(2);//ENDAST FÖR TEST
-//		player.hand.add(44);	//ENDAST FÖR TEST
+		dealer.hand.add(new ArrayList<Integer>());//Adderar ett elemnt
+		dealer.hand.get(0).add(new Integer(12));//Sätter värde i elementet
+		dealer.hand.add(new ArrayList<Integer>());//Adderar ett elemnt
+		dealer.hand.get(1).add(new Integer(120));//Sätter värde i elementet
+		System.out.println(dealer.hand.get(0).get(0).toString());
+		System.out.println(dealer.hand.get(1).get(0).toString());
+		
+//		dealer.hand.get(0).add(2);//ENDAST FÖR TEST
+//		player.hand.get(0).add(44);	//ENDAST FÖR TEST
 //		player.hand.add(234);	//ENDAST FÖR TEST
 	//	player.hand.add(new ArrayList<Integer>());
 //		player.setTotalValue(30);//ENDAST FÖR TEST
