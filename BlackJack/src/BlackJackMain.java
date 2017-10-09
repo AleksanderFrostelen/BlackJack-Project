@@ -45,13 +45,19 @@ public class BlackJackMain {
 			
 			//Playerns tur.
 			boolean playerHitNewCard=true;
+			System.out.println("Vill du fortsätta \"Ja\" \"Nej\"");
+			String scannerAnswer = scan.next().toLowerCase();
+			boolean hitMe=hitOrStay(scannerAnswer);
+
+			
 			do {
-				player.hand.add(44);	//ENDAST FÖR TEST
-				dealer.hand.add(1);//ENDAST FÖR TEST
-				System.out.println("Dealerns total: "+dealer.getTotalValue());
-				System.out.println("Player total: "+player.getTotalValue());
-//				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
-//				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
+				if (hitOrStay("Ja")) {
+					player.hand.add(dealRandomCards())
+					
+				}else {
+
+				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
+				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
 				playerHitNewCard=false;//ENDAST FÖR TEST
 			} while (playerHitNewCard==true);
 			
@@ -68,7 +74,12 @@ public class BlackJackMain {
 			System.out.println("Vill du fortsätta spela? Ja eller Nej");
 			String scannerAnswer = scan.next().toLowerCase();
 			//Vill spelaren fortsätta. 
-			mainPlay = scanNewGame(scannerAnswer);
+			mainPlay = scanNewGame(scannerAnswerOne);
+			if (scanNewGame("Ja")) {
+				
+			} else {
+
+			
 
 		} while (mainPlay == true);
 		
@@ -103,11 +114,21 @@ public class BlackJackMain {
 		boolean fetchReturnAnswer=false;
 
 		do {
-			switch (answerIn)
-			{
-				case "j": case "ja": returnAnswer=true;fetchReturnAnswer=true;break;
-				case "n": case "nej": returnAnswer=false;fetchReturnAnswer=true;break;
-				default: System.out.println("2 Vill du fortsätta spela? Ja eller Nej");fetchReturnAnswer=false;break;
+			switch (answerIn) {
+			case "j":
+			case "ja":
+				returnAnswer = true;
+				fetchReturnAnswer = true;
+				break;
+			case "n":
+			case "nej":
+				returnAnswer = false;
+				fetchReturnAnswer = true;
+				break;
+			default:
+				System.out.println(" Vill du fortsätta spela? Ja eller Nej");
+				fetchReturnAnswer = false;
+				break;
 			}
 		} while (fetchReturnAnswer==false);
 		return returnAnswer;
