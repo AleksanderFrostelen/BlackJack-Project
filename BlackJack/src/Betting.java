@@ -46,7 +46,6 @@ public class Betting {
 	 * Om man har 7-11 kan man dubbla
 	 * Om man inte har pengar får man istället upp att man kan satsa sina sista slantar
 	 * Om man inte har några pengar kvar får man upp att man inte kan dubbla 
-	 * Har man fler än en hand så ska handens nummer redovisar, typ Din hand 1 har 11 - vill du dubbla?
 	 * 
 	 * 
 	 * Om man satsat sin sista slant och förlorat så åker man ut. 
@@ -116,21 +115,18 @@ public class Betting {
 				  {
 					  setPlayerChips(tempChips-doubleValue);
 					  playerBet.set(0,doubleValue);
-					  System.out.println("Du dubblade till $" + getBettingValue()+". Du har $"+getPlayerChips()+" kvar.");
+					  System.out.println("Du dubblade till $" + doubleValue+". Du har $"+getPlayerChips()+" kvar.");
 				  } 
-				
 			  }
 			  
 			  if(tempChips<doubleValue&&getPlayerChips()>0)
 			  {
-				  System.out.println("Din hand har summan "+bettingValue+". Du kan inte dubbla insatsen, men du kan satsa återstående pengar. Vill du det? Ja eller Nej");
+				  System.out.println("Din hand har summan $"+bettingValue+". Du kan inte dubbla insatsen, \nmen du kan satsa återstående pengar. \nVill du det? Ja eller Nej");
 				  String scannerAnswer = scan.next().toLowerCase();
-				  doubleUp = yesOrNo(scannerAnswer, "Din hand har summan "+bettingValue+". Du kan inte dubbla insatsen, men du kan satsa återstående pengar. Vill du det? Ja eller Nej");
+				  doubleUp = yesOrNo(scannerAnswer, "Din hand har summan $"+bettingValue+". Du kan inte dubbla insatsen, \nmen du kan satsa återstående pengar $"+getPlayerChips()+". \nVill du det? Ja eller Nej");
 					if (doubleUp==true)
 					  {
-						  System.out.println(playerBet.get(0));
-						  int closeToDouble = playerBet.get(0)+getPlayerChips();
-						  playerBet.set(0,closeToDouble);
+						  playerBet.set(0,playerBet.get(0)+getPlayerChips());
 						  setPlayerChips(0);
 						  System.out.println("Du ökade till $" + playerBet.get(0)+". Du har $"+getPlayerChips()+" kvar.");
 					  } 
