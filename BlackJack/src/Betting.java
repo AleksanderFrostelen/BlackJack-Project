@@ -4,19 +4,9 @@ import java.util.Scanner;
 public class Betting {
 
 	public ArrayList<Integer> playerBet = new ArrayList<>();
-
 	private int playerChips = 10;
 	private Scanner scan = new Scanner(System.in);
 	private int bettingValue = 0;
-
-	// public ArrayList<Integer> getPlayerBet() {
-	// return playerBet;
-	// }
-	//
-	// public void setPlayerBet(ArrayList<Integer> playerBet) {
-	// this.playerBet = playerBet;
-	//
-	// }
 
 	public int getPlayerChips() {
 
@@ -71,9 +61,7 @@ public class Betting {
 		if (bettingValue >= 7 && bettingValue <= 11) {
 			
 			if (tempChips >= doubleValue) {
-				System.out.println("Vill du dubbla insatsen? Ja eller Nej");
-				String scannerAnswer = scan.next().toLowerCase();
-				doubleUp = yesOrNo(scannerAnswer, "Vill du dubbla insatsen? Ja eller Nej");
+				doubleUp = yesOrNo("Vill du dubbla insatsen? Ja eller Nej");
 
 				if (doubleUp == true) {
 					setPlayerChips(tempChips - doubleValue);
@@ -83,15 +71,11 @@ public class Betting {
 			}
 
 			if (tempChips < doubleValue && getPlayerChips() > 0) {
-				System.out.println("Din hand har summan $" + bettingValue
-						+ ". Du kan inte dubbla insatsen, \nmen du kan satsa återstående pengar. \nVill du det? Ja eller Nej");
-				String scannerAnswer = scan.next().toLowerCase();
 				doubleUp = yesOrNo("Din hand har summan $" + bettingValue + ". Du kan inte dubbla insatsen, \nmen du kan satsa återstående pengar $" + getPlayerChips() + ". \nVill du det? Ja eller Nej");
 				if (doubleUp == true) {
 					playerBet.set(0, playerBet.get(0) + getPlayerChips());
 					setPlayerChips(0);
-					System.out
-							.println("Du ökade till $" + playerBet.get(0) + ". Du har $" + getPlayerChips() + " kvar.");
+					System.out.println("Du ökade till $" + playerBet.get(0) + ". Du har $" + getPlayerChips() + " kvar.");
 				}
 			}
 		}
@@ -110,24 +94,19 @@ public class Betting {
 	}
 
 	void bettingPayBack(int stakeIn, double multipleIn) {
-		double newValue = (stakeIn * multipleIn) + stakeIn;
+		int newValue = (int) Math.ceil((stakeIn * multipleIn) + stakeIn);
 		newValue = newValue + getPlayerChips();
-		int newValueOut = (int) Math.round(newValue);
+		int newValueOut = (int) newValue;
 		setPlayerChips(newValueOut);
 	}
 
-	void onlyStakePayBack(int stakeIn) {
-		double newValue = stakeIn + getPlayerChips();
-		int newValueOut = (int) Math.round(newValue);
-		setPlayerChips(newValueOut);
-	}
+	void onlyStakePayBack(int stakeIn) {setPlayerChips(stakeIn + getPlayerChips());}
 
-	// GÖR OM DET BLIR FEL I DEFAULT
 	boolean yesOrNo(String printOut) {
 		boolean returnAnswer = true;
 		boolean fetchReturnAnswer = false;
 
-		do {
+		while (fetchReturnAnswer == false) {
 			System.out.println(printOut);
 			String scannerAnswer = scan.next().toLowerCase();
 			
@@ -143,12 +122,10 @@ public class Betting {
 				fetchReturnAnswer = true;
 				break;
 			default:
-				System.out.println(printOut);
 				fetchReturnAnswer = false;
 				break;
 			}
-		} while (fetchReturnAnswer == false);
+		} 
 		return returnAnswer;
 	}
-
 }

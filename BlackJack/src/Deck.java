@@ -65,8 +65,7 @@ public class Deck {
 
 	}
 
-	String showAllCards(Player playerObj, int handIndex)// Returnerar en sträng med valörerna på alla korten på vald
-														// hand.
+	String showAllCards(Player playerObj, int handIndex)// Returnerar en sträng med valörerna på alla korten på vald hand.
 	{
 		String tempString = "";
 		for (int handElem = 0; handElem < playerObj.hand.get(handIndex).size(); handElem++) {
@@ -82,7 +81,13 @@ public class Deck {
 
 	int totalHandValue(Player playerObj, int handIndex)// Returnerar totalen för en hand.
 	{
-		int handTotal = playerObj.hand.get(handIndex).stream().mapToInt(Integer::intValue).sum();
+		int handTotal = 0;
+		for (int handElement=0;handElement<playerObj.hand.get(handIndex).size();handElement++)
+		{
+			int oneElement = playerObj.hand.get(handIndex).get(handElement);
+			if (oneElement>11) {oneElement=10;}
+			handTotal = handTotal+oneElement;
+		}
 		return handTotal;
 	}
 }
