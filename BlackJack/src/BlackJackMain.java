@@ -37,14 +37,14 @@ public class BlackJackMain {
 		
 		//Spel setup
 		boolean mainPlay = true;
-		deck.resetAll(player,dealer);
-		dealer.hand.get(0).add(new Integer(deck.randomCard (12)+1));//Sätter värde i elementetENDAST FÖR TEST
-		dealer.hand.get(0).add(new Integer(deck.randomCard (12)+1));//Sätter värde i elementetENDAST FÖR TEST
+		
+//		dealer.hand.get(0).add(new Integer(deck.randomCard (12)+1));//Sätter värde i elementetENDAST FÖR TEST
+//		dealer.hand.get(0).add(new Integer(deck.randomCard (12)+1));//Sätter värde i elementetENDAST FÖR TEST
 //		player.hand.get(0).add(new Integer(deck.randomCard (12)+1));//Sätter värde i elementetENDAST FÖR TEST
 //		player.hand.get(0).add(new Integer(deck.randomCard (12)+1));//Sätter värde i elementetENDAST FÖR TEST
 		
-		player.hand.get(0).add(new Integer(10));//Sätter värde i elementetENDAST FÖR TEST
-		player.hand.get(0).add(new Integer(11));//Sätter värde i elementetENDAST FÖR TEST
+//		player.hand.get(0).add(new Integer(10));//Sätter värde i elementetENDAST FÖR TEST
+//		player.hand.get(0).add(new Integer(11));//Sätter värde i elementetENDAST FÖR TEST
 //		player.hand.add(new ArrayList<Integer>());//Adderar första raden till player
 //		player.hand.get(1).add(new Integer(10));//Sätter värde i elementetENDAST FÖR TEST
 //		player.hand.get(1).add(new Integer(1));//Sätter värde i elementetENDAST FÖR TEST
@@ -57,6 +57,17 @@ public class BlackJackMain {
 		
 		//Huvudloop för hela spelet.
 		do {
+			
+			deck.resetAll(player,dealer);
+			
+			//DEALERNS KORT SKA ÄNDRAS TILL RIKIGA RANDOM.
+			dealer.hand.get(0).add(new Integer(deck.randomCard (12)+1));//Sätter värde i elementetENDAST FÖR TEST
+			dealer.hand.get(0).add(new Integer(deck.randomCard (12)+1));//Sätter värde i elementetENDAST FÖR TEST
+			
+			player.hand.get(0).add(new Integer(1));//Sätter värde i elementetENDAST FÖR TEST
+			player.hand.get(0).add(new Integer(11));//Sätter värde i elementetENDAST FÖR TEST
+			
+			
 			//Playerns tur.
 			boolean playerHitNewCard=true;
 
@@ -69,7 +80,7 @@ public class BlackJackMain {
 			
 			betting.doubleUp(deck.totalHandValue(player,0),0);
 			
-			//BLIR PLAYER TJOCK SÅ FORLORAR DENNE AUTOMATISKT
+			//BLIR PLAYER TJOCK SÅ FORLORAR DENNE AUTOMATISKT. 
 			
 			
 			
@@ -110,25 +121,30 @@ public class BlackJackMain {
 				playerHitNewCard=false;//ENDAST FÖR TEST
 			} while (playerHitNewCard==true);
 			
-			//Dealerns tur
-			System.out.println("Dealerns visar sitt dolda kort: "+deck.showFirstCard(dealer,0,1));
-			System.out.println("Dealerns hand är: "+deck.showAllCards(dealer,0));
-
-			while(deck.totalHandValue(dealer,0)<=16)
+			boolean skipDealer=false;
+			if (player.hand.size()==1&&deck.totalHandValue(player,0)>21) {skipDealer=true;}
+			
+			if (skipDealer==false)
 			{
-				int tempRandom = new Integer(deck.randomCard (12)+1);
-				dealer.hand.get(0).add(tempRandom);
-				System.out.println("Dealern drar: "+tempRandom);
-			}
-
-			if (dealer.hand.size()>=1)
-			{
-				System.out.println("Dealern alla kort: "+deck.showAllCards(dealer,0));
-				System.out.println("Dealern stannar på "+deck.totalHandValue(dealer,0)+".");
-			}else {
+				//Dealerns tur
+				System.out.println("\nDealerns visar sitt dolda kort: "+deck.showFirstCard(dealer,0,1));
+				System.out.println("Dealerns hand är: "+deck.showAllCards(dealer,0));
+	
+				while(deck.totalHandValue(dealer,0)<=16)
+				{
+					int tempRandom = new Integer(deck.randomCard (12)+1);
+					dealer.hand.get(0).add(tempRandom);
+					System.out.println("Dealern drar: "+tempRandom);
+				}
+	
+				System.out.println("Dealerns hand är: "+deck.showAllCards(dealer,0));
 				System.out.println("Dealerns totalsumma är "+deck.totalHandValue(dealer,0)+".");
-				System.out.println("Dealern stannar.");
+				
+				if(deck.totalHandValue(dealer,0)>21)
+				{System.out.println("Dealern blir tjock.");}else {System.out.println("Dealern stannar.");}
 			}
+			
+			
 			
 			//Utvärdera vem som vunnit. 
 			printWinner();
@@ -136,28 +152,30 @@ public class BlackJackMain {
 			System.out.println("Vill du fortsätta spela? Ja eller Nej");
 			String scannerAnswer = scan.next().toLowerCase();
 			mainPlay = betting.yesOrNo(scannerAnswer, "Vill du fortsätta spela? Ja eller Nej");
+			
+			
 
 		} while (mainPlay == true);
 		
 		//Avslutning
-		System.out.println("Tack för att du ville spela en stund.");
+		String message = "* * * * * * * * * * * * * * *\n* * V I   S E S   I G E N * *\n* * * * * * * * * * * * * * *";
+		vegasNeonSign(message, 15);
+		scan.close();
 	}
 
 	//Metoder för Table. -------------------------
 	
 	int getTotalValue(Player playerObj) {return playerObj.getTotalValue();}//Hämtar det total värdet av en hand.
-	
 
-	
 	void printWinner()
 	{
+		//TEST ifall man har splittat. 
+//		player.hand.add(new ArrayList<Integer>());//Adderar första raden till playerENDAST FÖR TEST
+//		player.hand.get(1).add(new Integer(10));//Sätter värde i elementetENDAST FÖR TEST
+//		player.hand.get(1).add(new Integer(11));//Sätter värde i elementetENDAST FÖR TEST
+//		betting.playerBet.add(2);
 		
-		player.hand.add(new ArrayList<Integer>());//Adderar första raden till playerENDAST FÖR TEST
-		player.hand.get(1).add(new Integer(10));//Sätter värde i elementetENDAST FÖR TEST
-		player.hand.get(1).add(new Integer(11));//Sätter värde i elementetENDAST FÖR TEST
-		dealer.hand.get(0).add(new Integer(11));//Sätter värde i elementetENDAST FÖR TEST
-		
-		System.out.println("Spelarens size"+player.hand.size());
+		//dealer.hand.get(0).add(new Integer(11));//Sätter värde i elementetENDAST FÖR TEST
 		
 		for (int handIndex=0;handIndex<player.hand.size();handIndex++)
 		{
@@ -170,12 +188,12 @@ public class BlackJackMain {
 				{
 					if (deck.totalHandValue(player,handIndex)==deck.totalHandValue(dealer,0))
 					{
-						System.out.println(handNumber+" förlorade.");
+						System.out.println("\n"+handNumber+" förlorade.");
 						
 						if (deck.totalHandValue(player,handIndex)>=17)
 						{
 							System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får behålla din insats.");
-							//insats tillbaka till betting.setPlayerChips(int playerChips)
+							betting.onlyStakePayBack(deck.totalHandValue(player,handIndex));
 						}
 					}else if (deck.totalHandValue(player,handIndex)>deck.totalHandValue(dealer,0))
 					{
@@ -183,29 +201,29 @@ public class BlackJackMain {
 						if (deck.totalHandValue(player,handIndex)==21)
 						{
 							System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får tillbaka 1.5x din insats.");
+							betting.bettingPayBack(betting.playerBet.get(handIndex), 1.5);
 							//insats tillbaka till betting.setPlayerChips(int playerChips)
 						}else {
 							System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får tillbaka 1x din insats.");
+							betting.bettingPayBack(betting.playerBet.get(handIndex), 1);
 							//insats tillbaka till betting.setPlayerChips(int playerChips)
 						}
 					}
 				}else {
 					System.out.println(handNumber+" blev tjock. Du förlorar din insats.");
 				}
-			}else {
-				if (handIndex==0) {System.out.println("Dealern blev tjock.");}
-				
+			}else {				
 				if (deck.totalHandValue(player,handIndex)<=21)
 				{
-					System.out.println(handNumber+" vann!");
+				System.out.println("\n"+handNumber+" vann!");
 					
 					if (deck.totalHandValue(player,handIndex)==21)
 					{
 						System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får tillbaka 1.5x din insats.");
-						//insats tillbaka till betting.setPlayerChips(int playerChips)
+						betting.bettingPayBack(betting.playerBet.get(handIndex), 1.5);
 					}else {
 						System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får tillbaka 1x din insats.");
-						//insats tillbaka till betting.setPlayerChips(int playerChips)
+						betting.bettingPayBack(betting.playerBet.get(handIndex), 1);
 					}
 					
 				}else {
@@ -213,7 +231,7 @@ public class BlackJackMain {
 				}
 			}
 		}
-		
+		System.out.println("Du har nu $"+betting.getPlayerChips()+".");	
 		
 
 		
@@ -225,7 +243,7 @@ public class BlackJackMain {
 //		if (evaluateHands()==true)
 //		{
 //			System.out.println("Du vann handen.");
-//			String message = "* * * * * * * * * * * \n* * D U   V A N N * * \n* * * * * * * * * * *";
+//			String message = "* * * * * * * * * * * * * * *\n* * V I   S E S   I G E N * *\n* * * * * * * * * * * * * * *";
 //			vegasNeonSign(message, 15);
 //			
 //		}else {
