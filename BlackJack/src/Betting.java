@@ -1,15 +1,15 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
 public class Betting {
 
-	private ArrayList <Integer> playerBet = new ArrayList<>();
-	private int playerChips = 0;
+	public ArrayList <Integer> playerBet = new ArrayList<>();	
+	 
+	private int playerChips = 10;
 	private Scanner scan = new Scanner(System.in);
+	private int bettingValue=0;
 
-	int[] tempHand = {5,2};
 	
 	public ArrayList<Integer> getPlayerBet() {
 		return playerBet;
@@ -17,9 +17,11 @@ public class Betting {
 
 	public void setPlayerBet(ArrayList<Integer> playerBet) {
 		this.playerBet = playerBet;
+		
 	}
 
 	public int getPlayerChips() {
+		
 		return playerChips;
 	}
 
@@ -27,7 +29,13 @@ public class Betting {
 		this.playerChips = playerChips;
 	}
 
+	public int getBettingValue() {
+		return bettingValue;
+	}
 
+	public void setBettingValue(int bettingValue) {
+		this.bettingValue = bettingValue;
+	}
 
 
 
@@ -68,8 +76,9 @@ public class Betting {
 			  if (bettingIn<=getPlayerChips())
 			  {
 				  setPlayerChips(getPlayerChips()-bettingIn); 
-				  System.out.println("Du satsar $" + bettingIn);
-				  System.out.println("Du har $"+getPlayerChips()+" kvar.");
+				  setBettingValue(bettingIn);
+				  System.out.println("Du satsar $" + getBettingValue()+". Du har $"+getPlayerChips()+" kvar.");
+				  playerBet.add(getBettingValue());
 				  bettingAgain=false;
 			  }else {
 				  System.out.println("Du kan inte satsa så mycket.");
@@ -80,37 +89,87 @@ public class Betting {
 		      bettingAgain=false;
 		      System.out.println("Du har inga pengar kvar att satsa med.");
 	      }
-	     }while(bettingAgain==true);
-	   
+	     }while(bettingAgain==true);	   
 	   return bettingIn;
-
+	  
 	  }
 
 	  
 
-	  public void doubleUp(int[] handIn)
-
+	  public void doubleUp(int bettingValue, int bettingIndex)
 	  {
+		  int doubleValue = getBettingValue()*2;
+		  boolean doubleUp = false;
+		  int tempChips = getPlayerChips();
+		  
+		  if (bettingValue >=7 && bettingValue<=11)
+		  {
+			  System.out.println(tempChips+" "+doubleValue);
+			  
+			  if (tempChips>=doubleValue)
+			  {
+				  System.out.println("Vill du dubbla insatsen? Ja eller Nej");
+				  String scannerAnswer = scan.next().toLowerCase();
+				  doubleUp = yesOrNo(scannerAnswer, "Vill du dubbla insatsen? Ja eller Nej");
+			 
+				if (doubleUp==true)
+				  {
+					  setPlayerChips(tempChips-doubleValue);
+					  playerBet.set(0,doubleValue);
+					  System.out.println("Du dubblade till $" + getBettingValue()+". Du har $"+getPlayerChips()+" kvar.");
+				  } 
+				
+			  }
+			  
+			  if(tempChips<doubleValue&&getPlayerChips()>0)
+			  {
+				  System.out.println("Din hand har summan "+bettingValue+". Du kan inte dubbla insatsen, men du kan satsa återstående pengar. Vill du det? Ja eller Nej");
+				  String scannerAnswer = scan.next().toLowerCase();
+				  doubleUp = yesOrNo(scannerAnswer, "Din hand har summan "+bettingValue+". Du kan inte dubbla insatsen, men du kan satsa återstående pengar. Vill du det? Ja eller Nej");
+					if (doubleUp==true)
+					  {
+						  System.out.println(playerBet.get(0));
+						  int closeToDouble = playerBet.get(0)+getPlayerChips();
+						  playerBet.set(0,closeToDouble);
+						  setPlayerChips(0);
+						  System.out.println("Du ökade till $" + playerBet.get(0)+". Du har $"+getPlayerChips()+" kvar.");
+					  } 
+			  }
+		  }
+		  
 
-	    //if handIn = 7-11 AND length =2;
-
-	    //fråga om spelaren vill dubbla. 
-
+		  
 	  }
 	  
 	  int bettingScanEvaluator ()
 	  {
-		  Scanner scannerAnswer = new Scanner(System.in);
 		  int bettingIn;
 		  do {
-		      while (!scannerAnswer.hasNextInt()) {
-		    	  	System.out.println("Felaktig inmatning. Försök igen.");
-		          scannerAnswer.next(); 
+		      while (!scan.hasNextInt()) {
+		    	  	System.out.println("Satsa gärna ha ett rikigt belopp. Försök igen.");
+		    	  	scan.next(); 
 		      }
-		      bettingIn = scannerAnswer.nextInt();
+		      bettingIn = scan.nextInt();
 		  } while (bettingIn <= 0);
-
 		  return bettingIn;
 	  }
+	  
+	  //GÖR OM DET BLIR FEL I DEFAULT
+		boolean yesOrNo(String answerIn, String printOut)
+		{
+			boolean returnAnswer=true;
+			boolean fetchReturnAnswer=false;
+			do {
+				switch (answerIn)
+				{
+					case "j": case "ja": returnAnswer=true;fetchReturnAnswer=true;break;
+					case "n": case "nej": returnAnswer=false;fetchReturnAnswer=true;break;
+					default: System.out.println(printOut);fetchReturnAnswer=false;break;
+				}
+			} while (fetchReturnAnswer==false);
+			return returnAnswer;
+		}
+
+
 	  
 }
