@@ -151,31 +151,70 @@ public class BlackJackMain {
 	
 	void printWinner()
 	{
-		if (deck.totalHandValue(dealer,0)>21&&deck.totalHandValue(player,0)<=21) 
+		
+		player.hand.add(new ArrayList<Integer>());//Adderar första raden till playerENDAST FÖR TEST
+		player.hand.get(1).add(new Integer(10));//Sätter värde i elementetENDAST FÖR TEST
+		player.hand.get(1).add(new Integer(11));//Sätter värde i elementetENDAST FÖR TEST
+		dealer.hand.get(0).add(new Integer(11));//Sätter värde i elementetENDAST FÖR TEST
+		
+		System.out.println("Spelarens size"+player.hand.size());
+		
+		for (int handIndex=0;handIndex<player.hand.size();handIndex++)
 		{
-			System.out.println("Du vann handen.");
-			if (deck.totalHandValue(player,0)==21)
+			int formatHandNumber = handIndex+1;
+			String handNumber = (player.hand.size()==1) ? "Din hand" : "Hand nummer "+formatHandNumber;//Formaterar output string i fall man har splittat.
+
+			if (deck.totalHandValue(dealer,0)<=21)
 			{
-				
+				if (deck.totalHandValue(player,handIndex)<=21)
+				{
+					if (deck.totalHandValue(player,handIndex)==deck.totalHandValue(dealer,0))
+					{
+						System.out.println(handNumber+" förlorade.");
+						
+						if (deck.totalHandValue(player,handIndex)>=17)
+						{
+							System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får behålla din insats.");
+							//insats tillbaka till betting.setPlayerChips(int playerChips)
+						}
+					}else if (deck.totalHandValue(player,handIndex)>deck.totalHandValue(dealer,0))
+					{
+						System.out.println(handNumber+" vann!");
+						if (deck.totalHandValue(player,handIndex)==21)
+						{
+							System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får tillbaka 1.5x din insats.");
+							//insats tillbaka till betting.setPlayerChips(int playerChips)
+						}else {
+							System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får tillbaka 1x din insats.");
+							//insats tillbaka till betting.setPlayerChips(int playerChips)
+						}
+					}
+				}else {
+					System.out.println(handNumber+" blev tjock. Du förlorar din insats.");
+				}
 			}else {
+				if (handIndex==0) {System.out.println("Dealern blev tjock.");}
 				
+				if (deck.totalHandValue(player,handIndex)<=21)
+				{
+					System.out.println(handNumber+" vann!");
+					
+					if (deck.totalHandValue(player,handIndex)==21)
+					{
+						System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får tillbaka 1.5x din insats.");
+						//insats tillbaka till betting.setPlayerChips(int playerChips)
+					}else {
+						System.out.println("Du fick "+deck.totalHandValue(player,handIndex)+" och får tillbaka 1x din insats.");
+						//insats tillbaka till betting.setPlayerChips(int playerChips)
+					}
+					
+				}else {
+					System.out.println(handNumber+" blev tjock. Du förlorar din insats.");
+				}
 			}
-		}		
+		}
 		
 		
-		
-		
-//		if (deck.totalHandValue(dealer,0)>deck.totalHandValue(player,0)) 
-//		{System.out.println("Du förlorade handen.");}
-//		
-//		if (deck.totalHandValue(player,0)>21) 
-//		{System.out.println("Du förlorade handen.");}
-//		
-//		if (deck.totalHandValue(dealer,0)==deck.totalHandValue(player,0)) 
-//		{
-//			if (deck.totalHandValue(dealer,0)>=17&&deck.totalHandValue(dealer,0)<21)
-//				
-//		}
 
 		
 		
