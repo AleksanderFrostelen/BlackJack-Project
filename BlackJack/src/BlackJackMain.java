@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class BlackJackMain {
 
@@ -18,7 +17,6 @@ public class BlackJackMain {
 	}
 
 	private Deck deck = new Deck();
-	private Scanner scan = new Scanner(System.in);
 	private Player dealer = new Player();
 	private Player player = new Player();
 	private Betting betting = new Betting();
@@ -30,7 +28,6 @@ public class BlackJackMain {
 		// Huvudloop för hela spelet.
 		boolean mainPlay = true;
 		do {
-
 			deck.resetAll(player, dealer);
 
 			// DEALERNS KORT SKA ÄNDRAS TILL RIKTIGA RANDOM.
@@ -120,8 +117,7 @@ public class BlackJackMain {
 
 			// Utvärdera vem som vunnit.
 			printWinner();
-
-
+			
 			mainPlay = betting.yesOrNo("Vill du fortsätta spela? Ja eller Nej");
 
 		} while (mainPlay == true);
@@ -130,14 +126,10 @@ public class BlackJackMain {
 		String messageOut = "* * * * * * * * * * * * * * *\n* * V I   S E S   I G E N * *\n* * * * * * * * * * * * * * *";
 		vegasNeonSign(messageOut, 15);
 
-		scan.close();
+
 	}
 
-	// Metoder för Table. -------------------------
-
-	int getTotalValue(Player playerObj) {
-		return playerObj.getTotalValue();
-	}// Hämtar det total värdet av en hand.
+// Metoder för Table. -------------------------
 
 	void printWinner() {
 		for (int handIndex = 0; handIndex < player.hand.size(); handIndex++) {
