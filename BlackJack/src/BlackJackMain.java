@@ -3,15 +3,12 @@ import java.util.Scanner;
 public class BlackJackMain {
 
 	public static void main(String[] args) {
-	/**Developed 2017 by: 
-	 * Moa Gardsäter
-	 * Sara Svensson
-	 * Aleksander Frostelen
-	 * Jamien
-	 * Steffo Dimfelt
-	 * */
+		/**
+		 * Developed 2017 by: Moa Gardsäter Sara Svensson Aleksander Frostelen Jamien
+		 * Steffo Dimfelt
+		 */
 
-		//Hit Run and play
+		// Hit Run and play
 		BlackJackMain blackJack = new BlackJackMain();
 		blackJack.table();
 
@@ -19,9 +16,9 @@ public class BlackJackMain {
 
 	private Deck deck = new Deck();
 	private Scanner scan = new Scanner(System.in);
-	private Player dealer = new Player ();
+	private Player dealer = new Player();
 	private Player player = new Player();
-	
+
 	void table()
 	{
 		dealer.hand.add(1);//ENDAST FÖR TEST
@@ -37,7 +34,17 @@ public class BlackJackMain {
 			
 			//Playerns tur.
 			boolean playerHitNewCard=true;
+			System.out.println("Vill du fortsätta \"Ja\" \"Nej\"");
+			String scannerAnswer = scan.next().toLowerCase();
+			boolean hitMe=hitOrStay(scannerAnswer);
+
+			
 			do {
+				if (hitOrStay("Ja")) {
+					player.hand.add(dealRandomCards())
+					
+				}else {
+
 				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
 				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
 				playerHitNewCard=false;//ENDAST FÖR TEST
@@ -53,68 +60,98 @@ public class BlackJackMain {
 			printWinner();
 			System.out.println(deck.showFirstCard(player));
 			System.out.println("Vill du fortsätta spela? Ja eller Nej");
-			String scannerAnswer = scan.next().toLowerCase();
+			String scannerAnswerOne = scan.next().toLowerCase();
 			//Vill spelaren fortsätta. 
-			mainPlay = scanNewGame(scannerAnswer);
+			mainPlay = scanNewGame(scannerAnswerOne);
+			if (scanNewGame("Ja")) {
+				
+			} else {
+
+			
 
 		} while (mainPlay == true);
 		
 		//Avslutning
-		System.out.println("Tack för spelet.");
+	System.out.println("Tack för spelet.");
+			
+		
+	
+			
+		
+		
 	}
 
-	//Metoder för Table.
-	
-	int getTotalValue(Player playerObj) {return playerObj.getTotalValue();}//Hämtar det total värdet av en hand.
-	
-	boolean evaluateHands(Player playerObj, Player dealerObj)//Avgör om Players total är högre än Dealerns.
+	// Metoder för Table.
+
+	int getTotalValue(Player playerObj) {
+		return playerObj.getTotalValue();
+	}// Hämtar det total värdet av en hand.
+
+	boolean evaluateHands(Player playerObj, Player dealerObj)// Avgör om Players total är högre än Dealerns.
 	{
-		boolean outcome = true;		
-		if (dealerObj.getTotalValue()>=playerObj.getTotalValue()){outcome=false;}		
+		boolean outcome = true;
+		if (dealerObj.getTotalValue() >= playerObj.getTotalValue()) {
+			outcome = false;
+		}
 		return outcome;
 	}
-	
-	void printWinner()
-	{
-		if (evaluateHands(player,dealer)==true)
-		{
+
+	void printWinner() {
+		if (evaluateHands(player, dealer) == true) {
 			System.out.println("Du vann spelet.");
-		}else {
+		} else {
 			System.out.println("Du förlorade.");
 		}
 	}
-	
-	boolean scanNewGame(String answerIn)
-	{
-		boolean returnAnswer=true;
-		boolean fetchReturnAnswer=false;
-		
-		
+
+	boolean scanNewGame(String answerIn) {
+		boolean returnAnswer = true;
+		boolean fetchReturnAnswer = false;
+
 		do {
-			switch (answerIn)
-			{
-				case "j": case "ja": returnAnswer=true;fetchReturnAnswer=true;break;
-				case "n": case "nej": returnAnswer=false;fetchReturnAnswer=true;break;
-				default: System.out.println("2 Vill du fortsätta spela? Ja eller Nej");fetchReturnAnswer=false;break;
+			switch (answerIn) {
+			case "j":
+			case "ja":
+				returnAnswer = true;
+				fetchReturnAnswer = true;
+				break;
+			case "n":
+			case "nej":
+				returnAnswer = false;
+				fetchReturnAnswer = true;
+				break;
+			default:
+				System.out.println(" Vill du fortsätta spela? Ja eller Nej");
+				fetchReturnAnswer = false;
+				break;
 			}
-		} while (fetchReturnAnswer==false);
+		} while (fetchReturnAnswer == false);
 		return returnAnswer;
 	}
-	
-	boolean hitOrStay(String answerIn)
-	{
-		boolean returnAnswer=true;
-		boolean fetchReturnAnswer=false;
-		
+
+	boolean hitOrStay(String answerIn) {
+		boolean returnAnswer = true;
+		boolean fetchReturnAnswer = false;
+
 		System.out.println("Vill du fortsätta spela? Ja eller Nej");
 		do {
-			switch (answerIn)
-			{
-				case "j": case "ja": returnAnswer=true;fetchReturnAnswer=true;break;
-				case "n": case "nej": returnAnswer=false;fetchReturnAnswer=true;break;
-				default: System.out.println("Vill du fortsätta spela? Ja eller Nej");fetchReturnAnswer=false;break;
+			switch (answerIn) {
+			case "j":
+			case "ja":
+				returnAnswer = true;
+				fetchReturnAnswer = true;
+				break;
+			case "n":
+			case "nej":
+				returnAnswer = false;
+				fetchReturnAnswer = true;
+				break;
+			default:
+				System.out.println("Vill du fortsätta spela? Ja eller Nej");
+				fetchReturnAnswer = false;
+				break;
 			}
-		} while (fetchReturnAnswer==false);
+		} while (fetchReturnAnswer == false);
 		return returnAnswer;
 	}
 
