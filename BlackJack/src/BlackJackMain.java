@@ -3,14 +3,7 @@ import java.util.ArrayList;
 public class BlackJackMain {
 
 	public static void main(String[] args) {
-		/**
-		 * Developed 2017 by: 
-		 * Moa Gardsäter 
-		 * Sara Svensson 
-		 * Aleksander Frostelen 
-		 * Jamien
-		 * Steffo Dimfelt
-		 */
+
 	/**Developed 2017 by: 
 	 * Moa Gardsäter
 	 * Sara Svensson
