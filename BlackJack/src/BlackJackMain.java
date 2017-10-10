@@ -30,18 +30,11 @@ public class BlackJackMain {
 		do {
 			deck.resetAll(player, dealer);
 
-<<<<<<< HEAD
 			
-			do {
-				if (hitOrStay("Ja")) {
-					player.hand.add(dealRandomCards());
-					
-				}else {
-=======
+			
 			// DEALERNS KORT SKA ÄNDRAS TILL RIKTIGA RANDOM.
 			dealer.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
 			dealer.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
->>>>>>> branch 'HEAD' of https://github.com/steffodimfelt/bestfriends
 
 			player.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
 			player.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
@@ -146,20 +139,18 @@ public class BlackJackMain {
 			mainPlay = betting.yesOrNo("Vill du fortsätta spela? Ja eller Nej");
 
 		} while (mainPlay == true);
-<<<<<<< HEAD
 		
 		//Avslutning
 	System.out.println("Tack för spelet."); 
 			
 		
-=======
 
 		// Avslutning
 		String messageOut = "* * * * * * * * * * * * * * *\n* * V I   S E S   I G E N * *\n* * * * * * * * * * * * * * *";
 		vegasNeonSign(messageOut, 15);
+		
 
 
->>>>>>> branch 'HEAD' of https://github.com/steffodimfelt/bestfriends
 	}
 
 // Metoder för Table. -------------------------
@@ -224,7 +215,7 @@ public class BlackJackMain {
 	}
 
 	public void welcome() {
-		String message = "* * * * * * * * * * * * * * \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * *";
+		String message = "* * * * * * * * * * * * *  \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * ";
 		vegasNeonSign(message, 25);
 		System.out.println("Välkommen till Black Jack.");
 		System.out.println("För att vinna behöver summan av dina kort vara högre än Dealerns.");
