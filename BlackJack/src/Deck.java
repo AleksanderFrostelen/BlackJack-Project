@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Deck {
 
@@ -92,25 +93,72 @@ public class Deck {
 		}
 		return handTotal;
 	}
-//	public void aceDecision(Player playerObj) 
-//	{
-//		int ace;
-//		Scanner input = new Scanner(System.in);
-//		for(int i = 0; i < playerObj.hand.size(); i++) 
-//		{
-//			if(playerObj.hand.get(i) == 11 || playerObj.hand.get(i) == 1) 
-//			{
-//				System.out.println("Ska Esset vara 1 eller 11? Ange '1' eller '11', tryck sedan på enter.");
-//				ace = input.nextInt();
-//				if(ace == 1) 
-//				{
-//					playerObj.hand.set(i, 1);
-//				}
-//				else
-//				{
-//					playerObj.hand.set(i, 11);
-//				}
-//			}
-//		}
-//	}
+	public void aceDecision(Player playerObj) 
+	{
+		int ace;
+		Scanner input = new Scanner(System.in);
+		for(int i = 0; i < playerObj.hand.size(); i++) 
+		{
+	 for(int ii = 0; ii < playerObj.hand.get(i).size(); ii++)
+	{
+		 
+			if(playerObj.hand.get(i).equals(11) || playerObj.hand.get(i).equals(1)) 
+			{
+				
+				do 
+				{
+				System.out.println("Ska Esset vara 1 eller 11? Ange '1' eller '11', tryck sedan på enter.");
+				ace = input.nextInt();
+				
+				
+				if(ace == 1) 
+				{
+				playerObj.hand.get(i).add(ace);
+				
+				}
+				else if(ace == 11)
+				{
+					playerObj.hand.get(i).add(ace);
+				}
+				else 
+				{
+					System.out.println("Du får endast välja 1 eller 11 ");
+				}
+				
+				}while (ace != 1 || ace != 11);
+				
+		  }
+     }
+}
+			
+	 
+	   
+   }
+	 public void dAceDecision(Player dealerObj)
+		{
+	    	for(int i = 0; i < dealerObj.hand.size(); i++) 
+	    	{ 
+	    		if (totalHandValue(dealerObj, i) > 10) 
+	    		{
+	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
+	    			{
+	    				dealerObj.hand.get(0).set(ii, 1)	;
+	    			}
+	    			
+	    		}
+	    		else 
+	    		{
+	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
+	    			{
+	    				dealerObj.hand.get(0).set(ii, 11)	;
+	    			}
+	    		}
+	    	}
+	   
+	    	
+		
+	    }
+	
+	
+	
 }
