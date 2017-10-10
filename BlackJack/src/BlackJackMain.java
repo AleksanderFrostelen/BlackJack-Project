@@ -41,7 +41,7 @@ public class BlackJackMain {
 	
 		
 		//Huvudloop för hela spelet.
-		do {
+	/*	do {
 			
 			//Playerns tur.
 			boolean playerHitNewCard=true;
@@ -85,6 +85,7 @@ public class BlackJackMain {
 		
 		//Avslutning
 	System.out.println("Tack för spelet."); 
+	*/
 
 	}
 
