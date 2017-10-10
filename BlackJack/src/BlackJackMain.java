@@ -41,7 +41,7 @@ public class BlackJackMain {
 			
 			do {
 				if (hitOrStay("Ja")) {
-					player.hand.add(dealRandomCards())
+					player.hand.add(dealRandomCards());
 					
 				}else {
 
@@ -74,10 +74,6 @@ public class BlackJackMain {
 		//Avslutning
 	System.out.println("Tack för spelet."); 
 			
-		
-	
-				
-		
 		
 	}
 
