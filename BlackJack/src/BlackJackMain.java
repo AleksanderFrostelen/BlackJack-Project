@@ -1,154 +1,235 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class BlackJackMain {
 
 	public static void main(String[] args) {
-		/**
-		 * Developed 2017 by: Moa Gardsäter Sara Svensson Aleksander Frostelen Jamien
-		 * Steffo Dimfelt
-		 */
 
-		// Hit Run and play
+	/**Developed 2017 by: 
+	 * Moa Gardsäter
+	 * Sara Svensson
+	 * Aleksander Frostelen
+	 * Jaimen Lavalle
+	 * Steffo Dimfelt
+	 * */
+
 		BlackJackMain blackJack = new BlackJackMain();
 		blackJack.table();
-
 	}
 
 	private Deck deck = new Deck();
-	private Scanner scan = new Scanner(System.in);
 	private Player dealer = new Player();
 	private Player player = new Player();
+	private Betting betting = new Betting();
 
-	void table()
-	{
-		dealer.hand.add(1);//ENDAST FÖR TEST
-		player.hand.add(44);	//ENDAST FÖR TEST
-		player.hand.add(234);	//ENDAST FÖR TEST
-		player.setTotalValue(20);//ENDAST FÖR TEST
-		dealer.setTotalValue(20);//ENDAST FÖR TEST
-
-		boolean mainPlay = true;
+	void table() {
 		
-		//Huvudloop för hela spelet.
-		do {
-			
-			//Playerns tur.
-			boolean playerHitNewCard=true;
-			System.out.println("Vill du fortsätta \"Ja\" \"Nej\"");
-			String scannerAnswer = scan.next().toLowerCase();
-			boolean hitMe=hitOrStay(scannerAnswer);
+		welcome();
 
+		// Huvudloop för hela spelet.
+		boolean mainPlay = true;
+		do {
+			deck.resetAll(player, dealer);
+
+<<<<<<< HEAD
 			
 			do {
 				if (hitOrStay("Ja")) {
 					player.hand.add(dealRandomCards());
 					
 				}else {
+=======
+			// DEALERNS KORT SKA ÄNDRAS TILL RIKTIGA RANDOM.
+			dealer.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
+			dealer.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
+>>>>>>> branch 'HEAD' of https://github.com/steffodimfelt/bestfriends
 
-				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
-				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
-				playerHitNewCard=false;//ENDAST FÖR TEST
-			} while (playerHitNewCard==true);
-			
-			//Dealerns tur
-			boolean dealerHitNewCard=true;
+			player.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
+			player.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
+
+			// Playerns tur.
+			boolean playerHitNewCard = true;
+
+			betting.bettingLoop();
+
+			System.out.println("Dealerns kort är: " + deck.showOneCard(dealer, 0, 0));
+			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
+			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
+
+			betting.doubleUp(deck.totalHandValue(player, 0), 0);
+
+			boolean splitHands = false;
 			do {
-				dealerHitNewCard=false;//ENDAST FÖR TEST
-			} while (dealerHitNewCard==true);
-			
-			//Utvärdera vem som vunnit. 
-			printWinner();
-			System.out.println(deck.showFirstCard(player));
-			System.out.println("Vill du fortsätta spela? Ja eller Nej");
-			String scannerAnswerOne = scan.next().toLowerCase();
-			//Vill spelaren fortsätta. 
-			mainPlay = scanNewGame(scannerAnswerOne);
-			if (scanNewGame("Ja")) {
-				
-			} else {
+				int checkedAllHands = 0;
+				for (int handIndex = 0; handIndex < player.hand.size(); handIndex++) {
+					if (deck.showOneCard(player, handIndex, 0) == deck.showOneCard(player, handIndex, 1)) {
+						if (betting.getPlayerChips() >= betting.getBettingValue()) {
+							System.out.println("\nDu har pengar till en split.");
+							boolean splitCards = betting.yesOrNo("Vill du splitta dina kort? Ja eller Nej");
 
+							if (splitCards == true) {
+								System.out.println("Du splittar.");
+								player.hand.add(new ArrayList<Integer>());// Adderar ny rad till player
+								int tempElement = player.hand.get(handIndex).get(1);
+								player.hand.get(handIndex + 1).add(new Integer(tempElement));// Kopierar värde från gammal array till ny																								
+								player.hand.get(handIndex).clear();// Nollställer Row
+								player.hand.get(handIndex).add(new Integer(tempElement));// Kopierar tillbaka värdet till gammal array.														
+								player.hand.get(handIndex).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST SKA VAR RANDOM
+								player.hand.get(handIndex + 1).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST SKA VAR RANDOM
+							} else {
+								checkedAllHands++;
+							}
+						} else {
+							System.out.println("\nDu har tyvärr inte insats nog till en split.");
+							checkedAllHands++;
+						}
+					} else {
+						checkedAllHands++;
+					}
+				}
+
+				if (checkedAllHands == player.hand.size()) {splitHands = true;}
+
+			} while (splitHands = false);
+
+			// Players val - Hit or stay
+			do {
+				//Playerns tur.
+//				boolean playerHitNewCard=true;
+//				System.out.println("Vill du fortsätta \"Ja\" \"Nej\"");
+//				String scannerAnswer = scan.next().toLowerCase();
+//				boolean hitMe=hitOrStay(scannerAnswer);
+//
+//				
+//				do {
+//					if (hitOrStay("Ja")) {
+//						player.hand.add(dealRandomCards())
+//						
+//					}else {
+//
+//					System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
+//					System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
+//					playerHitNewCard=false;//ENDAST FÖR TEST
+//				} while (playerHitNewCard==true);
+				
+				playerHitNewCard = false;// ENDAST FÖR TEST
+			} while (playerHitNewCard == true);
+
+			boolean skipDealer = false;
+			if (player.hand.size() == 1 && deck.totalHandValue(player, 0) > 21) {
+				skipDealer = true;
+			}
+
+			// Dealerns tur
+			if (skipDealer == false) {
+				System.out.println("\nDealerns visar sitt dolda kort: " + deck.showOneCard(dealer, 0, 1));
+				System.out.println("Dealerns hand är: " + deck.showAllCards(dealer, 0));
+
+				while (deck.totalHandValue(dealer, 0) <= 16) {
+					int tempRandom = new Integer(deck.randomCard(12) + 1);
+					dealer.hand.get(0).add(tempRandom);
+					System.out.println("Dealern drar: " + tempRandom);
+				}
+
+				System.out.println("Dealerns hand är: " + deck.showAllCards(dealer, 0));
+				System.out.println("Dealerns totalsumma är " + deck.totalHandValue(dealer, 0) + ".");
+
+				if (deck.totalHandValue(dealer, 0) > 21) {
+					System.out.println("Dealern blir tjock.");
+				} else {
+					System.out.println("Dealern stannar.");
+				}
+			}
+
+			// Utvärdera vem som vunnit.
+			printWinner();
 			
+			mainPlay = betting.yesOrNo("Vill du fortsätta spela? Ja eller Nej");
 
 		} while (mainPlay == true);
+<<<<<<< HEAD
 		
 		//Avslutning
 	System.out.println("Tack för spelet."); 
 			
 		
+=======
+
+		// Avslutning
+		String messageOut = "* * * * * * * * * * * * * * *\n* * V I   S E S   I G E N * *\n* * * * * * * * * * * * * * *";
+		vegasNeonSign(messageOut, 15);
+
+
+>>>>>>> branch 'HEAD' of https://github.com/steffodimfelt/bestfriends
 	}
 
-	// Metoder för Table.
-
-	int getTotalValue(Player playerObj) {
-		return playerObj.getTotalValue();
-	}// Hämtar det total värdet av en hand.
-
-	boolean evaluateHands(Player playerObj, Player dealerObj)// Avgör om Players total är högre än Dealerns.
-	{
-		boolean outcome = true;
-		if (dealerObj.getTotalValue() >= playerObj.getTotalValue()) {
-			outcome = false;
-		}
-		return outcome;
-	}
+// Metoder för Table. -------------------------
 
 	void printWinner() {
-		if (evaluateHands(player, dealer) == true) {
-			System.out.println("Du vann spelet.");
-		} else {
-			System.out.println("Du förlorade.");
+		for (int handIndex = 0; handIndex < player.hand.size(); handIndex++) {
+			int formatHandNumber = handIndex + 1;
+			// Formaterar outputstring i fall man har splittat.
+			String handNumber = (player.hand.size() == 1) ? "Din hand" : "Hand nummer " + formatHandNumber;
+
+			if (deck.totalHandValue(dealer, 0) <= 21) {
+				if (deck.totalHandValue(player, handIndex) <= 21) {
+					if (deck.totalHandValue(player, handIndex) == deck.totalHandValue(dealer, 0)) {
+						System.out.println("\n" + handNumber + " förlorade.");
+						if (deck.totalHandValue(player, handIndex) >= 17) {
+							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får behålla din insats.");
+							betting.onlyStakePayBack(betting.playerBet.get(handIndex));
+						}
+					} else if (deck.totalHandValue(player, handIndex) > deck.totalHandValue(dealer, 0)) {
+						System.out.println(handNumber + " vann!");
+						if (deck.totalHandValue(player, handIndex) == 21) {
+							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1.5x din insats.");
+							betting.bettingPayBack(betting.playerBet.get(handIndex), 1.5);
+						} else {
+							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1x din insats.");
+							betting.bettingPayBack(betting.playerBet.get(handIndex), 1);
+						}
+					}
+				} else {
+					System.out.println(handNumber + " blev tjock. Du förlorar din insats.");
+				}
+			} else {
+				if (deck.totalHandValue(player, handIndex) <= 21) {
+					System.out.println("\n" + handNumber + " vann!");
+
+					if (deck.totalHandValue(player, handIndex) == 21) {
+						System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1.5x din insats.");
+						betting.bettingPayBack(betting.playerBet.get(handIndex), 1.5);
+					} else {
+						System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1x din insats.");
+						betting.bettingPayBack(betting.playerBet.get(handIndex), 1);
+					}
+				} else {
+					System.out.println(handNumber + " blev tjock. Du förlorar din insats.");
+				}
+			}
 		}
+		System.out.println("Du har nu $" + betting.getPlayerChips() + ".");
 	}
 
-	boolean scanNewGame(String answerIn) {
-		boolean returnAnswer = true;
-		boolean fetchReturnAnswer = false;
+	public void vegasNeonSign(String message, long millisPerChar) {
+		for (int i = 0; i < message.length(); i++) {
+			System.out.print(message.charAt(i));
 
-		do {
-			switch (answerIn) {
-			case "j":
-			case "ja":
-				returnAnswer = true;
-				fetchReturnAnswer = true;
-				break;
-			case "n":
-			case "nej":
-				returnAnswer = false;
-				fetchReturnAnswer = true;
-				break;
-			default:
-				System.out.println(" Vill du fortsätta spela? Ja eller Nej");
-				fetchReturnAnswer = false;
-				break;
+			try {
+				Thread.sleep(millisPerChar);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		} while (fetchReturnAnswer == false);
-		return returnAnswer;
+		}
+		System.out.println("");
 	}
 
-	boolean hitOrStay(String answerIn) {
-		boolean returnAnswer = true;
-		boolean fetchReturnAnswer = false;
-
-		System.out.println("Vill du fortsätta spela? Ja eller Nej");
-		do {
-			switch (answerIn) {
-			case "j":
-			case "ja":
-				returnAnswer = true;
-				fetchReturnAnswer = true;
-				break;
-			case "n":
-			case "nej":
-				returnAnswer = false;
-				fetchReturnAnswer = true;
-				break;
-			default:
-				System.out.println("Vill du fortsätta spela? Ja eller Nej");
-				fetchReturnAnswer = false;
-				break;
-			}
-		} while (fetchReturnAnswer == false);
-		return returnAnswer;
+	public void welcome() {
+		String message = "* * * * * * * * * * * * * * \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * *";
+		vegasNeonSign(message, 25);
+		System.out.println("Välkommen till Black Jack.");
+		System.out.println("För att vinna behöver summan av dina kort vara högre än Dealerns.");
+		System.out.println("Den som får högst kort, upp till och med 21, vinner handen.");
+		System.out.println("Lycka till!\n");
 	}
 
 }
