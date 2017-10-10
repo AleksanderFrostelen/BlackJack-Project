@@ -83,27 +83,7 @@ public class BlackJackMain {
 			} while (splitHands = false);
 
 			// Players val - Hit or stay
-			do {
-				//Playerns tur.
-//				boolean playerHitNewCard=true;
-//				System.out.println("Vill du fortsätta \"Ja\" \"Nej\"");
-//				String scannerAnswer = scan.next().toLowerCase();
-//				boolean hitMe=hitOrStay(scannerAnswer);
-//
-//				
-//				do {
-//					if (hitOrStay("Ja")) {
-//						player.hand.add(dealRandomCards())
-//						
-//					}else {
-//
-//					System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
-//					System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
-//					playerHitNewCard=false;//ENDAST FÖR TEST
-//				} while (playerHitNewCard==true);
-				
-				playerHitNewCard = false;// ENDAST FÖR TEST
-			} while (playerHitNewCard == true);
+			hitOrStay ();
 
 			boolean skipDealer = false;
 			if (player.hand.size() == 1 && deck.totalHandValue(player, 0) > 21) {
@@ -213,6 +193,32 @@ public class BlackJackMain {
 		System.out.println("För att vinna behöver summan av dina kort vara högre än Dealerns.");
 		System.out.println("Den som får högst kort, upp till och med 21, vinner handen.");
 		System.out.println("Lycka till!\n");
+	}
+	
+	public void hitOrStay ()
+	{
+
+//	
+//		
+//		do {
+//			boolean hitMe=true;
+//			
+//			hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
+//			
+//			if (hitMe==true) {
+//			//	player.hand.add(dealRandomCards())
+//				System.out.println("JA");
+//			}
+//			
+////			else {
+////
+////			System.out.println("Dina kort är "+deck.totalHandValue(player,0));
+////			System.out.println("Dealerns kort är "+deck.showOneCard(dealer, 0, 0));
+////			playerHitNewCard=false;//ENDAST FÖR TEST
+////			}
+//
+//			playerHitNewCard = false;// ENDAST FÖR TEST
+//		} while (playerHitNewCard == true);
 	}
 
 }
