@@ -56,16 +56,8 @@ public class Deck {
 	}
 
 	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och dealer
-	{
-		
-		playObj.hand.get(nr).add(new Integer(VALUESPAN.length + 1));
-		
-	}
+	{playObj.hand.get(nr).add(new Integer(VALUESPAN.length + 1));}
 
-	public void removeCard(Object object) // den ska använda randomCard och ger kort till player och dealer
-	{
-
-	}
 
 	String showAllCards(Player playerObj, int handIndex)// Returnerar en sträng med valörerna på alla korten på vald hand.
 	{
