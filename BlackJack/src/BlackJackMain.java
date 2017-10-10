@@ -72,11 +72,11 @@ public class BlackJackMain {
 		} while (mainPlay == true);
 		
 		//Avslutning
-	System.out.println("Tack för spelet.");
+	System.out.println("Tack för spelet."); 
 			
 		
 	
-			
+				
 		
 		
 	}
