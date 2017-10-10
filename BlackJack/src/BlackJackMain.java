@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class BlackJackMain {
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		/**
 		 * Developed 2017 by: 
 		 * Moa Gardsäter 
@@ -11,18 +12,55 @@ public class BlackJackMain {
 		 * Jamien
 		 * Steffo Dimfelt
 		 */
+=======
+	/**Developed 2017 by: 
+	 * Moa Gardsäter
+	 * Sara Svensson
+	 * Aleksander Frostelen
+	 * Jaimen Lavalle
+	 * Steffo Dimfelt
+	 * */
+>>>>>>> refs/heads/HEAD
 
 		BlackJackMain blackJack = new BlackJackMain();
 		blackJack.table();
 	}
+<<<<<<< HEAD
 
 	private Deck deck = new Deck();
 	private Player dealer = new Player();
+=======
+	private Scanner scan = new Scanner(System.in);
+	private Deck deck = new Deck();
+	private Player dealer = new Player ();
+>>>>>>> refs/heads/HEAD
 	private Player player = new Player();
 	private Betting betting = new Betting();
+<<<<<<< HEAD
 
 	void table() {
+=======
+	
+	void table()
+	{
+		dealer.hand.add(1);//ENDAST FÖR TEST
+		player.hand.add(44);	//ENDAST FÖR TEST
+		player.hand.add(234);	//ENDAST FÖR TEST
+		player.setTotalValue(20);//ENDAST FÖR TEST
+		dealer.setTotalValue(20);//ENDAST FÖR TEST
 		
+		String message = "* * * * * * * * * * * * * * \n* * B L A C K   J A C K * * \n* * * * * * * * * * * * * *";
+		vegasNeonSign(message, 25);
+		
+		//Setup table
+		boolean mainPlay = true;
+
+
+		deck.resetAll(player,dealer,betting);
+	
+>>>>>>> refs/heads/HEAD
+		
+<<<<<<< HEAD
 		welcome();
 
 		// Huvudloop för hela spelet.
@@ -49,7 +87,20 @@ public class BlackJackMain {
 			betting.doubleUp(deck.totalHandValue(player, 0), 0);
 
 			boolean splitHands = false;
+=======
+		//Huvudloop för hela spelet.
+	/*	do {
+			
+			//Playerns tur.
+			boolean playerHitNewCard=true;
+			System.out.println("Vill du fortsätta \"Ja\" \"Nej\"");
+			String scannerAnswer = scan.next().toLowerCase();
+			boolean hitMe=hitOrStay(scannerAnswer);
+
+			
+>>>>>>> refs/heads/HEAD
 			do {
+<<<<<<< HEAD
 				int checkedAllHands = 0;
 				for (int handIndex = 0; handIndex < player.hand.size(); handIndex++) {
 					if (deck.showOneCard(player, handIndex, 0) == deck.showOneCard(player, handIndex, 1)) {
@@ -83,7 +134,22 @@ public class BlackJackMain {
 			} while (splitHands = false);
 
 			// Players val - Hit or stay
+=======
+				if (hitOrStay("Ja")) {
+					player.hand.add(dealRandomCards())
+					
+				}else {
+
+				System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
+				System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
+				playerHitNewCard=false;//ENDAST FÖR TEST
+			} while (playerHitNewCard==true);
+			
+			//Dealerns tur
+			boolean dealerHitNewCard=true;
+>>>>>>> refs/heads/HEAD
 			do {
+<<<<<<< HEAD
 
 				// Hit or stay loop
 				playerHitNewCard = false;// ENDAST FÖR TEST
@@ -116,16 +182,43 @@ public class BlackJackMain {
 			}
 
 			// Utvärdera vem som vunnit.
+=======
+				
+				dealerHitNewCard=false;//ENDAST FÖR TEST
+			} while (dealerHitNewCard==true);
+			
+			//Utvärdera vem som vunnit. 
+>>>>>>> refs/heads/HEAD
 			printWinner();
+<<<<<<< HEAD
 			
 			mainPlay = betting.yesOrNo("Vill du fortsätta spela? Ja eller Nej");
+=======
+			System.out.println(deck.showFirstCard(player));
+			System.out.println("Vill du fortsätta spela? Ja eller Nej");
+			String scannerAnswer = scan.next().toLowerCase();
+			//Vill spelaren fortsätta. 
+			mainPlay = scanNewGame(scannerAnswerOne);
+			if (scanNewGame("Ja")) {
+				
+			} else {
+
+			
+>>>>>>> refs/heads/HEAD
 
 		} while (mainPlay == true);
+<<<<<<< HEAD
 
 		// Avslutning
 		String messageOut = "* * * * * * * * * * * * * * *\n* * V I   S E S   I G E N * *\n* * * * * * * * * * * * * * *";
 		vegasNeonSign(messageOut, 15);
 
+=======
+		
+		//Avslutning
+	System.out.println("Tack för spelet."); 
+	*/
+>>>>>>> refs/heads/HEAD
 
 	}
 
@@ -176,6 +269,7 @@ public class BlackJackMain {
 		}
 		System.out.println("Du har nu $" + betting.getPlayerChips() + ".");
 	}
+<<<<<<< HEAD
 
 	public void vegasNeonSign(String message, long millisPerChar) {
 		for (int i = 0; i < message.length(); i++) {
@@ -185,6 +279,30 @@ public class BlackJackMain {
 				Thread.sleep(millisPerChar);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+=======
+	
+	boolean scanNewGame(String answerIn)
+	{
+		boolean returnAnswer=true;
+		boolean fetchReturnAnswer=false;
+
+		do {
+			switch (answerIn) {
+			case "j":
+			case "ja":
+				returnAnswer = true;
+				fetchReturnAnswer = true;
+				break;
+			case "n":
+			case "nej":
+				returnAnswer = false;
+				fetchReturnAnswer = true;
+				break;
+			default:
+				System.out.println(" Vill du fortsätta spela? Ja eller Nej");
+				fetchReturnAnswer = false;
+				break;
+>>>>>>> refs/heads/HEAD
 			}
 		}
 		System.out.println("");
@@ -198,5 +316,22 @@ public class BlackJackMain {
 		System.out.println("Den som får högst kort, upp till och med 21, vinner handen.");
 		System.out.println("Lycka till!\n");
 	}
+	
+	public static void vegasNeonSign(String message, long millisPerChar)
+    {
+        for (int i = 0; i < message.length(); i++)
+        {
+            System.out.print(message.charAt(i));
 
+            try
+            {
+                Thread.sleep(millisPerChar);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("");
+    }
 }
