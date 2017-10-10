@@ -31,12 +31,14 @@ public class BlackJackMain {
 			deck.resetAll(player, dealer);
 
 			// DEALERNS KORT SKA ÄNDRAS TILL RIKTIGA RANDOM.
-			dealer.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
-			dealer.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
-
-			player.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
-			player.hand.get(0).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST
-
+			deck.dealRandomCards(0, player);
+			deck.dealRandomCards(0, player);
+			
+			deck.dealRandomCards(0, dealer);
+			deck.dealRandomCards(0, dealer);
+			
+			
+			
 			// Playerns tur.
 			boolean playerHitNewCard = true;
 
