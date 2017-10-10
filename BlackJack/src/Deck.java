@@ -90,25 +90,25 @@ public class Deck {
 		}
 		return handTotal;
 	}
-	public void aceDecision(Player playerObj) 
-	{
-		int ace;
-		Scanner input = new Scanner(System.in);
-		for(int i = 0; i < playerObj.hand.size(); i++) 
-		{
-			if(playerObj.hand.get(i) == 11 || playerObj.hand.get(i) == 1) 
-			{
-				System.out.println("Ska Esset vara 1 eller 11? Ange '1' eller '11', tryck sedan på enter.");
-				ace = input.nextInt();
-				if(ace == 1) 
-				{
-					playerObj.hand.set(i, 1);
-				}
-				else
-				{
-					playerObj.hand.set(i, 11);
-				}
-			}
-		}
-	}
+//	public void aceDecision(Player playerObj) 
+//	{
+//		int ace;
+//		Scanner input = new Scanner(System.in);
+//		for(int i = 0; i < playerObj.hand.size(); i++) 
+//		{
+//			if(playerObj.hand.get(i) == 11 || playerObj.hand.get(i) == 1) 
+//			{
+//				System.out.println("Ska Esset vara 1 eller 11? Ange '1' eller '11', tryck sedan på enter.");
+//				ace = input.nextInt();
+//				if(ace == 1) 
+//				{
+//					playerObj.hand.set(i, 1);
+//				}
+//				else
+//				{
+//					playerObj.hand.set(i, 11);
+//				}
+//			}
+//		}
+//	}
 }
