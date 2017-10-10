@@ -68,7 +68,7 @@ public class Deck {
 			}
 		}
 	
-	
+
 	// Returnerar ett slumpmässigt nummer
 	int randomCard(int randomIn) {
 		int randomOut = (int) (Math.random() * randomIn);
