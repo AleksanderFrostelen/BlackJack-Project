@@ -36,54 +36,29 @@ public class BlackJackMain {
 			
 			deck.dealRandomCards(0, dealer);
 			deck.dealRandomCards(0, dealer);
-			
-			
-			
+
 			// Playerns tur.
-			boolean playerHitNewCard = true;
+			//boolean playerHitNewCard = true;
 
 			betting.bettingLoop();
-
-			System.out.println("Dealerns kort är: " + deck.showOneCard(dealer, 0, 0));
+			
+			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
+			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
+			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
+			
+			//Player får välja valör i fall det finns ess i leken.
+			deck.aceDecision(player);
+			
+			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
 
+
 			betting.doubleUp(deck.totalHandValue(player, 0), 0);
 
-			boolean splitHands = false;
-			do {
-				int checkedAllHands = 0;
-				for (int handIndex = 0; handIndex < player.hand.size(); handIndex++) {
-					if (deck.showOneCard(player, handIndex, 0) == deck.showOneCard(player, handIndex, 1)) {
-						if (betting.getPlayerChips() >= betting.getBettingValue()) {
-							System.out.println("\nDu har pengar till en split.");
-							boolean splitCards = betting.yesOrNo("Vill du splitta dina kort? Ja eller Nej");
-
-							if (splitCards == true) {
-								System.out.println("Du splittar.");
-								player.hand.add(new ArrayList<Integer>());// Adderar ny rad till player
-								int tempElement = player.hand.get(handIndex).get(1);
-								player.hand.get(handIndex + 1).add(new Integer(tempElement));// Kopierar värde från gammal array till ny																								
-								player.hand.get(handIndex).clear();// Nollställer Row
-								player.hand.get(handIndex).add(new Integer(tempElement));// Kopierar tillbaka värdet till gammal array.														
-								player.hand.get(handIndex).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST SKA VAR RANDOM
-								player.hand.get(handIndex + 1).add(new Integer(deck.randomCard(12) + 1));// Sätter värde i elementetENDAST FÖR TEST SKA VAR RANDOM
-							} else {
-								checkedAllHands++;
-							}
-						} else {
-							System.out.println("\nDu har tyvärr inte insats nog till en split.");
-							checkedAllHands++;
-						}
-					} else {
-						checkedAllHands++;
-					}
-				}
-
-				if (checkedAllHands == player.hand.size()) {splitHands = true;}
-
-			} while (splitHands = false);
-
+			//Kör igenom ifall Player vill splitta kort.
+			splitHands();
+			
 			// Players val - Hit or stay
 			hitOrStay ();
 
@@ -99,6 +74,8 @@ public class BlackJackMain {
 
 				while (deck.totalHandValue(dealer, 0) <= 16) {
 					int tempRandom = new Integer(deck.randomCard(12) + 1);
+					deck.dealRandomCards(0, dealer);
+					deck.dAceDecision(dealer);
 					dealer.hand.get(0).add(tempRandom);
 					System.out.println("Dealern drar: " + tempRandom);
 				}
@@ -147,10 +124,10 @@ public class BlackJackMain {
 						System.out.println(handNumber + " vann!");
 						if (deck.totalHandValue(player, handIndex) == 21) {
 							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1.5x din insats.");
-							betting.bettingPayBack(betting.playerBet.get(handIndex), 1.5);
+							for (int bettingElem=0;bettingElem<betting.playerBet.size();bettingElem++){betting.bettingPayBack(bettingElem, 1.5);};
 						} else {
 							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1x din insats.");
-							betting.bettingPayBack(betting.playerBet.get(handIndex), 1);
+							for (int bettingElem=0;bettingElem<betting.playerBet.size();bettingElem++){betting.bettingPayBack(bettingElem, 1);}
 						}
 					}
 				} else {
@@ -162,10 +139,10 @@ public class BlackJackMain {
 
 					if (deck.totalHandValue(player, handIndex) == 21) {
 						System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1.5x din insats.");
-						betting.bettingPayBack(betting.playerBet.get(handIndex), 1.5);
+						for (int bettingElem=0;bettingElem<betting.playerBet.size();bettingElem++){betting.bettingPayBack(bettingElem, 1.5);}
 					} else {
 						System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1x din insats.");
-						betting.bettingPayBack(betting.playerBet.get(handIndex), 1);
+						for (int bettingElem=0;bettingElem<betting.playerBet.size();bettingElem++){betting.bettingPayBack(bettingElem, 1);}
 					}
 				} else {
 					System.out.println(handNumber + " blev tjock. Du förlorar din insats.");
@@ -189,8 +166,8 @@ public class BlackJackMain {
 	}
 
 	public void welcome() {
-		String message = "* * * * * * * * * * * * * * \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * *";
-		vegasNeonSign(message, 25);
+//		String message = "* * * * * * * * * * * * * * \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * *";
+//		vegasNeonSign(message, 25);
 		System.out.println("Välkommen till Black Jack.");
 		System.out.println("För att vinna behöver summan av dina kort vara högre än Dealerns.");
 		System.out.println("Den som får högst kort, upp till och med 21, vinner handen.");
@@ -199,28 +176,57 @@ public class BlackJackMain {
 	
 	public void hitOrStay ()
 	{
+		for (int handIndex=0;handIndex<player.hand.size();handIndex++)
+		{
+			boolean hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
+			
+			for (int handElement=0;handElement<player.hand.get(handIndex).size();handElement++)
+			{}
+			
+			if (hitMe==true) {
+				deck.dealRandomCards(handIndex, player);
+				System.out.println("JA");
+				}
+		}
+	}
+	
+	public void splitHands()
+	{
+		boolean splitHands = false;
+		do {
+			int checkedAllHands = 0;
+			for (int handIndex = 0; handIndex < player.hand.size(); handIndex++) {
+				if (deck.showOneCard(player, handIndex, 0) == deck.showOneCard(player, handIndex, 1)) {
+					if (betting.getPlayerChips() >= betting.getBettingValue()) {
+						System.out.println("\nDu har pengar till en split.");
+						boolean splitCards = betting.yesOrNo("Vill du splitta dina kort? Ja eller Nej");
 
-//	
-//		
-//		do {
-//			boolean hitMe=true;
-//			
-//			hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
-//			
-//			if (hitMe==true) {
-//			//	player.hand.add(dealRandomCards())
-//				System.out.println("JA");
-//			}
-//			
-////			else {
-////
-////			System.out.println("Dina kort är "+deck.totalHandValue(player,0));
-////			System.out.println("Dealerns kort är "+deck.showOneCard(dealer, 0, 0));
-////			playerHitNewCard=false;//ENDAST FÖR TEST
-////			}
-//
-//			playerHitNewCard = false;// ENDAST FÖR TEST
-//		} while (playerHitNewCard == true);
+						if (splitCards == true) {
+							System.out.println("Du splittar.");
+							player.hand.add(new ArrayList<Integer>());// Adderar ny rad till player
+							int tempElement = player.hand.get(handIndex).get(1);
+							player.hand.get(handIndex + 1).add(new Integer(tempElement));// Kopierar värde från gammal array till ny																								
+							player.hand.get(handIndex).clear();// Nollställer Row
+							player.hand.get(handIndex).add(new Integer(tempElement));// Kopierar tillbaka värdet till gammal array.
+							//Slumpmässigt tal till Player
+							deck.dealRandomCards(handIndex, player);
+							deck.dealRandomCards(handIndex+1, player);
+							deck.aceDecision(player);
+						} else {
+							checkedAllHands++;
+						}
+					} else {
+						System.out.println("\nDu har tyvärr inte insats nog till en split.");
+						checkedAllHands++;
+					}
+				} else {
+					checkedAllHands++;
+				}
+			}
+
+			if (checkedAllHands == player.hand.size()) {splitHands = true;}
+
+		} while (splitHands = false);
 	}
 
 }
