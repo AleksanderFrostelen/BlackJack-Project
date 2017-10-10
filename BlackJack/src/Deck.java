@@ -85,6 +85,9 @@ public class Deck {
 		}
 		return handTotal;
 	}
+	
+	
+	
 	public void aceDecision(Player playerObj) 
 	{
 		int ace;
