@@ -1,10 +1,5 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
-<<<<<<< HEAD
-=======
-import java.util.Scanner;
-import java.util.Arrays;
->>>>>>> refs/heads/HEAD
 
 public class Deck {
 
@@ -52,24 +47,11 @@ public class Deck {
 
 	public void resetAll(Player playerObj, Player dealerObj) // shoe ska laddas om till deckSetup och båda händerna ska nollas.
 	{
-<<<<<<< HEAD
 		playerObj.hand.clear();
 		playerObj.hand.clear();
 		shoe.clear();
 		playerObj.hand.add(new ArrayList<Integer>());// Adderar första raden till player
 		dealerObj.hand.add(new ArrayList<Integer>());// Adderar första raden till dealer
-=======
-		//System.out.println(shoe.get(cardNmbIn).toString());
-		return shoe.get(cardNmbIn);
-	}
-	
-	public void resetAll(Player playerObj1,Player playerObj2, Betting bettingObj) //shoe ska laddas om till deckSetup och båda händerna ska nollas.
-	{
-		playerObj1.hand.clear();
-		playerObj2.hand.clear();
-		bettingObj.playerBet.clear();
-		shoe.clear();
->>>>>>> refs/heads/HEAD
 		shuffle();
 	}
 
@@ -91,7 +73,6 @@ public class Deck {
 		}
 		return tempString;
 	}
-<<<<<<< HEAD
 
 	int showOneCard(Player playerObj, int handIndex, int cardIndex)// Returnerar valören på det första kortet på hand.
 	{
@@ -108,10 +89,7 @@ public class Deck {
 			handTotal = handTotal+oneElement;
 		}
 		return handTotal;
-=======
-	
-	int showFirstCard(Player playerObj){return playerObj.hand.get(0);}//Returnerar valören på det första kortet på hand.
-	
+	}
 	public void aceDecision(Player playerObj) 
 	{
 		int ace;
@@ -132,6 +110,5 @@ public class Deck {
 				}
 			}
 		}
->>>>>>> refs/heads/HEAD
 	}
 }
