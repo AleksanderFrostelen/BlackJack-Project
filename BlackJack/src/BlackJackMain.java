@@ -91,8 +91,24 @@ public class BlackJackMain {
 
 			// Players val - Hit or stay
 			do {
-
-				// Hit or stay loop
+				//Playerns tur.
+//				boolean playerHitNewCard=true;
+//				System.out.println("Vill du fortsätta \"Ja\" \"Nej\"");
+//				String scannerAnswer = scan.next().toLowerCase();
+//				boolean hitMe=hitOrStay(scannerAnswer);
+//
+//				
+//				do {
+//					if (hitOrStay("Ja")) {
+//						player.hand.add(dealRandomCards())
+//						
+//					}else {
+//
+//					System.out.println("Dina kort är "+deck.showAllCards(player)+" Totalt blir det "+getTotalValue(player));
+//					System.out.println("Dealerns kort är "+deck.showFirstCard(dealer));
+//					playerHitNewCard=false;//ENDAST FÖR TEST
+//				} while (playerHitNewCard==true);
+				
 				playerHitNewCard = false;// ENDAST FÖR TEST
 			} while (playerHitNewCard == true);
 
