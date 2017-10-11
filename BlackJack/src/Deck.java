@@ -150,7 +150,7 @@ public class Deck {
 	    		{
 	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
 	    			{
-	    				dealerObj.hand.get(0).set(ii, 11)	;
+	    				dealerObj.hand.get(0).set(ii, 11);
 	    			}
 	    		}
 	    	}
