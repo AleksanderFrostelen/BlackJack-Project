@@ -94,6 +94,7 @@ public class Betting {
 	}
 
 	void bettingPayBack(int stakeIn, double multipleIn) {
+		System.out.println(stakeIn+" "+multipleIn);
 		int newValue = (int) Math.ceil((stakeIn * multipleIn) + stakeIn);
 		newValue = newValue + getPlayerChips();
 		int newValueOut = (int) newValue;
