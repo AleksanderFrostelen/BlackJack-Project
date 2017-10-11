@@ -95,7 +95,6 @@ public class Betting {
 	}
 
 	void bettingPayBack(int stakeIn, double multipleIn) {
-		System.out.println(stakeIn+" "+multipleIn);
 		int newValue = (int) Math.ceil((stakeIn * multipleIn) + stakeIn);
 		newValue = newValue + getPlayerChips();
 		int newValueOut = (int) newValue;
@@ -130,37 +129,40 @@ public class Betting {
 		} 
 		return returnAnswer;
 	}
+	
 	//Välja om man vill satsa över eller under
 		void overUnderMeth() {
 			if (getPlayerChips() >= getBettingValue() )
 			{
 				boolean overUnderAnswer=false;
 				overUnderAnswer = yesOrNo("Vill du satsa Över/Under? Ja eller Nej.");
-				if (overUnderAnswer = true)
+				if (overUnderAnswer == true)
 				{
 					boolean fetchReturnAnswer = false;
 
 					while (fetchReturnAnswer == false) {
-						System.out.println("Vill du satsa över eller under?");
+						System.out.println("Vad vill du satsa? Över eller Under?");
 						String scannerAnswer = scan.next().toLowerCase();
 						
+						System.out.println(scannerAnswer);
 						switch (scannerAnswer) {
 						case "ö":
 						case "över":
 							overUnderChoice = "över";
-							System.out.println("Du valde att spela $ " + overUnderChoice);
+							System.out.println("Du valde att spela $"+getBettingValue()+" på Över.");
+							fetchReturnAnswer=true;
 							break;
 						case "u":
 						case "under":
 							overUnderChoice = "under";
-							System.out.println("Du valde att spela $ " + overUnderChoice);
+							System.out.println("Du valde att spela $"+getBettingValue()+" på Under.");
+							fetchReturnAnswer=true;
 							break;
 						default:
 							fetchReturnAnswer = false;
 							break;
 						}
 					}
-
 				}
 			}
 			
@@ -170,16 +172,26 @@ public class Betting {
 		{
 			if (overUnderChoice != "")
 			{
-				if (playerObj.getTotalValue()> 13 && Betting.this.overUnderChoice.equals("över")){
-					
-				
+				if (playerObj.getTotalValue()> 13 && overUnderChoice.equals("över"))
+				{
+					System.out.println("Du fick satsat på Över och får tillbaka 1x din insats.");
+					bettingPayBack(0, 1);
 				}
-				else if (playerObj.getTotalValue() < 13 && Betting.this.overUnderChoice.equals("under"))
+				else if (playerObj.getTotalValue() < 13 && overUnderChoice.equals("under"))
 				{
 					
+					int twoFirstCardsValue = playerObj.hand.get(0).get(0)+playerObj.hand.get(0).get(1);
+					if (twoFirstCardsValue==22)
+					{
+						System.out.println("Du satsade på Under och fick två ess. Du får tillbaka 1.5x din insats.");
+						bettingPayBack(0, 1.5);
+					}else {
+						System.out.println("Du fick satsat på Under och får tillbaka 1x din insats.");
+						bettingPayBack(0, 1);
+					}
 				}
 				else {
-					System.out.println("Det blev 13 du förlorade buhu");
+					System.out.println("Det blev 13. Du förlorade. Buhu.");
 				}
 			}
 			

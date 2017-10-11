@@ -50,11 +50,11 @@ public class BlackJackMain {
 			// Playerns tur.
 			betting.bettingLoop();
 			betting.overUnderMeth();
-
 			
 			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
+			System.out.println("");
 			
 			betting.overUnderPay(player);
 			
