@@ -104,7 +104,7 @@ public class Betting {
 
 	void onlyStakePayBack(int stakeIn) {setPlayerChips(stakeIn + getPlayerChips());}
 
-	boolean yesOrNo() {
+	boolean yesOrNo(String string) {
 		boolean returnAnswer = true;
 		boolean fetchReturnAnswer = false;
 
@@ -156,13 +156,13 @@ public class Betting {
 		} 
 		return returnAnswer;
 	}
-	//Välja om man vill satsa över eller under
+	//Vï¿½lja om man vill satsa ï¿½ver eller under
 	void overUnderMeth() {
 		
 		getBettingValue();
 		if (playerChips <= bettingValue )
 		{
-			System.out.println("Vill du satsa över eller under?");
+			System.out.println("Vill du satsa ï¿½ver eller under?");
 			boolean overUnderAnswer = yesOrNo();
 			
 			if (overUnderAnswer = true)
@@ -170,7 +170,7 @@ public class Betting {
 				boolean overOrUnderBool = overOrUnder();
 				if (overOrUnderBool = true)
 				{	
-					overUnderChoice = "över";
+					overUnderChoice = "ï¿½ver";
 					System.out.println("Du valde att spela $ " + overUnderChoice);
 				}
 				else {
@@ -189,7 +189,7 @@ public class Betting {
 	{
 		if (Betting.this.overUnderChoice != "")
 		{
-			if (playerObj.getTotalValue()> 13 && Betting.this.overUnderChoice.equals("över")){
+			if (playerObj.getTotalValue()> 13 && Betting.this.overUnderChoice.equals("ï¿½ver")){
 				
 			
 			}
@@ -198,7 +198,7 @@ public class Betting {
 				
 			}
 			else {
-				System.out.println("Det blev 13 du förlorade buhu");
+				System.out.println("Det blev 13 du fï¿½rlorade buhu");
 			}
 		}
 		

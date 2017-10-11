@@ -192,7 +192,7 @@ public class Deck
 	    				dealerObj.hand.get(0).set(ii, 11);
 	    			}
 	    		}
-	    	}
+	    	 }
 	   }
 	
 	void removeCards(int indexNmb)
