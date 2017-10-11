@@ -3,11 +3,20 @@ import java.util.Scanner;
 
 public class Betting {
 
-	public ArrayList<Integer> playerBet = new ArrayList<>();
-	private int playerChips = 10;
-	private Scanner scan = new Scanner(System.in);
-	private int bettingValue = 0;
-	private String overUnderChoice = "";
+	private int playerChips;
+	private Scanner scan;
+	private int bettingValue;
+	private String overUnderChoice;
+	private ArrayList<Integer> playerBet;
+	
+	public Betting() {
+		super();
+		playerBet = new ArrayList<>();
+		playerChips = 10;
+		scan = new Scanner(System.in);
+		bettingValue = 0;
+		overUnderChoice = "";
+	}
 
 	public int getPlayerChips() {
 
@@ -25,8 +34,25 @@ public class Betting {
 	public void setBettingValue(int bettingValue) {
 		this.bettingValue = bettingValue;
 	}
+	
+	public ArrayList<Integer> getPlayerBet() {
+		return playerBet;
+	}
 
-	public int bettingLoop() {
+	public void setPlayerBet(ArrayList<Integer> playerBet) {
+		this.playerBet = playerBet;
+	}
+
+	public int getPlayerBetSize() {
+		return playerBet.size();
+	}
+	
+	public int getPlayerBetHandIndex(int handIndex) {
+		return playerBet.get(handIndex);
+	}
+	
+
+	public void bettingLoop() {
 		boolean bettingAgain = false;
 		int bettingIn = 0;
 		do {
@@ -51,7 +77,7 @@ public class Betting {
 				System.out.println("Du har inga pengar kvar att satsa med.");
 			}
 		} while (bettingAgain == true);
-		return bettingIn;
+
 	}
 
 	public void doubleUp(int bettingValue, int bettingIndex) {
@@ -140,23 +166,27 @@ public class Betting {
 				if (overUnderAnswer == true)
 				{
 					boolean fetchReturnAnswer = false;
-
+					
 					while (fetchReturnAnswer == false) {
 						System.out.println("Vad vill du satsa? Över eller Under?");
 						String scannerAnswer = scan.next().toLowerCase();
-						
+						int betIn=0;
 						System.out.println(scannerAnswer);
 						switch (scannerAnswer) {
 						case "ö":
 						case "över":
 							overUnderChoice = "över";
-							System.out.println("Du valde att spela $"+getBettingValue()+" på Över.");
+							System.out.println("Du har valt att spela $"+getBettingValue()+" på Över.");							
+							betIn = playerChips-getPlayerChips();
+							setPlayerChips(betIn);
 							fetchReturnAnswer=true;
 							break;
 						case "u":
 						case "under":
 							overUnderChoice = "under";
-							System.out.println("Du valde att spela $"+getBettingValue()+" på Under.");
+							System.out.println("Du har valt att spela $"+getBettingValue()+" på Under.");
+							betIn = playerChips-getPlayerChips();
+							setPlayerChips(betIn);
 							fetchReturnAnswer=true;
 							break;
 						default:
