@@ -207,7 +207,7 @@ public class BlackJackMain {
 					if (betting.getPlayerChips() >= betting.getBettingValue()) {
 						System.out.println("\nDu har pengar till en split.");
 						boolean splitCards = betting.yesOrNo("Vill du splitta dina kort? Ja eller Nej");
-
+						
 						if (splitCards == true) {
 							System.out.println("Du splittar.");
 							player.hand.add(new ArrayList<Integer>());// Adderar ny rad till player
