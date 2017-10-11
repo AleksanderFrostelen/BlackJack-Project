@@ -182,27 +182,37 @@ public class Betting {
 				int TotalCardValue=	playerCard1+playerCard2;	
 	
 				
-				if (TotalCardValue> 13 && overUnderChoice.equals("över"))
+				if ( overUnderChoice.equals("över"))
 				{
+					if (TotalCardValue> 13)
+					{
 					System.out.println("Du fick satsat på Över och får tillbaka 1x din insats.");
 					bettingPayBack(0, 1);
-				}
-				else if (TotalCardValue < 13 && overUnderChoice.equals("under"))
-				{
-					
-					int twoFirstCardsValue = playerObj.hand.get(0).get(0)+playerObj.hand.get(0).get(1);
-					if (twoFirstCardsValue==22)
-					{
-						System.out.println("Du satsade på Under och fick två ess. Du får tillbaka 1.5x din insats.");
-						bettingPayBack(0, 1.5);
-					}else {
-						System.out.println("Du fick satsat på Under och får tillbaka 1x din insats.");
-						bettingPayBack(0, 1);
+					}
+					else {
+						System.out.println("Det blev "+TotalCardValue+". Du förlorade. Buhu.");
 					}
 				}
-				else {
-					System.out.println("Det blev 13. Du förlorade. Buhu.");
+				else if (overUnderChoice.equals("under"))
+				{
+					if (TotalCardValue<13)
+					{
+						int twoFirstCardsValue = playerObj.hand.get(0).get(0)+playerObj.hand.get(0).get(1);
+						if (twoFirstCardsValue==22)
+						{
+							System.out.println("Du satsade på Under och fick två ess. Du får tillbaka 1.5x din insats.");
+							bettingPayBack(0, 1.5);
+						}else {
+							System.out.println("Du fick satsat på Under och får tillbaka 1x din insats.");
+							bettingPayBack(0, 1);
+						}
+					}
+					else {
+						System.out.println("Det blev "+TotalCardValue+". Du förlorade. Buhu.");
+					}
+
 				}
+				
 			}
 			
 		}
