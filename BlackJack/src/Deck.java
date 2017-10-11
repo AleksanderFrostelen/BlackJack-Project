@@ -177,6 +177,7 @@ public class Deck
 	    	for(int i = 0; i < dealerObj.hand.size(); i++) 
 	    	{ 
 	    		if (totalHandValue(dealerObj, i) > 10) 
+	    			
 	    		{
 	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
 	    			{
