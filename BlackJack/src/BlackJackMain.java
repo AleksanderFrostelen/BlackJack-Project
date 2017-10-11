@@ -16,18 +16,10 @@ public class BlackJackMain {
 		blackJack.table();
 	}
 
-	private Deck deck;
-	private Player dealer;
-	private Player player;
-	private Betting betting;
-
-	public BlackJackMain() {
-		super();
-		deck = new Deck();
-		dealer = new Player();
-		player = new Player();
-		betting = new Betting();
-	}
+	private Deck deck = new Deck();
+	private Player dealer = new Player();
+	private Player player = new Player();
+	private Betting betting = new Betting();
 
 	void table() {
 		
@@ -194,7 +186,9 @@ public class BlackJackMain {
 			boolean hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
 			
 			for (int handElement=0;handElement<player.hand.get(handIndex).size();handElement++)
-			{}
+			{
+				
+			}
 			
 			if (hitMe==true) {
 				deck.dealRandomCards(handIndex, player);
