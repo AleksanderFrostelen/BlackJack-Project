@@ -7,26 +7,17 @@ import java.util.Arrays;
 public class Deck 
 {
 
-	ArrayList<String> name = new ArrayList<String>(
-			Arrays.asList("Kung", "Knekt", "Dam", "Ess", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-	ArrayList<String> suit = new ArrayList<String>(Arrays.asList("Spader", "Hjärter", "Ruter", "Klöver"));
-	ArrayList<String> shoeCol = new ArrayList<String>();
-	{
-		for(int x=0; x<suit.size();x++) 
-		{
-			for (int xx = 0; xx < name.size(); xx++) 
-			{
-				shoeCol.add(suit.get(x) + "." + name.get(xx));
-				
-			}
-		}
-}
-	private ArrayList<String> reload = new ArrayList<>();
+
+	//private ArrayList<String> reload = new ArrayList<>();
 	
 	//private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
 	private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup = new int[52];
-	public LinkedList<Integer> shoe = new LinkedList<>();//ska var private
+	public LinkedList<Integer> shoe = new LinkedList<>();
+	ArrayList<String> shoeCol = new ArrayList<>();
+	ArrayList<String> name = new ArrayList<String>(Arrays.asList( "2", "3", "4", "5", "6", "7", "8", "9", "10","Knekt", "Dam","Kung","Ess"));
+	ArrayList<String> suit = new ArrayList<String>(Arrays.asList("Spader", "Hjärter", "Ruter", "Klöver"));
+	
 	private Scanner input = new Scanner(System.in);
 
 	public int[] getDeckSetup() 
@@ -68,14 +59,23 @@ public class Deck
 	// Blandar en ny lek att spela med.
 	void shuffle() 
 	{
-		System.out.println("Shuffle");
-
-		System.out.println("Shoe: "+shoe.size());
-		
 		for (int LinkedElem = 0; LinkedElem < deckSetup.length; LinkedElem++) 
 		{
 			shoe.add(deckSetup[LinkedElem]);
 		}
+		
+		shoeCol = new ArrayList<String>();
+		{
+			for(int x=0; x<suit.size();x++) 
+			{
+				for (int xx = 0; xx < name.size(); xx++) 
+				{
+					shoeCol.add(suit.get(x) + " " + name.get(xx));
+					
+				}
+			}
+		}
+		
 	}
 
 	// Returnerar ett slumpmässigt nummer
@@ -94,39 +94,44 @@ public class Deck
 	public void resetAll(Player playerObj, Player dealerObj) // shoe ska laddas om till deckSetup och båda händerna ska
 																// nollas.
 	{
-		playerObj.hand.clear();
-		playerObj.hand.clear();
 		shoe.clear();
+		shoeCol.clear();
+		playerObj.hand.clear();
+		playerObj.hand.clear();
 		playerObj.hand.add(new ArrayList<Integer>());// Adderar första raden till player
 		dealerObj.hand.add(new ArrayList<Integer>());// Adderar första raden till dealer
+		playerObj.handCol.add(new ArrayList<String>());// Adderar första raden till player, färger string
+		dealerObj.handCol.add(new ArrayList<String>());// Adderar första raden till dealer, färger string
 		shuffle();
 	}
 
-	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och
-														// dealer
+	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och dealer
 	{
 		int randomCard=shoe.get(randomCard(shoe.size()));
+		String randomCardCol=shoeCol.get(randomCard(shoeCol.size()));
 		playObj.hand.get(nr).add(new Integer(randomCard));
-		
-		//REMOVE IN HÄR
+		playObj.handCol.get(nr).add(new String(randomCardCol));
 		removeCards(randomCard);
-		System.out.println("Colors REMOVE IN HÄR:");
 	}
 
-	String showAllCards(Player playerObj, int handIndex)// Returnerar en sträng med valörerna på alla korten på vald
-														// hand.
+	String showAllCards(Player playerObj, int handIndex)// Returnerar en sträng med valörerna på alla korten på vald hand.
 	{
 		String tempString = "";
 		for (int handElem = 0; handElem < playerObj.hand.get(handIndex).size(); handElem++) 
 		{
-			tempString += playerObj.hand.get(handIndex).get(handElem).toString() + " ";
+			if (handElem==playerObj.hand.get(handIndex).size()-1)
+			{
+				tempString += playerObj.handCol.get(handIndex).get(handElem).toString();
+			}else {
+				tempString += playerObj.handCol.get(handIndex).get(handElem).toString() + ", ";
+			}
 		}
 		return tempString;
 	}
 
-	int showOneCard(Player playerObj, int handIndex, int cardIndex)// Returnerar valören på det första kortet på hand.
+	String showOneCard(Player playerObj, int handIndex, int cardIndex)// Returnerar valören på det första kortet på hand.
 	{
-		return playerObj.hand.get(handIndex).get(cardIndex);
+		return playerObj.handCol.get(handIndex).get(cardIndex);
 	}
 
 	int totalHandValue(Player playerObj, int handIndex)// Returnerar totalen för en hand.
@@ -167,13 +172,9 @@ public class Deck
 			}
 		}
 	}
-
-	
-
    
 	 public void dAceDecision(Player dealerObj)
 		{
-		 System.out.println(dealerObj.hand.get(0));
 	    	for(int i = 0; i < dealerObj.hand.size(); i++) 
 	    	{ 
 	    		if (totalHandValue(dealerObj, i) > 10) 
@@ -181,9 +182,7 @@ public class Deck
 	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
 	    			{
 	    				dealerObj.hand.get(0).set(i, 1)	;
-	    				System.out.println(dealerObj.hand.get(0));
 	    			}
-	    			
 	    		}
 	    		else 
 	    		{
@@ -193,16 +192,12 @@ public class Deck
 	    			}
 	    		}
 	    	}
-	    	System.out.println(dealerObj.hand.get(0));
 	   }
 	
 	void removeCards(int indexNmb)
 	{
 		shoe.remove(indexNmb);
+		shoeCol.remove(indexNmb);
 	}
 	    	
-		
-
-	
-	
 }
