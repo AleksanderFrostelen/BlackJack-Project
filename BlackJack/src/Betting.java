@@ -185,6 +185,24 @@ public class Betting {
 		
 		
 	}
+	void overUnderPay(Player playerObj)
+	{
+		if (Betting.this.overUnderChoice != "")
+		{
+			if (playerObj.getTotalValue()> 13 && Betting.this.overUnderChoice.equals("över")){
+				
+			
+			}
+			else if (playerObj.getTotalValue() < 13 && Betting.this.overUnderChoice.equals("under"))
+			{
+				
+			}
+			else {
+				System.out.println("Det blev 13 du förlorade buhu");
+			}
+		}
+		
+	}
 	
 	
 }
