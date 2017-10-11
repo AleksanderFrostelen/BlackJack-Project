@@ -114,8 +114,7 @@ public class Deck
 		removeCards(randomCard);
 	}
 
-	String showAllCards(Player playerObj, int handIndex)// Returnerar en sträng med valörerna på alla korten på vald
-														// hand.
+	String showAllCards(Player playerObj, int handIndex)// Returnerar en sträng med valörerna på alla korten på vald hand.
 	{
 		String tempString = "";
 		for (int handElem = 0; handElem < playerObj.hand.get(handIndex).size(); handElem++) 
