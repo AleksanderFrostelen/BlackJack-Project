@@ -208,6 +208,8 @@ public class Betting {
 				
 				if (playerCard1==11) {playerCard1=1;}
 				if (playerCard2==11) {playerCard2=1;}
+				if (playerCard1>11) {playerCard1=10;}
+				if (playerCard2>11) {playerCard2=10;}
 				
 				int TotalCardValue=	playerCard1+playerCard2;	
 	

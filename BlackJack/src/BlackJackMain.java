@@ -32,11 +32,11 @@ public class BlackJackMain {
 	void table() {
 		
 		welcome();
-
+		deck.deckSetup();
 		// Huvudloop för hela spelet.
 		boolean mainPlay = true;
 		do {
-			deck.deckSetup();
+			
 			deck.resetAll(player, dealer);
 			
 			//Dela ut kort
@@ -58,6 +58,7 @@ public class BlackJackMain {
 			
 			betting.overUnderPay(player);
 			
+			System.out.println("");
 			//Player får välja valör i fall det finns ess i leken.
 			deck.aceDecision(player);
 			
@@ -70,6 +71,7 @@ public class BlackJackMain {
 			//Kör igenom ifall Player vill splitta kort.
 			splitHands();
 			
+			//IF SPLIT NÄR MAN SKRIVER UT I SPLITTEN.ANNARS BLIR DET DUBBELT. 
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
 			
@@ -83,7 +85,7 @@ public class BlackJackMain {
 
 			// Dealerns tur
 			if (skipDealer == false) {
-				System.out.println("\nDealerns visar sitt dolda kort: " + deck.showOneCard(dealer, 0, 1));
+				System.out.println("Dealerns visar sitt dolda kort: " + deck.showOneCard(dealer, 0, 1));
 				System.out.println("Dealerns hand är: " + deck.showAllCards(dealer, 0));
 
 				while (deck.totalHandValue(dealer, 0) <= 16) {
@@ -132,16 +134,16 @@ public class BlackJackMain {
 						System.out.println("\n" + handNumber + " förlorade.");
 						if (deck.totalHandValue(player, handIndex) >= 17) {
 							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får behålla din insats.");
-							betting.onlyStakePayBack(betting.playerBet.get(handIndex));
+							betting.onlyStakePayBack(betting.getPlayerBetHandIndex(handIndex));
 						}
 					} else if (deck.totalHandValue(player, handIndex) > deck.totalHandValue(dealer, 0)) {
 						System.out.println(handNumber + " vann!");
 						if (deck.totalHandValue(player, handIndex) == 21) {
 							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1.5x din insats.");
-							for (int bettingElem=0;bettingElem<betting.playerBet.size();bettingElem++){betting.bettingPayBack(bettingElem, 1.5);};
+							for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++){betting.bettingPayBack(bettingElem, 1.5);};
 						} else {
 							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1x din insats.");
-							for (int bettingElem=0;bettingElem<betting.playerBet.size();bettingElem++){betting.bettingPayBack(bettingElem, 1);}
+							for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++){betting.bettingPayBack(bettingElem, 1);}
 						}
 					}
 				} else {
@@ -153,10 +155,10 @@ public class BlackJackMain {
 
 					if (deck.totalHandValue(player, handIndex) == 21) {
 						System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1.5x din insats.");
-						for (int bettingElem=0;bettingElem<betting.playerBet.size();bettingElem++){betting.bettingPayBack(bettingElem, 1.5);}
+						for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++){betting.bettingPayBack(bettingElem, 1.5);}
 					} else {
 						System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1x din insats.");
-						for (int bettingElem=0;bettingElem<betting.playerBet.size();bettingElem++){betting.bettingPayBack(bettingElem, 1);}
+						for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++){betting.bettingPayBack(bettingElem, 1);}
 					}
 				} else {
 					System.out.println(handNumber + " blev tjock. Du förlorar din insats.");
@@ -181,8 +183,8 @@ public class BlackJackMain {
 
 	public void welcome() {
 
-		String message = "* * * * * * * * * * * * *  \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * ";
-		vegasNeonSign(message, 25);
+//		String message = "* * * * * * * * * * * * *  \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * ";
+//		vegasNeonSign(message, 25);
 		System.out.println("Välkommen till Black Jack.");
 		System.out.println("För att vinna behöver summan av dina kort vara högre än Dealerns.");
 		System.out.println("Den som får högst kort, upp till och med 21, vinner handen.");
@@ -191,18 +193,11 @@ public class BlackJackMain {
 	
 	public void hitOrStay ()
 	{
-		for (int handIndex=0;handIndex<player.hand.size();handIndex++)
-		{
-			boolean hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
+		boolean hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
 			
-			for (int handElement=0;handElement<player.hand.get(handIndex).size();handElement++)
-			{}
-			
-			if (hitMe==true) {
-				deck.dealRandomCards(handIndex, player);
-				System.out.println("JA");
-				}
-		}
+			if (hitMe==true) {System.out.println("Hit me!");}
+			if (hitMe==false) {System.out.println("Inga fler kort.");}
+
 	}
 	
 	public void splitHands()
