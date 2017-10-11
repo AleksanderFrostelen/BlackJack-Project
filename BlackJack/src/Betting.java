@@ -103,8 +103,8 @@ public class Betting {
 	}
 
 	void onlyStakePayBack(int stakeIn) {setPlayerChips(stakeIn + getPlayerChips());}
-
-	boolean yesOrNo(String string) {
+	
+	boolean yesOrNo() {
 		boolean returnAnswer = true;
 		boolean fetchReturnAnswer = false;
 

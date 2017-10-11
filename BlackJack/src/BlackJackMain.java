@@ -192,7 +192,7 @@ public class BlackJackMain {
 			
 			if (hitMe==true) {
 				deck.dealRandomCards(handIndex, player);
-				System.out.println("JA");
+				System.out.println("Ja");
 				}
 		}
 	}
