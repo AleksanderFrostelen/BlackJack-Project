@@ -38,8 +38,6 @@ public class BlackJackMain {
 		do {
 			deck.deckSetup();
 			deck.resetAll(player, dealer);
-
-			System.out.println("Shoesize:"+deck.shoe.size());
 			
 			//Dela ut kort
 			deck.dealRandomCards(0, player);
@@ -51,10 +49,14 @@ public class BlackJackMain {
 
 			// Playerns tur.
 			betting.bettingLoop();
+			betting.overUnderMeth();
+
 			
 			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
+			
+			betting.overUnderPay(player);
 			
 			//Player får välja valör i fall det finns ess i leken.
 			deck.aceDecision(player);

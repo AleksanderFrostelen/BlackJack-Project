@@ -6,12 +6,8 @@ import java.util.Arrays;
 
 public class Deck 
 {
-
-
-	//private ArrayList<String> reload = new ArrayList<>();
-	
-	//private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
-	private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
+	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
+	//private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup = new int[52];
 	public LinkedList<Integer> shoe = new LinkedList<>();
 	ArrayList<String> shoeCol = new ArrayList<>();
@@ -19,6 +15,8 @@ public class Deck
 	ArrayList<String> suit = new ArrayList<String>(Arrays.asList("Spader", "Hjärter", "Ruter", "Klöver"));
 	
 	private Scanner input = new Scanner(System.in);
+	
+	
 
 	public int[] getDeckSetup() 
 	{
@@ -104,7 +102,7 @@ public class Deck
 		dealerObj.handCol.add(new ArrayList<String>());// Adderar första raden till dealer, färger string
 		shuffle();
 	}
-
+ 
 	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och dealer
 	{
 		int randomCard=shoe.get(randomCard(shoe.size()));

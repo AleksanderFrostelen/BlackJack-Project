@@ -7,6 +7,7 @@ public class Betting {
 	private int playerChips = 10;
 	private Scanner scan = new Scanner(System.in);
 	private int bettingValue = 0;
+	private String overUnderChoice = "";
 
 	public int getPlayerChips() {
 
@@ -129,4 +130,58 @@ public class Betting {
 		} 
 		return returnAnswer;
 	}
+	//Välja om man vill satsa över eller under
+		void overUnderMeth() {
+			if (getPlayerChips() >= getBettingValue() )
+			{
+				boolean overUnderAnswer=false;
+				overUnderAnswer = yesOrNo("Vill du satsa Över/Under? Ja eller Nej.");
+				if (overUnderAnswer = true)
+				{
+					boolean fetchReturnAnswer = false;
+
+					while (fetchReturnAnswer == false) {
+						System.out.println("Vill du satsa över eller under?");
+						String scannerAnswer = scan.next().toLowerCase();
+						
+						switch (scannerAnswer) {
+						case "ö":
+						case "över":
+							overUnderChoice = "över";
+							System.out.println("Du valde att spela $ " + overUnderChoice);
+							break;
+						case "u":
+						case "under":
+							overUnderChoice = "under";
+							System.out.println("Du valde att spela $ " + overUnderChoice);
+							break;
+						default:
+							fetchReturnAnswer = false;
+							break;
+						}
+					}
+
+				}
+			}
+			
+			
+		}
+		void overUnderPay(Player playerObj)
+		{
+			if (overUnderChoice != "")
+			{
+				if (playerObj.getTotalValue()> 13 && Betting.this.overUnderChoice.equals("över")){
+					
+				
+				}
+				else if (playerObj.getTotalValue() < 13 && Betting.this.overUnderChoice.equals("under"))
+				{
+					
+				}
+				else {
+					System.out.println("Det blev 13 du förlorade buhu");
+				}
+			}
+			
+		}
 }
