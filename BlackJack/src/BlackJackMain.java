@@ -170,8 +170,9 @@ public class BlackJackMain {
 	}
 
 	public void welcome() {
-//		String message = "* * * * * * * * * * * * * * \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * *";
-//		vegasNeonSign(message, 25);
+
+		String message = "* * * * * * * * * * * * *  \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * ";
+		vegasNeonSign(message, 25);
 		System.out.println("Välkommen till Black Jack.");
 		System.out.println("För att vinna behöver summan av dina kort vara högre än Dealerns.");
 		System.out.println("Den som får högst kort, upp till och med 21, vinner handen.");

@@ -1,9 +1,24 @@
+import java.text.Format;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Arrays;
 
 public class Deck {
 
+	ArrayList<String> name = new ArrayList<String>(
+			Arrays.asList("Kung", "Knekt", "Dam", "Ess", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+	ArrayList<String> suit = new ArrayList<String>(Arrays.asList("Spader", "Hjärter", "Ruter", "Klöver"));
+	ArrayList<String> shoeCol = new ArrayList<String>();{
+		for(int x=0; x<suit.size();x++) {
+			for (int xx = 0; xx < name.size(); xx++) {
+				shoeCol.add(suit.get(x) + "." + name.get(xx));
+				
+			}
+		}
+}
+	private ArrayList<String> reload = new ArrayList<>();
+	
 	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
 //	private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup = new int[52];
