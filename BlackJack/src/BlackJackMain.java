@@ -28,18 +28,20 @@ public class BlackJackMain {
 		// Huvudloop för hela spelet.
 		boolean mainPlay = true;
 		do {
+			deck.deckSetup();
 			deck.resetAll(player, dealer);
 
-			// DEALERNS KORT SKA ÄNDRAS TILL RIKTIGA RANDOM.
-			deck.dealRandomCards(0, player);
-			deck.dealRandomCards(0, player);
+			System.out.println("Shoesize:"+deck.shoe.size());
 			
+			//Dela ut kort
+			deck.dealRandomCards(0, player);
+			deck.dealRandomCards(0, player);
 			deck.dealRandomCards(0, dealer);
 			deck.dealRandomCards(0, dealer);
+			
+			deck.dAceDecision(dealer);
 
 			// Playerns tur.
-			//boolean playerHitNewCard = true;
-
 			betting.bettingLoop();
 			
 			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
@@ -53,11 +55,13 @@ public class BlackJackMain {
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
 
-
-			betting.doubleUp(deck.totalHandValue(player, 0), 0);
+			betting.doubleUp(deck.totalHandValue(player, 0), 0);//Checka om det finns dubbla kort.
 
 			//Kör igenom ifall Player vill splitta kort.
 			splitHands();
+			
+			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
+			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
 			
 			// Players val - Hit or stay
 			hitOrStay ();
