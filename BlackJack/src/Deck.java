@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class Deck {
 
-//	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
-	private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
+	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
+//	private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup = new int[52];
-	private LinkedList<Integer> shoe = new LinkedList<>();
+	public LinkedList<Integer> shoe = new LinkedList<>();//ska var private
+	private Scanner input = new Scanner(System.in);
 
 	public int[] getDeckSetup() {
 		return deckSetup;
@@ -42,8 +43,12 @@ public class Deck {
 
 	// Blandar en ny lek att spela med.
 	void shuffle() {
+		System.out.println("Shuffle");
+
+		System.out.println("Shoe: "+shoe.size());
+		
 		for (int LinkedElem = 0; LinkedElem < deckSetup.length; LinkedElem++) {
-			shoe.add(deckSetup[LinkedElem]);// Lägger in varje element från array deckSetup till LinkedList shoe
+			shoe.add(deckSetup[LinkedElem]);
 		}
 	}
 
@@ -72,7 +77,12 @@ public class Deck {
 	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och
 														// dealer
 	{
-		playObj.hand.get(nr).add(new Integer(VALUESPAN[randomCard(VALUESPAN[VALUESPAN.length-1])]));
+		int randomCard=shoe.get(randomCard(shoe.size()));
+		playObj.hand.get(nr).add(new Integer(randomCard));
+		
+		//REMOVE IN HÄR
+		removeCards(randomCard);
+		System.out.println("Colors REMOVE IN HÄR:");
 	}
 
 	String showAllCards(Player playerObj, int handIndex)// Returnerar en sträng med valörerna på alla korten på vald
@@ -105,40 +115,52 @@ public class Deck {
 
 	public void aceDecision(Player playerObj) {
 		int ace;
-		Scanner input = new Scanner(System.in);
 		for (int i = 0; i < playerObj.hand.size(); i++) {
 			for (int ii = 0; ii < playerObj.hand.get(i).size(); ii++) {
-
-				if (playerObj.hand.get(i).equals(11) || playerObj.hand.get(i).equals(1)) {
-
+				
+				if (playerObj.hand.get(i).get(ii).equals(11) || playerObj.hand.get(i).get(ii).equals(1)) {
+					System.out.println("Det finns ett ess i din hand. Ska esset vara 1 eller 11?");
+					boolean gotADecision=false;
 					do {
-						System.out.println("Ska Esset vara 1 eller 11? Ange '1' eller '11'.");
 						ace = input.nextInt();
-
 						if (ace == 1) {
-							playerObj.hand.get(i).add(ace);
-
+							playerObj.hand.get(i).set(ii, ace);
+							gotADecision=true;
 						} else if (ace == 11) {
-							playerObj.hand.get(i).add(ace);
+							playerObj.hand.get(i).set(ii, ace);
+							gotADecision=true;
 						} else {
-							System.out.println("Du får endast välja 1 eller 11 ");
+							System.out.println("Du får endast välja 1 eller 11.");
 						}
-
-					} while (ace != 1 || ace != 11);
+					} while (gotADecision==false);
 				}
 			}
 		}
-		input.close();
 	}
 
-	public void dAceDecision(Player dealerObj) {
+	public void dAceDecision(Player dealerObj) 
+	{
 		for (int i = 0; i < dealerObj.hand.size(); i++) {
+			System.out.println("Dealer total: "+totalHandValue(dealerObj, i));
 			if (totalHandValue(dealerObj, i) > 10) 
 			{
-				for (int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) {dealerObj.hand.get(0).set(ii, 1);}
+				for (int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
+				{
+					dealerObj.hand.get(0).set(ii, 1);
+					System.out.println("Hand "+dealerObj.hand.get(0).get(ii));
+				}
 			} else {
-				for (int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) {dealerObj.hand.get(0).set(ii, 11);}
+				for (int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
+				{
+					dealerObj.hand.get(0).set(ii, 11);
+					System.out.println("Hand "+dealerObj.hand.get(0).get(ii));
+				}
 			}
 		}
+	}
+	
+	void removeCards(int indexNmb)
+	{
+		shoe.remove(indexNmb);
 	}
 }
