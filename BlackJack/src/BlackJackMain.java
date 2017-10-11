@@ -16,10 +16,18 @@ public class BlackJackMain {
 		blackJack.table();
 	}
 
-	private Deck deck = new Deck();
-	private Player dealer = new Player();
-	private Player player = new Player();
-	private Betting betting = new Betting();
+	private Deck deck;
+	private Player dealer;
+	private Player player;
+	private Betting betting;
+
+	public BlackJackMain() {
+		super();
+		deck = new Deck();
+		dealer = new Player();
+		player = new Player();
+		betting = new Betting();
+	}
 
 	void table() {
 		
