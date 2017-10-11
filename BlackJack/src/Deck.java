@@ -168,41 +168,8 @@ public class Deck
 		}
 	}
 
-	/*public void dAceDecision(Player dealerObj) 
-	{
-		System.out.println(dealerObj.hand.get(0));
-		for (int i = 0; i < dealerObj.hand.size(); i++) 
-		{
-			System.out.println("Dealer total: "+totalHandValue(dealerObj, i));
-			if (totalHandValue(dealerObj, i) > 10) 
-			{
-				for (int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
-				{
-					dealerObj.hand.get(0).set(ii, 1);
-					System.out.println("Hand "+dealerObj.hand.get(0).get(ii));
-				}
-			} else 
-			
-			{
-				for (int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
-				{
-					dealerObj.hand.get(0).set(ii, 11);
-					System.out.println("Hand "+dealerObj.hand.get(0).get(ii));
-				}
+	
 
-				else 
-				{
-					System.out.println("Du får endast välja 1 eller 11 ");
-				}
-				
-				}while (ace != 1 || ace != 11);
-				
-		  }
-     }*/
-
-			
-	 
-	   
    
 	 public void dAceDecision(Player dealerObj)
 		{
