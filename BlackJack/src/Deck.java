@@ -160,7 +160,7 @@ public class Deck
 							playerObj.hand.get(i).set(ii, ace);
 							gotADecision=true;
 						} else {
-							System.out.println("Du får endast välja 1 eller 11.");
+							System.out.println("Du kan endast välja 1 eller 11.");
 						}
 					} while (gotADecision==false);
 				}
@@ -195,7 +195,7 @@ public class Deck
 	    		}
 	    	}
 	    	System.out.println(dealerObj.hand.get(0));
-	   }
+	    	 }
 	
 	void removeCards(int indexNmb)
 	{

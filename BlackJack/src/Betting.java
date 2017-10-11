@@ -45,7 +45,7 @@ public class Betting {
 					System.out.println("Du kan inte satsa så mycket.");
 					bettingAgain = true;
 				}
-				
+
 			} else {
 				bettingAgain = false;
 				System.out.println("Du har inga pengar kvar att satsa med.");
@@ -60,7 +60,7 @@ public class Betting {
 		int tempChips = getPlayerChips();
 
 		if (bettingValue >= 7 && bettingValue <= 11) {
-			
+
 			if (tempChips >= doubleValue) {
 				doubleUp = yesOrNo("Vill du dubbla insatsen? Ja eller Nej");
 
@@ -72,11 +72,14 @@ public class Betting {
 			}
 
 			if (tempChips < doubleValue && getPlayerChips() > 0) {
-				doubleUp = yesOrNo("Din hand har summan $" + bettingValue + ". Du kan inte dubbla insatsen, \nmen du kan satsa återstående pengar $" + getPlayerChips() + ". \nVill du det? Ja eller Nej");
+				doubleUp = yesOrNo("Din hand har summan $" + bettingValue
+						+ ". Du kan inte dubbla insatsen, \nmen du kan satsa återstående pengar $" + getPlayerChips()
+						+ ". \nVill du det? Ja eller Nej");
 				if (doubleUp == true) {
 					playerBet.set(0, playerBet.get(0) + getPlayerChips());
 					setPlayerChips(0);
-					System.out.println("Du ökade till $" + playerBet.get(0) + ". Du har $" + getPlayerChips() + " kvar.");
+					System.out
+							.println("Du ökade till $" + playerBet.get(0) + ". Du har $" + getPlayerChips() + " kvar.");
 				}
 			}
 		}
@@ -95,23 +98,27 @@ public class Betting {
 	}
 
 	void bettingPayBack(int stakeIn, double multipleIn) {
-		System.out.println(stakeIn+" "+multipleIn);
+		System.out.println(stakeIn + " " + multipleIn);
 		int newValue = (int) Math.ceil((stakeIn * multipleIn) + stakeIn);
 		newValue = newValue + getPlayerChips();
 		int newValueOut = (int) newValue;
 		setPlayerChips(newValueOut);
 	}
 
-	void onlyStakePayBack(int stakeIn) {setPlayerChips(stakeIn + getPlayerChips());}
-	
+	void onlyStakePayBack(int stakeIn) {
+		setPlayerChips(stakeIn + getPlayerChips());
+	}
+
 	boolean yesOrNo() {
+
+	boolean yesOrNo(String string) {
 		boolean returnAnswer = true;
 		boolean fetchReturnAnswer = false;
 
 		while (fetchReturnAnswer == false) {
 			System.out.println(printOut);
 			String scannerAnswer = scan.next().toLowerCase();
-			
+
 			switch (scannerAnswer) {
 			case "j":
 			case "ja":
@@ -127,10 +134,10 @@ public class Betting {
 				fetchReturnAnswer = false;
 				break;
 			}
-		} 
+		}
 		return returnAnswer;
 	}
-	
+
 	boolean overOrUnder() {
 		boolean returnAnswer = true;
 		boolean fetchReturnAnswer = false;
@@ -138,10 +145,10 @@ public class Betting {
 		while (fetchReturnAnswer == false) {
 			System.out.println(printOut);
 			String scannerAnswer = scan.next().toLowerCase();
-			
+
 			switch (scannerAnswer) {
 			case "over":
-			
+
 				returnAnswer = true;
 				fetchReturnAnswer = true;
 				break;
@@ -153,56 +160,46 @@ public class Betting {
 				fetchReturnAnswer = false;
 				break;
 			}
-		} 
+		}
 		return returnAnswer;
 	}
-	//V�lja om man vill satsa �ver eller under
+
+	// V�lja om man vill satsa �ver eller under
 	void overUnderMeth() {
-		
+
 		getBettingValue();
-		if (playerChips <= bettingValue )
-		{
+		if (playerChips <= bettingValue) {
 			System.out.println("Vill du satsa �ver eller under?");
 			boolean overUnderAnswer = yesOrNo();
-			
-			if (overUnderAnswer = true)
-			{
+
+			if (overUnderAnswer = true) {
 				boolean overOrUnderBool = overOrUnder();
-				if (overOrUnderBool = true)
-				{	
+				if (overOrUnderBool = true) {
 					overUnderChoice = "�ver";
 					System.out.println("Du valde att spela $ " + overUnderChoice);
-				}
-				else {
+				} else {
 					overUnderChoice = "under";
 					System.out.println("Du valde att spela $ " + overUnderChoice);
-					
+
 				}
-				
+
 			}
-			
+
 		}
-		
-		
+
 	}
-	void overUnderPay(Player playerObj)
-	{
-		if (Betting.this.overUnderChoice != "")
-		{
-			if (playerObj.getTotalValue()> 13 && Betting.this.overUnderChoice.equals("�ver")){
-				
-			
-			}
-			else if (playerObj.getTotalValue() < 13 && Betting.this.overUnderChoice.equals("under"))
-			{
-				
-			}
-			else {
+
+	void overUnderPay(Player playerObj) {
+		if (Betting.this.overUnderChoice != "") {
+			if (playerObj.getTotalValue() > 13 && Betting.this.overUnderChoice.equals("�ver")) {
+
+			} else if (playerObj.getTotalValue() < 13 && Betting.this.overUnderChoice.equals("under")) {
+
+			} else {
 				System.out.println("Det blev 13 du f�rlorade buhu");
 			}
 		}
-		
+
 	}
-	
-	
+
 }
