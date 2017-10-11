@@ -163,7 +163,7 @@ public class Deck
 							playerObj.hand.get(i).set(ii, ace);
 							gotADecision=true;
 						} else {
-							System.out.println("Du får endast välja 1 eller 11.");
+							System.out.println("Du kan endast välja 1 eller 11.");
 						}
 					} while (gotADecision==false);
 				}
@@ -176,6 +176,7 @@ public class Deck
 	    	for(int i = 0; i < dealerObj.hand.size(); i++) 
 	    	{ 
 	    		if (totalHandValue(dealerObj, i) > 10) 
+	    			
 	    		{
 	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
 	    			{
@@ -189,7 +190,7 @@ public class Deck
 	    				dealerObj.hand.get(0).set(ii, 11);
 	    			}
 	    		}
-	    	}
+	    	 }
 	   }
 	
 	void removeCards(int indexNmb)

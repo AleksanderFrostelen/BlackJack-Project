@@ -103,7 +103,7 @@ public class Betting {
 
 	void onlyStakePayBack(int stakeIn) {setPlayerChips(stakeIn + getPlayerChips());}
 
-	boolean yesOrNo(String printOut) {
+	boolean yesOrNo(String string) {
 		boolean returnAnswer = true;
 		boolean fetchReturnAnswer = false;
 
@@ -130,6 +130,7 @@ public class Betting {
 		return returnAnswer;
 	}
 	
+<<<<<<< HEAD
 	//Välja om man vill satsa över eller under
 		void overUnderMeth() {
 			if (getPlayerChips() >= getBettingValue() )
@@ -196,4 +197,80 @@ public class Betting {
 			}
 			
 		}
+=======
+	boolean overOrUnder() {
+		boolean returnAnswer = true;
+		boolean fetchReturnAnswer = false;
+
+		while (fetchReturnAnswer == false) {
+			System.out.println(printOut);
+			String scannerAnswer = scan.next().toLowerCase();
+			
+			switch (scannerAnswer) {
+			case "over":
+			
+				returnAnswer = true;
+				fetchReturnAnswer = true;
+				break;
+			case "under":
+				returnAnswer = false;
+				fetchReturnAnswer = true;
+				break;
+			default:
+				fetchReturnAnswer = false;
+				break;
+			}
+		} 
+		return returnAnswer;
+	}
+	//V�lja om man vill satsa �ver eller under
+	void overUnderMeth() {
+		
+		getBettingValue();
+		if (playerChips <= bettingValue )
+		{
+			System.out.println("Vill du satsa �ver eller under?");
+			boolean overUnderAnswer = yesOrNo();
+			
+			if (overUnderAnswer = true)
+			{
+				boolean overOrUnderBool = overOrUnder();
+				if (overOrUnderBool = true)
+				{	
+					overUnderChoice = "�ver";
+					System.out.println("Du valde att spela $ " + overUnderChoice);
+				}
+				else {
+					overUnderChoice = "under";
+					System.out.println("Du valde att spela $ " + overUnderChoice);
+					
+				}
+				
+			}
+			
+		}
+		
+		
+	}
+	void overUnderPay(Player playerObj)
+	{
+		if (Betting.this.overUnderChoice != "")
+		{
+			if (playerObj.getTotalValue()> 13 && Betting.this.overUnderChoice.equals("�ver")){
+				
+			
+			}
+			else if (playerObj.getTotalValue() < 13 && Betting.this.overUnderChoice.equals("under"))
+			{
+				
+			}
+			else {
+				System.out.println("Det blev 13 du f�rlorade buhu");
+			}
+		}
+		
+	}
+	
+	
+>>>>>>> branch 'HEAD' of https://github.com/steffodimfelt/bestfriends
 }
