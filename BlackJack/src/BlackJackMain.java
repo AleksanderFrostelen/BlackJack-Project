@@ -33,6 +33,9 @@ public class BlackJackMain {
 		
 		welcome();
 		deck.deckSetup();
+
+		
+		
 		// Huvudloop för hela spelet.
 		boolean mainPlay = true;
 		do {
@@ -45,6 +48,15 @@ public class BlackJackMain {
 			deck.dealRandomCards(0, dealer);
 			deck.dealRandomCards(0, dealer);
 			
+			
+
+			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
+			System.out.println("Delaer kort är: " + deck.showAllCards(dealer, 0));
+			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
+			System.out.println("Totalsumman för Dealer: " + deck.totalHandValue(dealer, 0));
+			System.out.println("");
+			
+			
 			deck.dAceDecision(dealer);
 
 			// Playerns tur.
@@ -53,7 +65,9 @@ public class BlackJackMain {
 			
 			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
+			System.out.println("Delaer kort är: " + deck.showAllCards(dealer, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
+			System.out.println("Totalsumman för Dealer: " + deck.totalHandValue(dealer, 0));
 			System.out.println("");
 			
 			betting.overUnderPay(player);

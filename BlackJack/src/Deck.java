@@ -107,15 +107,10 @@ public class Deck
  
 	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och dealer
 	{
-		int randomCard=shoe.get(randomCard(shoe.size()));
-		
-		String randomCardCol=shoeCol.get(randomCard);
-		System.out.println("randomCard "+randomCard);
-		System.out.println("randomCardCol "+randomCardCol);
-		
+		int randomCard=shoe.get(randomCard(shoe.size()));		
+		String randomCardCol=shoeCol.get(randomCard);		
 		playObj.hand.get(nr).add(new Integer(randomCard));
 		playObj.handCol.get(nr).add(new String(randomCardCol));
-
 		removeCards(randomCard);
 	}
 
@@ -141,10 +136,6 @@ public class Deck
 
 	int totalHandValue(Player playerObj, int handIndex)// Returnerar totalen för en hand.
 	{
-		
-		System.out.println("TotalHandValue index in: "+playerObj+" "+playerObj.hand.get(handIndex));
-		
-		
 		int handTotal = 0;
 		for (int handElement = 0; handElement < playerObj.hand.get(handIndex).size(); handElement++) 
 		{
@@ -153,7 +144,6 @@ public class Deck
 				oneElement = 10;
 			}
 			handTotal = handTotal + oneElement;
-			System.out.println(playerObj+"handTotal "+handTotal);
 		}
 		return handTotal;
 	}
