@@ -3,11 +3,20 @@ import java.util.Scanner;
 
 public class Betting {
 
-	public ArrayList<Integer> playerBet = new ArrayList<>();
-	private int playerChips = 10;
-	private Scanner scan = new Scanner(System.in);
-	private int bettingValue = 0;
-	private String overUnderChoice = "";
+	private int playerChips;
+	private Scanner scan;
+	private int bettingValue;
+	private String overUnderChoice;
+	private ArrayList<Integer> playerBet;
+	
+	public Betting() {
+		super();
+		playerBet = new ArrayList<>();
+		playerChips = 10;
+		scan = new Scanner(System.in);
+		bettingValue = 0;
+		overUnderChoice = "";
+	}
 
 	public int getPlayerChips() {
 
@@ -25,8 +34,25 @@ public class Betting {
 	public void setBettingValue(int bettingValue) {
 		this.bettingValue = bettingValue;
 	}
+	
+	public ArrayList<Integer> getPlayerBet() {
+		return playerBet;
+	}
 
-	public int bettingLoop() {
+	public void setPlayerBet(ArrayList<Integer> playerBet) {
+		this.playerBet = playerBet;
+	}
+
+	public int getPlayerBetSize() {
+		return playerBet.size();
+	}
+	
+	public int getPlayerBetHandIndex(int handIndex) {
+		return playerBet.get(handIndex);
+	}
+	
+
+	public void bettingLoop() {
 		boolean bettingAgain = false;
 		int bettingIn = 0;
 		do {
@@ -51,7 +77,7 @@ public class Betting {
 				System.out.println("Du har inga pengar kvar att satsa med.");
 			}
 		} while (bettingAgain == true);
-		return bettingIn;
+
 	}
 
 	public void doubleUp(int bettingValue, int bettingIndex) {
@@ -94,11 +120,24 @@ public class Betting {
 		return bettingIn;
 	}
 
-	void bettingPayBack(int stakeIn, double multipleIn) {
-		int newValue = (int) Math.ceil((stakeIn * multipleIn) + stakeIn);
-		newValue = newValue + getPlayerChips();
-		int newValueOut = (int) newValue;
-		setPlayerChips(newValueOut);
+	void bettingPayBack(int stakeIn, int multipleIn) {
+		
+		System.out.println(playerBet.get(stakeIn));
+		
+		int newValue=0;
+		
+		switch (multipleIn) {
+		case 0: newValue=playerBet.get(stakeIn);break;
+		case 1: newValue=(playerBet.get(stakeIn)*2);break;
+		case 2: newValue=(playerBet.get(stakeIn)*2)+playerBet.get(stakeIn);break;
+		default:
+			break;
+		}
+		
+		System.out.println(""+newValue);
+		System.out.println(getPlayerChips());
+		setPlayerChips(getPlayerChips()+newValue);
+		
 	}
 
 	void onlyStakePayBack(int stakeIn) {setPlayerChips(stakeIn + getPlayerChips());}
@@ -135,24 +174,32 @@ public class Betting {
 		void overUnderMeth() {
 			if (getPlayerChips() >= getBettingValue() )
 			{
+				boolean overUnderAnswer=false;
+				overUnderAnswer = yesOrNo("Vill du satsa Över/Under? Ja eller Nej.");
+				if (overUnderAnswer == true)
+				{
 					boolean fetchReturnAnswer = false;
-
+					
 					while (fetchReturnAnswer == false) {
 						System.out.println("Vad vill du satsa? Över eller Under?");
 						String scannerAnswer = scan.next().toLowerCase();
-						
+						int betIn=0;
 						System.out.println(scannerAnswer);
 						switch (scannerAnswer) {
 						case "ö":
 						case "över":
 							overUnderChoice = "över";
-							System.out.println("Du valde att spela $"+getBettingValue()+" på Över.");
+							System.out.println("Du har valt att spela $"+getBettingValue()+" på Över.");							
+							betIn = playerChips-getPlayerChips();
+							setPlayerChips(betIn);
 							fetchReturnAnswer=true;
 							break;
 						case "u":
 						case "under":
 							overUnderChoice = "under";
-							System.out.println("Du valde att spela $"+getBettingValue()+" på Under.");
+							System.out.println("Du har valt att spela $"+getBettingValue()+" på Under.");
+							betIn = playerChips-getPlayerChips();
+							setPlayerChips(betIn);
 							fetchReturnAnswer=true;
 							break;
 						default:
@@ -164,7 +211,7 @@ public class Betting {
 			}
 			
 			
-		
+		}
 		void overUnderPay(Player playerObj)
 		{
 			if (overUnderChoice != "")
@@ -174,6 +221,8 @@ public class Betting {
 				
 				if (playerCard1==11) {playerCard1=1;}
 				if (playerCard2==11) {playerCard2=1;}
+				if (playerCard1>11) {playerCard1=10;}
+				if (playerCard2>11) {playerCard2=10;}
 				
 				int TotalCardValue=	playerCard1+playerCard2;	
 	
@@ -197,7 +246,7 @@ public class Betting {
 						if (twoFirstCardsValue==22)
 						{
 							System.out.println("Du satsade på Under och fick två ess. Du får tillbaka 1.5x din insats.");
-							bettingPayBack(0, 1.5);
+							bettingPayBack(0, 2);
 						}else {
 							System.out.println("Du fick satsat på Under och får tillbaka 1x din insats.");
 							bettingPayBack(0, 1);
