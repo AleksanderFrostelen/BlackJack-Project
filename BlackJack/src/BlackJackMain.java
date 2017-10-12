@@ -16,10 +16,18 @@ public class BlackJackMain {
 		blackJack.table();
 	}
 
-	private Deck deck = new Deck();
-	private Player dealer = new Player();
-	private Player player = new Player();
-	private Betting betting = new Betting();
+	private Deck deck;
+	private Player dealer;
+	private Player player;
+	private Betting betting;
+
+	public BlackJackMain() {
+		super();
+		deck = new Deck();
+		dealer = new Player();
+		player = new Player();
+		betting = new Betting();
+	}
 
 	void table() {
 		
@@ -30,8 +38,6 @@ public class BlackJackMain {
 		do {
 			deck.deckSetup();
 			deck.resetAll(player, dealer);
-
-			System.out.println("Shoesize:"+deck.shoe.size());
 			
 			//Dela ut kort
 			deck.dealRandomCards(0, player);
@@ -43,25 +49,22 @@ public class BlackJackMain {
 
 			// Playerns tur.
 			betting.bettingLoop();
-			
 			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
+			System.out.println("");
+			
+			betting.overUnderPay(player);
 			
 			//Player får välja valör i fall det finns ess i leken.
 			deck.aceDecision(player);
 			
-			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
-			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
-			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
 
 			betting.doubleUp(deck.totalHandValue(player, 0), 0);//Checka om det finns dubbla kort.
 
 			//Kör igenom ifall Player vill splitta kort.
 			splitHands();
 			
-			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
-			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
 			
 			// Players val - Hit or stay
 			hitOrStay ();
@@ -180,21 +183,14 @@ public class BlackJackMain {
 	}
 	
 	public void hitOrStay ()
-	{
-		for (int handIndex=0;handIndex<player.hand.size();handIndex++)
-		{
-			boolean hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
+	
+	
 			
-			for (int handElement=0;handElement<player.hand.get(handIndex).size();handElement++)
-			{
+
 				
-			}
 			
-			if (hitMe==true) {
-				deck.dealRandomCards(handIndex, player);
-				System.out.println("Ja");
-				}
-		}
+		
+		
 	}
 	
 	public void splitHands()
@@ -207,7 +203,7 @@ public class BlackJackMain {
 					if (betting.getPlayerChips() >= betting.getBettingValue()) {
 						System.out.println("\nDu har pengar till en split.");
 						boolean splitCards = betting.yesOrNo("Vill du splitta dina kort? Ja eller Nej");
-						
+
 						if (splitCards == true) {
 							System.out.println("Du splittar.");
 							player.hand.add(new ArrayList<Integer>());// Adderar ny rad till player
