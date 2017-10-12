@@ -197,7 +197,7 @@ public class Deck
 	    				dealerObj.hand.get(i).set(i, 1);
 	    			}
 	    		}
-	    		System.out.println(dealerObj.hand.get(0));
+	    		//System.out.println(dealerObj.hand.get(0));
 	    		
 	    		
 	    	 }
