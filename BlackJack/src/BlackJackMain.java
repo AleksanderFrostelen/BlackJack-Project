@@ -47,9 +47,7 @@ public class BlackJackMain {
 			deck.dealRandomCards(0, player);
 			deck.dealRandomCards(0, dealer);
 			deck.dealRandomCards(0, dealer);
-			
-			
-			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
+
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
 			System.out.println("");
@@ -62,7 +60,7 @@ public class BlackJackMain {
 			
 			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
-			System.out.println("Delaer kort är: " + deck.showAllCards(dealer, 0));
+			System.out.println("Dealer kort är: " + deck.showAllCards(dealer, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
 			System.out.println("Totalsumman för Dealer: " + deck.totalHandValue(dealer, 0));
 			System.out.println("");
@@ -70,7 +68,7 @@ public class BlackJackMain {
 			betting.overUnderPay(player);
 			
 			System.out.println("");
-			//Player får välja valör i fall det finns ess i leken.
+
 			deck.aceDecision(player);
 			
 			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
@@ -207,10 +205,32 @@ public class BlackJackMain {
 	
 	public void hitOrStay ()
 	{
-		boolean hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
+		for (int i = 0; i < player.hand.size(); i++) {
 			
-			if (hitMe==true) {System.out.println("Hit me!");}
-			if (hitMe==false) {System.out.println("Inga fler kort.");}
+
+					boolean fetchReturnAnswer = true;
+
+					do {
+						boolean hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
+						
+						if (hitMe==true)
+						{
+							deck.dealRandomCards(i, player);
+							System.out.println("Dina kort är: " + deck.showAllCards(player, i));
+						}else 
+						{
+							fetchReturnAnswer=false;
+						}
+						
+						if (deck.totalHandValue(player, 0) > 21) {
+							System.out.println("Du fick "+deck.totalHandValue(player, 0)+". Du blev tjock.");
+							fetchReturnAnswer=false;
+						
+						}
+						
+					} while (fetchReturnAnswer==true);
+			
+		}
 
 	}
 	
