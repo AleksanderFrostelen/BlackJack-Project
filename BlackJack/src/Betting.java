@@ -120,11 +120,24 @@ public class Betting {
 		return bettingIn;
 	}
 
-	void bettingPayBack(int stakeIn, double multipleIn) {
-		int newValue = (int) Math.ceil((stakeIn * multipleIn) + stakeIn);
-		newValue = newValue + getPlayerChips();
-		int newValueOut = (int) newValue;
-		setPlayerChips(newValueOut);
+	void bettingPayBack(int stakeIn, int multipleIn) {
+		
+		System.out.println(playerBet.get(stakeIn));
+		
+		int newValue=0;
+		
+		switch (multipleIn) {
+		case 0: newValue=playerBet.get(stakeIn);break;
+		case 1: newValue=(playerBet.get(stakeIn)*2);break;
+		case 2: newValue=(playerBet.get(stakeIn)*2)+playerBet.get(stakeIn);break;
+		default:
+			break;
+		}
+		
+		System.out.println(""+newValue);
+		System.out.println(getPlayerChips());
+		setPlayerChips(getPlayerChips()+newValue);
+		
 	}
 
 	void onlyStakePayBack(int stakeIn) {setPlayerChips(stakeIn + getPlayerChips());}
@@ -233,7 +246,7 @@ public class Betting {
 						if (twoFirstCardsValue==22)
 						{
 							System.out.println("Du satsade på Under och fick två ess. Du får tillbaka 1.5x din insats.");
-							bettingPayBack(0, 1.5);
+							bettingPayBack(0, 2);
 						}else {
 							System.out.println("Du fick satsat på Under och får tillbaka 1x din insats.");
 							bettingPayBack(0, 1);

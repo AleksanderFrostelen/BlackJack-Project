@@ -6,8 +6,8 @@ import java.util.Arrays;
 
 public class Deck 
 {
-	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
-	//private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
+	//private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
+	private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup;
 	private LinkedList<Integer> shoe;
 	private ArrayList<String> shoeCol;
@@ -175,24 +175,12 @@ public class Deck
    
 	 public void dAceDecision(Player dealerObj)
 		{
-	    	for(int i = 0; i < dealerObj.hand.size(); i++) 
-	    	{ 
-	    		if (totalHandValue(dealerObj, i) > 10) 
-	    			
-	    		{
-	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
-	    			{
-	    				dealerObj.hand.get(0).set(i, 1)	;
-	    			}
-	    		}
-	    		else 
-	    		{
-	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
-	    			{
-	    				dealerObj.hand.get(0).set(ii, 11);
-	    			}
-	    		}
-	    	 }
+
+		
+		 int retval=dealerObj.hand.get(0).indexOf(11);
+		 
+
+		 
 	   }
 	
 	void removeCards(int indexNmb)
