@@ -109,7 +109,7 @@ public class Deck
 	{
 		int randomCard=shoe.get(randomCard(shoe.size()));		
 		String randomCardCol=shoeCol.get(randomCard);		
-		playObj.hand.get(nr).add(new Integer(randomCard));
+		playObj.hand.get(nr).add(new Integer(shoe.get(randomCard)));
 		playObj.handCol.get(nr).add(new String(randomCardCol));
 		removeCards(randomCard);
 	}
@@ -175,20 +175,10 @@ public class Deck
    
 	 public void dAceDecision(Player dealerObj)
 		{
-
-		
-		 int retval=dealerObj.hand.get(0).indexOf(11);
-		 
-
-		 
 	    	for(int i = 0; i < dealerObj.hand.size(); i++) 
-	    		
 	    	{ 
-	    		 
 	    		while (totalHandValue(dealerObj, i) > 21) 
 	    		{
-	    			
-	    			
 	    			int found = dealerObj.hand.get(i).indexOf(11);
 	    			int num = dealerObj.hand.get(i).get(found);
 	    			if (num == 11) 
@@ -197,9 +187,6 @@ public class Deck
 	    				dealerObj.hand.get(i).set(i, 1);
 	    			}
 	    		}
-	    		//System.out.println(dealerObj.hand.get(0));
-	    		
-	    		
 	    	 }
 	   }
 	
