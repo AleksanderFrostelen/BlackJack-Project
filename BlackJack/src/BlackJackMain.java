@@ -49,14 +49,11 @@ public class BlackJackMain {
 			deck.dealRandomCards(0, dealer);
 			
 			
-
+			System.out.println("Dealerns öppna kort är: " + deck.showOneCard(dealer, 0, 0));
 			System.out.println("Dina kort är: " + deck.showAllCards(player, 0));
-			System.out.println("Delaer kort är: " + deck.showAllCards(dealer, 0));
 			System.out.println("Totalsumman för dina kort: " + deck.totalHandValue(player, 0));
-			System.out.println("Totalsumman för Dealer: " + deck.totalHandValue(dealer, 0));
 			System.out.println("");
-			
-			
+
 			deck.dAceDecision(dealer);
 
 			// Playerns tur.
@@ -148,16 +145,19 @@ public class BlackJackMain {
 						System.out.println("\n" + handNumber + " förlorade.");
 						if (deck.totalHandValue(player, handIndex) >= 17) {
 							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får behålla din insats.");
-							betting.onlyStakePayBack(betting.getPlayerBetHandIndex(handIndex));
+							
+							betting.bettingPayBack(betting.getPlayerBetHandIndex(handIndex), 0);
 						}
 					} else if (deck.totalHandValue(player, handIndex) > deck.totalHandValue(dealer, 0)) {
 						System.out.println(handNumber + " vann!");
 						if (deck.totalHandValue(player, handIndex) == 21) {
-							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1.5x din insats.");
-							for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++){betting.bettingPayBack(bettingElem, 1.5);};
+							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 2x din insats.");
+							for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++)
+							{betting.bettingPayBack(bettingElem, 2);};
 						} else {
 							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1x din insats.");
-							for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++){betting.bettingPayBack(bettingElem, 1);}
+							for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++)
+							{betting.bettingPayBack(bettingElem, 1);}
 						}
 					}
 				} else {
@@ -168,8 +168,8 @@ public class BlackJackMain {
 					System.out.println("\n" + handNumber + " vann!");
 
 					if (deck.totalHandValue(player, handIndex) == 21) {
-						System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1.5x din insats.");
-						for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++){betting.bettingPayBack(bettingElem, 1.5);}
+						System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 2x din insats.");
+						for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++){betting.bettingPayBack(bettingElem, 2);}
 					} else {
 						System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får tillbaka 1x din insats.");
 						for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++){betting.bettingPayBack(bettingElem, 1);}
