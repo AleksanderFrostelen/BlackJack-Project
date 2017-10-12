@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Deck 
 {
-	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
+	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11 };
 	//private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup;
 	private LinkedList<Integer> shoe;
@@ -175,23 +175,26 @@ public class Deck
    
 	 public void dAceDecision(Player dealerObj)
 		{
+		 
 	    	for(int i = 0; i < dealerObj.hand.size(); i++) 
+	    		
 	    	{ 
-	    		if (totalHandValue(dealerObj, i) > 10) 
+	    		 
+	    		while (totalHandValue(dealerObj, i) > 21) 
+	    		{
 	    			
-	    		{
-	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
+	    			
+	    			int found = dealerObj.hand.get(i).indexOf(11);
+	    			int num = dealerObj.hand.get(i).get(found);
+	    			if (num == 11) 
 	    			{
-	    				dealerObj.hand.get(0).set(i, 1)	;
+	    				
+	    				dealerObj.hand.get(i).set(i, 1);
 	    			}
 	    		}
-	    		else 
-	    		{
-	    			for(int ii = 0; ii < dealerObj.hand.get(i).size(); ii++) 
-	    			{
-	    				dealerObj.hand.get(0).set(ii, 11);
-	    			}
-	    		}
+	    		System.out.println(dealerObj.hand.get(0));
+	    		
+	    		
 	    	 }
 	   }
 	
