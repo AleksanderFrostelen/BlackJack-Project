@@ -8,15 +8,23 @@ public class Deck
 {
 	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
 	//private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
-	private int[] deckSetup = new int[52];
-	public LinkedList<Integer> shoe = new LinkedList<>();
-	ArrayList<String> shoeCol = new ArrayList<>();
-	ArrayList<String> name = new ArrayList<String>(Arrays.asList( "2", "3", "4", "5", "6", "7", "8", "9", "10","Knekt", "Dam","Kung","Ess"));
-	ArrayList<String> suit = new ArrayList<String>(Arrays.asList("Spader", "Hjärter", "Ruter", "Klöver"));
+	private int[] deckSetup;
+	private LinkedList<Integer> shoe;
+	private ArrayList<String> shoeCol;
+	private ArrayList<String> name;
+	private ArrayList<String> suit;
 	
-	private Scanner input = new Scanner(System.in);
-	
-	
+	private Scanner input;
+
+	public Deck() {
+		super();
+		deckSetup = new int[52];
+		shoe = new LinkedList<>();
+		shoeCol = new ArrayList<>();
+		name = new ArrayList<String>(Arrays.asList( "2", "3", "4", "5", "6", "7", "8", "9", "10","Knekt", "Dam","Kung","Ess"));
+		suit = new ArrayList<String>(Arrays.asList("Spader", "Hjärter", "Ruter", "Klöver"));
+		input = new Scanner(System.in);
+	}
 
 	public int[] getDeckSetup() 
 	{
@@ -41,14 +49,8 @@ public class Deck
 	// Lägger upp alla kort i grundleken deckSetup
 	void deckSetup() 
 	{
-		for (int VALUESPANElem = 0; VALUESPANElem < deckSetup.length; VALUESPANElem = VALUESPANElem + VALUESPAN.length)// Loopar
-																														// igenom
-																														// hela
-																														// array
-																														// deckSpan
-																														// med
-																														// repeat
-																														// VALUESPAN.length
+		// Loopar igenom hela array deckSpan med repeat VALUESPAN.length
+		for (int VALUESPANElem = 0; VALUESPANElem < deckSetup.length; VALUESPANElem = VALUESPANElem + VALUESPAN.length)
 		{
 			System.arraycopy(VALUESPAN, 0, deckSetup, VALUESPANElem, VALUESPAN.length);
 		} // Kopierar hela array VALUESPAN till array deckSpan
@@ -62,17 +64,18 @@ public class Deck
 			shoe.add(deckSetup[LinkedElem]);
 		}
 		
-		shoeCol = new ArrayList<String>();
+		//shoeCol = new ArrayList<String>();
 		{
 			for(int x=0; x<suit.size();x++) 
 			{
 				for (int xx = 0; xx < name.size(); xx++) 
 				{
 					shoeCol.add(suit.get(x) + " " + name.get(xx));
-					
 				}
 			}
 		}
+//		System.out.println(shoeCol);
+//		System.out.println(shoe);
 		
 	}
 
@@ -89,8 +92,7 @@ public class Deck
 		return shoe.get(cardNmbIn);
 	}
 
-	public void resetAll(Player playerObj, Player dealerObj) // shoe ska laddas om till deckSetup och båda händerna ska
-																// nollas.
+	public void resetAll(Player playerObj, Player dealerObj) // shoe ska laddas om till deckSetup och båda händerna ska nollas.
 	{
 		shoe.clear();
 		shoeCol.clear();
@@ -106,9 +108,14 @@ public class Deck
 	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och dealer
 	{
 		int randomCard=shoe.get(randomCard(shoe.size()));
-		String randomCardCol=shoeCol.get(randomCard(shoeCol.size()));
+		
+		String randomCardCol=shoeCol.get(randomCard);
+		System.out.println("randomCard "+randomCard);
+		System.out.println("randomCardCol "+randomCardCol);
+		
 		playObj.hand.get(nr).add(new Integer(randomCard));
 		playObj.handCol.get(nr).add(new String(randomCardCol));
+
 		removeCards(randomCard);
 	}
 
@@ -134,6 +141,10 @@ public class Deck
 
 	int totalHandValue(Player playerObj, int handIndex)// Returnerar totalen för en hand.
 	{
+		
+		System.out.println("TotalHandValue index in: "+playerObj+" "+playerObj.hand.get(handIndex));
+		
+		
 		int handTotal = 0;
 		for (int handElement = 0; handElement < playerObj.hand.get(handIndex).size(); handElement++) 
 		{
@@ -142,6 +153,7 @@ public class Deck
 				oneElement = 10;
 			}
 			handTotal = handTotal + oneElement;
+			System.out.println(playerObj+"handTotal "+handTotal);
 		}
 		return handTotal;
 	}
