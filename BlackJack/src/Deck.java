@@ -181,6 +181,26 @@ public class Deck
 		 
 
 		 
+	    	for(int i = 0; i < dealerObj.hand.size(); i++) 
+	    		
+	    	{ 
+	    		 
+	    		while (totalHandValue(dealerObj, i) > 21) 
+	    		{
+	    			
+	    			
+	    			int found = dealerObj.hand.get(i).indexOf(11);
+	    			int num = dealerObj.hand.get(i).get(found);
+	    			if (num == 11) 
+	    			{
+	    				
+	    				dealerObj.hand.get(i).set(i, 1);
+	    			}
+	    		}
+	    		System.out.println(dealerObj.hand.get(0));
+	    		
+	    		
+	    	 }
 	   }
 	
 	void removeCards(int indexNmb)
