@@ -1,3 +1,4 @@
+//3.2
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -88,7 +89,7 @@ public class Betting {
 		if (bettingValue >= 7 && bettingValue <= 11) {
 			
 			if (tempChips >= doubleValue) {
-				doubleUp = yesOrNo("Vill du dubbla insatsen? Ja eller Nej");
+				doubleUp = yesOrNo("Vill du dubbla insatsen? Ja eller Nej.");
 
 				if (doubleUp == true) {
 					setPlayerChips(tempChips - doubleValue);
@@ -122,8 +123,6 @@ public class Betting {
 
 	void bettingPayBack(int stakeIn, int multipleIn) {
 		
-		System.out.println(playerBet.get(stakeIn));
-		
 		int newValue=0;
 		
 		switch (multipleIn) {
@@ -133,11 +132,7 @@ public class Betting {
 		default:
 			break;
 		}
-		
-		System.out.println(""+newValue);
-		System.out.println(getPlayerChips());
 		setPlayerChips(getPlayerChips()+newValue);
-		
 	}
 
 	void onlyStakePayBack(int stakeIn) {setPlayerChips(stakeIn + getPlayerChips());}
@@ -175,31 +170,26 @@ public class Betting {
 			if (getPlayerChips() >= getBettingValue() )
 			{
 				boolean overUnderAnswer=false;
-				overUnderAnswer = yesOrNo("Vill du satsa Över/Under? Ja eller Nej.");
+				overUnderAnswer = yesOrNo("Vill du satsa $"+getBettingValue()+" på Över/Under? Ja eller Nej.");
 				if (overUnderAnswer == true)
 				{
 					boolean fetchReturnAnswer = false;
 					
 					while (fetchReturnAnswer == false) {
-						System.out.println("Vad vill du satsa? Över eller Under?");
+						System.out.println("Vad vill du satsa? Över eller Under?\nEss räknas som 1.");
 						String scannerAnswer = scan.next().toLowerCase();
-						int betIn=0;
 						System.out.println(scannerAnswer);
 						switch (scannerAnswer) {
 						case "ö":
 						case "över":
 							overUnderChoice = "över";
 							System.out.println("Du har valt att spela $"+getBettingValue()+" på Över.");							
-							betIn = playerChips-getPlayerChips();
-							setPlayerChips(betIn);
 							fetchReturnAnswer=true;
 							break;
 						case "u":
 						case "under":
 							overUnderChoice = "under";
 							System.out.println("Du har valt att spela $"+getBettingValue()+" på Under.");
-							betIn = playerChips-getPlayerChips();
-							setPlayerChips(betIn);
 							fetchReturnAnswer=true;
 							break;
 						default:
@@ -225,17 +215,20 @@ public class Betting {
 				if (playerCard2>11) {playerCard2=10;}
 				
 				int TotalCardValue=	playerCard1+playerCard2;	
-	
+				
+			
 				
 				if ( overUnderChoice.equals("över"))
 				{
 					if (TotalCardValue> 13)
 					{
-					System.out.println("Du fick satsat på Över och får tillbaka 1x din insats.");
+					System.out.println("Du satsade på Över och får tillbaka 2x insatsen.");
 					bettingPayBack(0, 1);
 					}
 					else {
-						System.out.println("Det blev "+TotalCardValue+". Du förlorade. Buhu.");
+						System.out.println("Det blev "+TotalCardValue+" på Över/Under.\nDu förlorade $"+getBettingValue()+". Buhu.");
+						setPlayerChips(getPlayerChips()-getBettingValue());
+						System.out.println("Du har $" + getPlayerChips() + " kvar.");
 					}
 				}
 				else if (overUnderChoice.equals("under"))
@@ -245,23 +238,25 @@ public class Betting {
 						int twoFirstCardsValue = playerObj.hand.get(0).get(0)+playerObj.hand.get(0).get(1);
 						if (twoFirstCardsValue==22)
 						{
-							System.out.println("Du satsade på Under och fick två ess. Du får tillbaka 1.5x din insats.");
+							System.out.println("Du satsade på Under och fick två ess.\nDu får tillbaka 3x insatsen.");
 							bettingPayBack(0, 2);
+							System.out.println("Du har $" + getPlayerChips() + ".");
 						}else {
-							System.out.println("Du fick satsat på Under och får tillbaka 1x din insats.");
+							System.out.println("Du fick satsat på Under och får tillbaka 2x insatsen.");
 							bettingPayBack(0, 1);
+							System.out.println("Du har $" + getPlayerChips() + ".");
 						}
 					}
 					else {
-						System.out.println("Det blev "+TotalCardValue+". Du förlorade. Buhu.");
+						System.out.println("Det blev "+TotalCardValue+" på Över/Under.\nDu förlorade $"+getBettingValue()+". Buhu.");
+						setPlayerChips(getPlayerChips()-getBettingValue());
+						System.out.println("Du har $" + getPlayerChips() + " kvar.");
 					}
 
 				}
-				
+				System.out.println("");
 			}
 			
 		}
-
-
 
 }
