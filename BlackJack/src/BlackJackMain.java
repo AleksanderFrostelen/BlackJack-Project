@@ -61,6 +61,7 @@ public class BlackJackMain {
 			//Kör igenom ifall Player vill splitta kort.
 			betting.doubleUp(deck.totalHandValue(player, 0), 0);//Checka om det finns dubbla kort.
 			splitHands();
+			
 			deck.aceDecision(player);
 			
 			// Players val - Hit or stay
@@ -230,6 +231,7 @@ public class BlackJackMain {
 	public void splitHands()
 	{
 		boolean splitHands = false;
+		boolean madeASplit = false;
 		
 		do {
 			int checkedAllHands = 0;
@@ -237,66 +239,52 @@ public class BlackJackMain {
 				
 				//System.out.println("Lika med i split "+player.hand.get(handIndex).get(0)+" "+player.hand.get(handIndex).get(0));
 
-				try {
-					if (player.hand.get(handIndex).get(0).equals(player.hand.get(handIndex).get(1))) 
+				if (player.hand.get(handIndex).get(0).equals(player.hand.get(handIndex).get(1))) 
+				{
+					if (betting.getPlayerChips() >= betting.getBettingValue()) 
 					{
-						
-//						System.out.println("SPLIT INSIDE");
-//						System.out.println("chips"+betting.getPlayerChips());
-//						System.out.println("value"+betting.getBettingValue());
-//						System.out.println("handIndex"+handIndex);
+						System.out.println("Du har pengar till en split.");
+						boolean splitCards = betting.yesOrNo("Vill du splitta dina kort? Ja eller Nej");
 
-						if (betting.getPlayerChips() >= betting.getBettingValue()) {
-							System.out.println("\nDu har pengar till en split.");
-							boolean splitCards = betting.yesOrNo("Vill du splitta dina kort? Ja eller Nej");
+						if (splitCards == true) 
+						{
+							player.hand.add(new ArrayList<Integer>());// Adderar ny rad till player
+							player.handCol.add(new ArrayList<String>());// Adderar ny rad till player
 
-							if (splitCards == true) {
-//								System.out.println("Du splittar.");
-//								System.out.println("size före "+player.hand.size());
-								player.hand.add(new ArrayList<Integer>());// Adderar ny rad till player
-								player.handCol.add(new ArrayList<String>());// Adderar ny rad till player
-//								System.out.println("size efter "+player.hand.size());
+							int tempElement = player.hand.get(handIndex).get(1);
+							String tempElementCol = player.handCol.get(handIndex).get(1);
+							player.hand.get(handIndex + 1).add(new Integer(tempElement));// Kopierar värde från gammal array till ny																								
+							player.hand.get(handIndex).clear();// Nollställer Row
+							player.hand.get(handIndex).add(new Integer(tempElement));// Kopierar tillbaka värdet till gammal array.
+							
+							player.handCol.get(handIndex + 1).add(new String(tempElementCol));// Kopierar värde från gammal array till ny																								
+							player.handCol.get(handIndex).clear();// Nollställer Row
+							player.handCol.get(handIndex).add(new String(tempElementCol));// Kopierar tillbaka värdet till gammal array.
+							
+							deck.dealRandomCards(handIndex, player);
+							deck.dealRandomCards(handIndex+1, player);
+							
+							System.out.println("På hand nummer "+handIndex+" fick du: "+deck.showOneCard(player, handIndex+1, 1));
+							
+							betting.setPlayerChips(betting.getPlayerChips()-betting.getBettingValue());
+							System.out.println("Du har $"+betting.getPlayerChips()+" kvar.\n");
+							madeASplit = true;
 
-								int tempElement = player.hand.get(handIndex).get(1);
-								String tempElementCol = player.handCol.get(handIndex).get(1);
-								player.hand.get(handIndex + 1).add(new Integer(tempElement));// Kopierar värde från gammal array till ny																								
-								player.hand.get(handIndex).clear();// Nollställer Row
-								player.hand.get(handIndex).add(new Integer(tempElement));// Kopierar tillbaka värdet till gammal array.
-								
-								player.handCol.get(handIndex + 1).add(new String(tempElementCol));// Kopierar värde från gammal array till ny																								
-								player.handCol.get(handIndex).clear();// Nollställer Row
-								player.handCol.get(handIndex).add(new String(tempElementCol));// Kopierar tillbaka värdet till gammal array.
-								
-								//deck.dealRandomCards(handIndex+1, player);
-								//deck.dealRandomCards(handIndex, player);
-//								System.out.println("get 0 efter "+player.hand.get(handIndex).get(0));
-//								System.out.println("get 1 efter "+player.hand.get(handIndex+1).get(0));
-								
-								deck.dealRandomCards(handIndex, player);
-								deck.dealRandomCards(handIndex+1, player);
-								
-
-							} else {
-								checkedAllHands++;
-							}
 						} else {
-							System.out.println("\nDu har tyvärr inte insats nog till en split.");
 							checkedAllHands++;
 						}
 					} else {
+						if(madeASplit)
+						{
+							System.out.println("Du har tyvärr inte insats nog till fler splittar.");
+						}
+						
 						checkedAllHands++;
 					}
-				} catch (IndexOutOfBoundsException e) {
-					//System.out.println("OUT OF BOUNDS");
-					//deck.dealRandomCards(handIndex, player);
-				}
-				
-				
-				
-			}
-			
-//			System.out.println(""+checkedAllHands);
-			
+				} else {
+					checkedAllHands++;
+				}				
+			}			
 			if (checkedAllHands == player.hand.size()) {splitHands = true;}
 
 		} while (splitHands = false);

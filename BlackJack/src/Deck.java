@@ -101,10 +101,7 @@ public class Deck
  
 	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och dealer
 	{
-		//int randomCard=shoe.get(randomCard(shoe.size()));	
 		int randomCard=randomCard(shoe.size());	
-		
-		System.out.println("randomCard"+randomCard);
 		String randomCardCol=shoeCol.get(randomCard);		
 		playObj.hand.get(nr).add(new Integer(shoe.get(randomCard)));
 		playObj.handCol.get(nr).add(new String(randomCardCol));
