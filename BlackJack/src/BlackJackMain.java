@@ -1,8 +1,6 @@
-<<<<<<< HEAD
+
 //3.4
-=======
-//3.3
->>>>>>> branch 'HEAD' of https://github.com/steffodimfelt/bestfriends
+
 import java.util.ArrayList;
 
 public class BlackJackMain {
