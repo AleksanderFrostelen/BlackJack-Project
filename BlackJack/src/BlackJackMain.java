@@ -65,6 +65,7 @@ public class BlackJackMain {
 			deck.aceDecision(player);
 			
 			// Players val - Hit or stay
+			System.out.println("");
 			hitOrStay ();
 			
 			boolean skipDealer = false;
@@ -98,9 +99,9 @@ public class BlackJackMain {
 				}
 				
 				if (deck.totalHandValue(dealer, 0) > 21) {
-					System.out.println("Dealern blir tjock.\n");
+					System.out.println("Dealern blir tjock.");
 				} else {
-					System.out.println("Dealern stannar.\n");
+					System.out.println("Dealern stannar.");
 				}
 			}
 
@@ -109,7 +110,7 @@ public class BlackJackMain {
 			printWinner();
 			
 			System.out.println("");
-			mainPlay = betting.yesOrNo("Vill du fortsätta spela? Ja eller Nej");
+			mainPlay = betting.yesOrNo("Vill du fortsätta spela? Ja eller Nej.");
 
 		} while (mainPlay == true);
 
@@ -126,7 +127,7 @@ public class BlackJackMain {
 		for (int handIndex = 0; handIndex < player.hand.size(); handIndex++) {
 			int formatHandNumber = handIndex + 1;
 			// Formaterar outputstring i fall man har splittat.
-			String handNumber = (player.hand.size() == 1) ? "Din hand" : "Hand nummer " + formatHandNumber;
+			String handNumber = (player.hand.size() == 1) ? "Din hand" : "Hand " + formatHandNumber;
 
 			if (deck.totalHandValue(dealer, 0) <= 21) {
 				if (deck.totalHandValue(player, handIndex) <= 21) {
@@ -166,6 +167,7 @@ public class BlackJackMain {
 				} else {
 					System.out.println(handNumber + " blev tjock. Du förlorar din insats.");
 				}
+				
 			}
 		}
 		System.out.println("Du har nu $" + betting.getPlayerChips() + ".");
@@ -200,7 +202,9 @@ public class BlackJackMain {
 					boolean fetchReturnAnswer = true;
 
 					do {
-						boolean hitMe = betting.yesOrNo("Vill du ha ett nytt kort? Ja eller Nej.");
+						int tempNmb = i+1;
+						String handNumber = (player.hand.size() == 1) ? "din hand" : "Hand " + tempNmb;
+						boolean hitMe = betting.yesOrNo("\nVill du ha ett nytt kort på "+handNumber+"? Ja eller Nej.");
 						
 						if (hitMe==true)
 						{
@@ -244,7 +248,7 @@ public class BlackJackMain {
 					if (betting.getPlayerChips() >= betting.getBettingValue()) 
 					{
 						System.out.println("Du har pengar till en split.");
-						boolean splitCards = betting.yesOrNo("Vill du splitta dina kort? Ja eller Nej");
+						boolean splitCards = betting.yesOrNo("Vill du splitta dina kort? Ja eller Nej.");
 
 						if (splitCards == true) 
 						{
