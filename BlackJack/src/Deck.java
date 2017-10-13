@@ -1,4 +1,3 @@
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.LinkedList;
@@ -60,12 +59,9 @@ public class Deck
 	void shuffle() 
 	{
 		for (int LinkedElem = 0; LinkedElem < deckSetup.length; LinkedElem++) 
-		{
-			shoe.add(deckSetup[LinkedElem]);
-		}
-		
-		//shoeCol = new ArrayList<String>();
-		{
+		{shoe.add(deckSetup[LinkedElem]);}
+
+	
 			for(int x=0; x<suit.size();x++) 
 			{
 				for (int xx = 0; xx < name.size(); xx++) 
@@ -73,10 +69,6 @@ public class Deck
 					shoeCol.add(suit.get(x) + " " + name.get(xx));
 				}
 			}
-		}
-//		System.out.println(shoeCol);
-//		System.out.println(shoe);
-		
 	}
 
 	// Returnerar ett slumpmässigt nummer
@@ -97,7 +89,9 @@ public class Deck
 		shoe.clear();
 		shoeCol.clear();
 		playerObj.hand.clear();
-		playerObj.hand.clear();
+		dealerObj.hand.clear();
+		playerObj.handCol.clear();
+		dealerObj.handCol.clear();
 		playerObj.hand.add(new ArrayList<Integer>());// Adderar första raden till player
 		dealerObj.hand.add(new ArrayList<Integer>());// Adderar första raden till dealer
 		playerObj.handCol.add(new ArrayList<String>());// Adderar första raden till player, färger string
@@ -107,15 +101,15 @@ public class Deck
  
 	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och dealer
 	{
-		int randomCard=shoe.get(randomCard(shoe.size()));		
+		int randomCard=randomCard(shoe.size());	
 		String randomCardCol=shoeCol.get(randomCard);		
-		playObj.hand.get(nr).add(new Integer(randomCard));
+		playObj.hand.get(nr).add(new Integer(shoe.get(randomCard)));
 		playObj.handCol.get(nr).add(new String(randomCardCol));
 		removeCards(randomCard);
 	}
 
 	String showAllCards(Player playerObj, int handIndex)// Returnerar en sträng med valörerna på alla korten på vald hand.
-	{
+	{	
 		String tempString = "";
 		for (int handElem = 0; handElem < playerObj.hand.get(handIndex).size(); handElem++) 
 		{
@@ -154,7 +148,15 @@ public class Deck
 			for (int ii = 0; ii < playerObj.hand.get(i).size(); ii++) {
 				
 				if (playerObj.hand.get(i).get(ii).equals(11) || playerObj.hand.get(i).get(ii).equals(1)) {
-					System.out.println("Det finns ett ess i din hand. Ska esset vara 1 eller 11?");
+					
+					if (playerObj.hand.size()==1)
+					{
+						System.out.println("Det finns ett ess i din hand.\nSka esset vara 1 eller 11?");
+					}else {
+						int handNmb = i+1;
+						System.out.println("Det finns ett ess i Hand "+handNmb+".\nSka esset vara 1 eller 11?");
+					}
+
 					boolean gotADecision=false;
 					do {
 						ace = input.nextInt();
@@ -167,6 +169,7 @@ public class Deck
 						} else {
 							System.out.println("Du kan endast välja 1 eller 11.");
 						}
+						System.out.println("Totalsumman för dina kort: " + totalHandValue(playerObj, i)+"\n");
 					} while (gotADecision==false);
 				}
 			}
@@ -175,31 +178,17 @@ public class Deck
    
 	 public void dAceDecision(Player dealerObj)
 		{
-
-		
-		 int retval=dealerObj.hand.get(0).indexOf(11);
-		 
-
-		 
 	    	for(int i = 0; i < dealerObj.hand.size(); i++) 
-	    		
 	    	{ 
-	    		 
 	    		while (totalHandValue(dealerObj, i) > 21) 
 	    		{
-	    			
-	    			
 	    			int found = dealerObj.hand.get(i).indexOf(11);
 	    			int num = dealerObj.hand.get(i).get(found);
 	    			if (num == 11) 
 	    			{
-	    				
 	    				dealerObj.hand.get(i).set(i, 1);
 	    			}
 	    		}
-	    		//System.out.println(dealerObj.hand.get(0));
-	    		
-	    		
 	    	 }
 	   }
 	
