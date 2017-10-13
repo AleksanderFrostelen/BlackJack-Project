@@ -1,4 +1,4 @@
-//3.1
+//3.3
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.LinkedList;
@@ -6,8 +6,8 @@ import java.util.Arrays;
 
 public class Deck 
 {
-	//private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
-	private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
+	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
+	//private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup;
 	private LinkedList<Integer> shoe;
 	private ArrayList<String> shoeCol;
@@ -145,7 +145,7 @@ public class Deck
 
 	
 	public void aceDecision(Player playerObj) {
-		int ace;
+		String ace;
 		for (int i = 0; i < playerObj.hand.size(); i++) {
 			for (int ii = 0; ii < playerObj.hand.get(i).size(); ii++) {
 				
@@ -154,28 +154,39 @@ public class Deck
 					if (playerObj.hand.size()==1)
 					{
 						System.out.println("Det finns ett ess i din hand.\nSka esset vara 1 eller 11?");
+						System.out.println("Din kort är: "+showAllCards(playerObj, i));
 					}else {
 						int handNmb = i+1;
 						System.out.println("Det finns ett ess i Hand "+handNmb+".\nSka esset vara 1 eller 11?");
+						System.out.println("Hand "+handNmb+": "+showAllCards(playerObj, i));
 					}
 
-					try { boolean gotADecision=false;
+					
+					boolean gotADecision=false;
 					do {
-						ace = input.nextInt();
-						if (ace == 1) {
-							playerObj.hand.get(i).set(ii, ace);
+						ace = input.next();
+						
+						switch (ace) {
+						case "1":
+							playerObj.hand.get(i).set(ii, 1);
 							gotADecision=true;
-						} else if (ace == 11) {
-							playerObj.hand.get(i).set(ii, ace);
+							break;
+
+						case "11":
+							playerObj.hand.get(i).set(ii, 11);
 							gotADecision=true;
-						} else {
+							break;
+							
+						default:
 							System.out.println("Du kan endast välja 1 eller 11.");
+							gotADecision=false;
+							break;
 						}
+						System.out.println("");
+				
 						System.out.println("Totalsumman för dina kort: " + totalHandValue(playerObj, i)+"\n");
-					} while (gotADecision==false);} 
-					catch (Exception e) {
-						System.out.println("Skriv in 1 eller 11");
-					}
+					} while (gotADecision==false);
+
 				}
 			}
 		}
