@@ -1,4 +1,4 @@
-//3.1
+//3.2
 import java.util.ArrayList;
 
 public class BlackJackMain {
@@ -273,9 +273,9 @@ public class BlackJackMain {
 							
 							deck.dealRandomCards(handIndex, player);
 							deck.dealRandomCards(handIndex+1, player);
-							
-							System.out.println("På hand nummer "+handIndex+" fick du: "+deck.showOneCard(player, handIndex+1, 1));
-							
+							int tempHandIndex=handIndex+1;
+							System.out.println("På Hand "+tempHandIndex+" fick du: "+deck.showOneCard(player, handIndex+1, 1));
+							System.out.println("Dina kort är: " + deck.showAllCards(player, handIndex));
 							betting.setPlayerChips(betting.getPlayerChips()-betting.getBettingValue());
 							System.out.println("Du har $"+betting.getPlayerChips()+" kvar.\n");
 							madeASplit = true;
