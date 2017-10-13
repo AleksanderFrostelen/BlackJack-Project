@@ -1,4 +1,4 @@
-//3.3
+//3.7
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.LinkedList;
@@ -154,7 +154,7 @@ public class Deck
 					if (playerObj.hand.size()==1)
 					{
 						System.out.println("Det finns ett ess i din hand.\nSka esset vara 1 eller 11?");
-						System.out.println("Din kort är: "+showAllCards(playerObj, i));
+						System.out.println("Dina kort är: "+showAllCards(playerObj, i));
 					}else {
 						int handNmb = i+1;
 						System.out.println("Det finns ett ess i Hand "+handNmb+".\nSka esset vara 1 eller 11?");

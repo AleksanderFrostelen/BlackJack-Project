@@ -1,4 +1,4 @@
-//3.3
+//3.7
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -99,7 +99,7 @@ public class Betting {
 			}
 
 			if (tempChips < doubleValue && getPlayerChips() > 0) {
-				doubleUp = yesOrNo("Din hand har summan $" + bettingValue + ". Du kan inte dubbla insatsen, \nmen du kan satsa återstående pengar $" + getPlayerChips() + ". \nVill du det? Ja eller Nej");
+				doubleUp = yesOrNo("Din hand har summan " + bettingValue + ". Du kan inte dubbla insatsen, \nmen du kan satsa återstående pengar $" + getPlayerChips() + ". \nVill du det? Ja eller Nej.");
 				if (doubleUp == true) {
 					playerBet.set(0, playerBet.get(0) + getPlayerChips());
 					setPlayerChips(0);
@@ -129,8 +129,7 @@ public class Betting {
 		case 0: newValue=playerBet.get(stakeIn);break;
 		case 1: newValue=(playerBet.get(stakeIn)*2);break;
 		case 2: newValue=(playerBet.get(stakeIn)*2)+playerBet.get(stakeIn);break;
-		default:
-			break;
+		default:break;
 		}
 		setPlayerChips(getPlayerChips()+newValue);
 	}
@@ -216,7 +215,7 @@ public class Betting {
 				
 				int TotalCardValue=	playerCard1+playerCard2;	
 				
-			
+				System.out.println("");
 				
 				if ( overUnderChoice.equals("över"))
 				{
@@ -257,7 +256,7 @@ public class Betting {
 				}
 				System.out.println("");
 			}
-			
+			overUnderChoice = "";
 		}
 
 }
