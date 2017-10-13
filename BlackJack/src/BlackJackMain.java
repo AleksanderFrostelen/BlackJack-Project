@@ -1,4 +1,3 @@
-
 //3.4
 
 import java.util.ArrayList;
@@ -106,8 +105,6 @@ public class BlackJackMain {
 					System.out.println("Dealern stannar.");
 				}
 			}
-
-			// Utvärdera vem som vunnit.
 			
 			printWinner();
 			
@@ -120,15 +117,11 @@ public class BlackJackMain {
 				System.out.println("");
 				mainPlay = betting.yesOrNo("Vill du fortsätta spela? Ja eller Nej.");
 			}
-
-
 		} while (mainPlay == true);
 
 		// Avslutning
 		String messageOut = "* * * * * * * * * * * * * * *\n* * V I   S E S   I G E N * *\n* * * * * * * * * * * * * * *";
 		vegasNeonSign(messageOut, 15);
-
-
 	}
 
 // Metoder för Table. -------------------------
@@ -179,7 +172,6 @@ public class BlackJackMain {
 				} else {
 					System.out.println(handNumber + " blev tjock. Du förlorar din insats.");
 				}
-				
 			}
 		}
 		System.out.println("Du har nu $" + betting.getPlayerChips() + ".");
@@ -239,7 +231,6 @@ public class BlackJackMain {
 						}
 						
 					} while (fetchReturnAnswer==true);
-			
 		}
 
 	}
@@ -280,8 +271,6 @@ public class BlackJackMain {
 							
 							deck.dealRandomCards(handIndex, player);
 							deck.dealRandomCards(handIndex+1, player);
-							int tempHandIndex=handIndex+1;
-							
 							
 							System.out.println(player.hand.size());
 							for (int splitRow=0;splitRow<player.hand.size();splitRow++)
@@ -315,5 +304,4 @@ public class BlackJackMain {
 
 		} while (splitHands = false);
 	}
-
 }

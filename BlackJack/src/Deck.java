@@ -1,4 +1,4 @@
-//3.7
+//3.8
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.LinkedList;
@@ -7,7 +7,6 @@ import java.util.Arrays;
 public class Deck 
 {
 	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
-	//private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup;
 	private LinkedList<Integer> shoe;
 	private ArrayList<String> shoeCol;
@@ -61,8 +60,6 @@ public class Deck
 	{
 		for (int LinkedElem = 0; LinkedElem < deckSetup.length; LinkedElem++) 
 		{shoe.add(deckSetup[LinkedElem]);}
-
-	
 			for(int x=0; x<suit.size();x++) 
 			{
 				for (int xx = 0; xx < name.size(); xx++) 
@@ -153,15 +150,14 @@ public class Deck
 					
 					if (playerObj.hand.size()==1)
 					{
-						System.out.println("Det finns ett ess i din hand.\nSka esset vara 1 eller 11?");
 						System.out.println("Dina kort är: "+showAllCards(playerObj, i));
+						System.out.println("Det finns ett ess i din hand.\nSka esset vara 1 eller 11?");
 					}else {
 						int handNmb = i+1;
-						System.out.println("Det finns ett ess i Hand "+handNmb+".\nSka esset vara 1 eller 11?");
 						System.out.println("Hand "+handNmb+": "+showAllCards(playerObj, i));
+						System.out.println("Det finns ett ess i Hand "+handNmb+".\nSka esset vara 1 eller 11?");
 					}
 
-					
 					boolean gotADecision=false;
 					do {
 						ace = input.next();
@@ -213,6 +209,5 @@ public class Deck
 	{
 		shoe.remove(indexNmb);
 		shoeCol.remove(indexNmb);
-	}
-	    	
+	}    	
 }
