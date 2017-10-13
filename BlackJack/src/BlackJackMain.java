@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+//3.4
+=======
 //3.3
+>>>>>>> branch 'HEAD' of https://github.com/steffodimfelt/bestfriends
 import java.util.ArrayList;
 
 public class BlackJackMain {
@@ -143,8 +147,8 @@ public class BlackJackMain {
 						System.out.println("\n" + handNumber + " förlorade.");
 						if (deck.totalHandValue(player, handIndex) >= 17) {
 							System.out.println("Du fick " + deck.totalHandValue(player, handIndex) + " och får behålla din insats.");
-							
-							betting.bettingPayBack(betting.getPlayerBetHandIndex(handIndex), 0);
+							for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++)
+							{betting.bettingPayBack(bettingElem, 0);};
 						}
 					} else if (deck.totalHandValue(player, handIndex) > deck.totalHandValue(dealer, 0)) {
 						System.out.println(handNumber + " vann!");
