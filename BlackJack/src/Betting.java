@@ -1,4 +1,4 @@
-//3.7
+//3.8
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -97,15 +97,6 @@ public class Betting {
 					System.out.println("Du dubblade till $" + doubleValue + ". Du har $" + getPlayerChips() + " kvar.");
 				}
 			}
-
-			if (tempChips < doubleValue && getPlayerChips() > 0) {
-				doubleUp = yesOrNo("Din hand har summan " + bettingValue + ". Du kan inte dubbla insatsen, \nmen du kan satsa återstående pengar $" + getPlayerChips() + ". \nVill du det? Ja eller Nej.");
-				if (doubleUp == true) {
-					playerBet.set(0, playerBet.get(0) + getPlayerChips());
-					setPlayerChips(0);
-					System.out.println("Du ökade till $" + playerBet.get(0) + ". Du har $" + getPlayerChips() + " kvar.");
-				}
-			}
 		}
 	}
 
@@ -175,7 +166,7 @@ public class Betting {
 					boolean fetchReturnAnswer = false;
 					
 					while (fetchReturnAnswer == false) {
-						System.out.println("Vad vill du satsa? Över eller Under?\nEss räknas som 1.");
+						System.out.println("Vad vill du satsa? Över eller Under?\nEss räknas alltid som 1 i Över/Under.");
 						String scannerAnswer = scan.next().toLowerCase();
 						System.out.println(scannerAnswer);
 						switch (scannerAnswer) {
