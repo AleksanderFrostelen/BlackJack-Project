@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class Deck 
 {
-	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
-	//private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
+	//private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
+	private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup;
 	private LinkedList<Integer> shoe;
 	private ArrayList<String> shoeCol;
@@ -101,7 +101,10 @@ public class Deck
  
 	public void dealRandomCards(int nr, Player playObj) // den ska använda randomCard och ger kort till player och dealer
 	{
-		int randomCard=shoe.get(randomCard(shoe.size()));		
+		//int randomCard=shoe.get(randomCard(shoe.size()));	
+		int randomCard=randomCard(shoe.size());	
+		
+		System.out.println("randomCard"+randomCard);
 		String randomCardCol=shoeCol.get(randomCard);		
 		playObj.hand.get(nr).add(new Integer(shoe.get(randomCard)));
 		playObj.handCol.get(nr).add(new String(randomCardCol));
