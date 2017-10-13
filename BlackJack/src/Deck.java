@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class Deck 
 {
-	//private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
-	private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
+	private final int[] VALUESPAN = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 11 };
+	//private final int[] VALUESPAN = { 11,11,11,11,11,11,11,11,11,11,11,11,11 };
 	private int[] deckSetup;
 	private LinkedList<Integer> shoe;
 	private ArrayList<String> shoeCol;
@@ -148,7 +148,15 @@ public class Deck
 			for (int ii = 0; ii < playerObj.hand.get(i).size(); ii++) {
 				
 				if (playerObj.hand.get(i).get(ii).equals(11) || playerObj.hand.get(i).get(ii).equals(1)) {
-					System.out.println("Det finns ett ess i din hand.\nSka esset vara 1 eller 11?");
+					
+					if (playerObj.hand.size()==1)
+					{
+						System.out.println("Det finns ett ess i din hand.\nSka esset vara 1 eller 11?");
+					}else {
+						int handNmb = i+1;
+						System.out.println("Det finns ett ess i Hand "+handNmb+".\nSka esset vara 1 eller 11?");
+					}
+
 					boolean gotADecision=false;
 					do {
 						ace = input.nextInt();
@@ -161,7 +169,7 @@ public class Deck
 						} else {
 							System.out.println("Du kan endast välja 1 eller 11.");
 						}
-						System.out.println("Totalsumman för dina kort: " + totalHandValue(playerObj, 0)+"\n");
+						System.out.println("Totalsumman för dina kort: " + totalHandValue(playerObj, i)+"\n");
 					} while (gotADecision==false);
 				}
 			}
