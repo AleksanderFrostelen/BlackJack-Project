@@ -65,7 +65,6 @@ public class BlackJackMain {
 			deck.aceDecision(player);
 			
 			// Players val - Hit or stay
-			System.out.println("");
 			hitOrStay ();
 			
 			boolean skipDealer = false;
@@ -109,8 +108,16 @@ public class BlackJackMain {
 			
 			printWinner();
 			
-			System.out.println("");
-			mainPlay = betting.yesOrNo("Vill du fortsätta spela? Ja eller Nej.");
+			if (betting.getPlayerChips()==0)
+			{
+				System.out.println("");
+				System.out.println("Dina pengar är slut. Tack för att du ville spela.");
+				mainPlay = false;
+			}else {
+				System.out.println("");
+				mainPlay = betting.yesOrNo("Vill du fortsätta spela? Ja eller Nej.");
+			}
+
 
 		} while (mainPlay == true);
 
@@ -188,8 +195,8 @@ public class BlackJackMain {
 
 	public void welcome() {
 
-//		String message = "* * * * * * * * * * * * *  \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * ";
-//		vegasNeonSign(message, 25);
+		String message = "* * * * * * * * * * * * *  \n* * B L A C K J A C K * * \n* * * * * * * * * * * * * ";
+		vegasNeonSign(message, 25);
 		System.out.println("Välkommen till Black Jack.");
 		System.out.println("För att vinna behöver summan av dina kort vara högre än Dealerns.");
 		System.out.println("Den som får högst kort, upp till och med 21, vinner handen.");
@@ -204,7 +211,7 @@ public class BlackJackMain {
 					do {
 						int tempNmb = i+1;
 						String handNumber = (player.hand.size() == 1) ? "din hand" : "Hand " + tempNmb;
-						boolean hitMe = betting.yesOrNo("\nVill du ha ett nytt kort på "+handNumber+"? Ja eller Nej.");
+						boolean hitMe = betting.yesOrNo("Vill du ha ett nytt kort på "+handNumber+"? Ja eller Nej.");
 						
 						if (hitMe==true)
 						{
@@ -240,8 +247,6 @@ public class BlackJackMain {
 		do {
 			int checkedAllHands = 0;
 			for (int handIndex = 0; handIndex < player.hand.size(); handIndex++) {
-				
-				//System.out.println("Lika med i split "+player.hand.get(handIndex).get(0)+" "+player.hand.get(handIndex).get(0));
 
 				if (player.hand.get(handIndex).get(0).equals(player.hand.get(handIndex).get(1))) 
 				{
