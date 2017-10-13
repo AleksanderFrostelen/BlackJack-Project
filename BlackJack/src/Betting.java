@@ -1,4 +1,4 @@
-//3.6
+//3.7
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -215,7 +215,7 @@ public class Betting {
 				
 				int TotalCardValue=	playerCard1+playerCard2;	
 				
-			
+				System.out.println("");
 				
 				if ( overUnderChoice.equals("över"))
 				{
