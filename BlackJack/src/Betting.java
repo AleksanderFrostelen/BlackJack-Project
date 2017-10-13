@@ -1,4 +1,4 @@
-//3.2
+//3.3
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -224,6 +224,7 @@ public class Betting {
 					{
 					System.out.println("Du satsade på Över och får tillbaka 2x insatsen.");
 					bettingPayBack(0, 1);
+					System.out.println("Du har $" + getPlayerChips() + ".");
 					}
 					else {
 						System.out.println("Det blev "+TotalCardValue+" på Över/Under.\nDu förlorade $"+getBettingValue()+". Buhu.");
