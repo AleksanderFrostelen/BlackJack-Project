@@ -1,3 +1,4 @@
+//3.1
 import java.util.ArrayList;
 
 public class BlackJackMain {
@@ -135,7 +136,7 @@ public class BlackJackMain {
 			int formatHandNumber = handIndex + 1;
 			// Formaterar outputstring i fall man har splittat.
 			String handNumber = (player.hand.size() == 1) ? "Din hand" : "Hand " + formatHandNumber;
-
+			
 			if (deck.totalHandValue(dealer, 0) <= 21) {
 				if (deck.totalHandValue(player, handIndex) <= 21) {
 					if (deck.totalHandValue(player, handIndex) == deck.totalHandValue(dealer, 0)) {
