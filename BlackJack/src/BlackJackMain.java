@@ -1,4 +1,4 @@
-//3.2
+//3.3
 import java.util.ArrayList;
 
 public class BlackJackMain {
@@ -157,6 +157,8 @@ public class BlackJackMain {
 							for (int bettingElem=0;bettingElem<betting.getPlayerBetSize();bettingElem++)
 							{betting.bettingPayBack(bettingElem, 1);}
 						}
+					}else {
+						System.out.println("\n" + handNumber + " förlorade.");
 					}
 				} else {
 					System.out.println(handNumber + " blev tjock. Du förlorar din insats.");
@@ -261,21 +263,33 @@ public class BlackJackMain {
 							player.hand.add(new ArrayList<Integer>());// Adderar ny rad till player
 							player.handCol.add(new ArrayList<String>());// Adderar ny rad till player
 
-							int tempElement = player.hand.get(handIndex).get(1);
-							String tempElementCol = player.handCol.get(handIndex).get(1);
-							player.hand.get(handIndex + 1).add(new Integer(tempElement));// Kopierar värde från gammal array till ny																								
-							player.hand.get(handIndex).clear();// Nollställer Row
-							player.hand.get(handIndex).add(new Integer(tempElement));// Kopierar tillbaka värdet till gammal array.
+							int tempElement0 = player.hand.get(handIndex).get(0);
+							int tempElement1 = player.hand.get(handIndex).get(1);
+							String tempElementCol0 = player.handCol.get(handIndex).get(0);
+							String tempElementCol1 = player.handCol.get(handIndex).get(1);
 							
-							player.handCol.get(handIndex + 1).add(new String(tempElementCol));// Kopierar värde från gammal array till ny																								
+							player.hand.get(handIndex + 1).add(new Integer(tempElement1));// Kopierar värde från gammal array till ny																								
+							player.hand.get(handIndex).clear();// Nollställer Row
+							player.hand.get(handIndex).add(new Integer(tempElement0));// Kopierar tillbaka värdet till gammal array.
+
+							player.handCol.get(handIndex + 1).add(new String(tempElementCol1));// Kopierar värde från gammal array till ny	
 							player.handCol.get(handIndex).clear();// Nollställer Row
-							player.handCol.get(handIndex).add(new String(tempElementCol));// Kopierar tillbaka värdet till gammal array.
+							player.handCol.get(handIndex).add(new String(tempElementCol0));// Kopierar tillbaka värdet till gammal array.
 							
 							deck.dealRandomCards(handIndex, player);
 							deck.dealRandomCards(handIndex+1, player);
 							int tempHandIndex=handIndex+1;
-							System.out.println("På Hand "+tempHandIndex+" fick du: "+deck.showOneCard(player, handIndex+1, 1));
-							System.out.println("Dina kort är: " + deck.showAllCards(player, handIndex));
+							
+							
+							System.out.println(player.hand.size());
+							for (int splitRow=0;splitRow<player.hand.size();splitRow++)
+							{
+								int tempSplitRow=splitRow+1;
+								System.out.println("På Hand "+tempSplitRow+" fick du: "+deck.showOneCard(player, splitRow, 1));
+								System.out.println("Dina kort är: " + deck.showAllCards(player, splitRow));
+								System.out.println("");
+							}
+
 							betting.setPlayerChips(betting.getPlayerChips()-betting.getBettingValue());
 							System.out.println("Du har $"+betting.getPlayerChips()+" kvar.\n");
 							madeASplit = true;
