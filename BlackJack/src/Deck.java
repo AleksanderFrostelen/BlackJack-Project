@@ -143,6 +143,7 @@ public class Deck
 		return handTotal;
 	}
 
+	
 	public void aceDecision(Player playerObj) {
 		int ace;
 		for (int i = 0; i < playerObj.hand.size(); i++) {
@@ -158,7 +159,7 @@ public class Deck
 						System.out.println("Det finns ett ess i Hand "+handNmb+".\nSka esset vara 1 eller 11?");
 					}
 
-					boolean gotADecision=false;
+					try { boolean gotADecision=false;
 					do {
 						ace = input.nextInt();
 						if (ace == 1) {
@@ -171,11 +172,15 @@ public class Deck
 							System.out.println("Du kan endast välja 1 eller 11.");
 						}
 						System.out.println("Totalsumman för dina kort: " + totalHandValue(playerObj, i)+"\n");
-					} while (gotADecision==false);
+					} while (gotADecision==false);} 
+					catch (Exception e) {
+						System.out.println("Skriv in 1 eller 11");
+					}
 				}
 			}
 		}
 	}
+	
    
 	 public void dAceDecision(Player dealerObj)
 		{
